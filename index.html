@@ -4,167 +4,197 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Perry Kingston - Cybersecurity Portfolio</title>
- <style>
-  /* Modern professional font stack */
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 40px; /* Increased from 20px for breathing room */
-    line-height: 1.75; /* Improved readability */
-    background-color: #f7f9fc;
-    background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
-    background-repeat: repeat;
-    color: #333;
-  }
+  <style>
+    /* Modern professional font stack */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 40px 0; /* top/bottom padding only; sides handled by container */
+      line-height: 1.75;
+      background-color: #f7f9fc;
+      background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+      background-repeat: repeat;
+      color: #333;
+      scroll-behavior: smooth; /* smooth scrolling */
+    }
 
-  .container {
-    max-width: 900px;
-    margin: auto;
-    background-color: rgba(255, 255, 255, 0.95);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
-  }
+    /* Sticky Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 15px 30px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      font-weight: 600;
+      z-index: 1000;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
 
-  h1, h2, h3 {
-    color: #2c3e50;
-    font-weight: 600;
-    margin-top: 1.5em;
-    margin-bottom: 0.5em;
-    line-height: 1.2;
-  }
+    .navbar a {
+      color: #2980b9;
+      text-decoration: none;
+      font-size: 1.1em;
+      transition: color 0.3s ease;
+    }
 
-  p, li {
-    font-size: 1.05em;
-    margin-bottom: 1em;
-  }
+    .navbar a:hover {
+      color: #1c5980;
+      text-decoration: underline;
+    }
 
-  a {
-    color: #2980b9;
-    text-decoration: none;
-  }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+    }
 
-  a:hover {
-    text-decoration: underline;
-  }
+    h1, h2, h3 {
+      color: #2c3e50;
+      font-weight: 600;
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+      line-height: 1.2;
+    }
 
-  section {
-    margin-bottom: 2.5em;
-  }
+    p, li {
+      font-size: 1.05em;
+      margin-bottom: 1em;
+    }
 
-  header, footer {
-    text-align: center;
-    margin-top: 1em;
-    margin-bottom: 2em;
-  }
+    a {
+      color: #2980b9;
+      text-decoration: none;
+    }
 
-  footer {
-    font-size: 0.9em;
-    color: #888;
-    margin-top: 3em;
-  }
-</style>
+    a:hover {
+      text-decoration: underline;
+    }
 
+    section {
+      margin-bottom: 2.5em;
+    }
+
+    header, footer {
+      text-align: center;
+      margin-top: 1em;
+      margin-bottom: 2em;
+    }
+
+    footer {
+      font-size: 0.9em;
+      color: #888;
+      margin-top: 3em;
+    }
+  </style>
 </head>
 <body>
-  <header>
+
+  <nav class="navbar">
+    <a href="#about">About</a>
+    <a href="#Education">Education</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <header class="container">
     <h1>Perry Kingston</h1>
     <p>Pursuing Bachelor's in Cybersecurity with Data Analytics & Project Management Concentrations | Networking & Security Enthusiast</p>
   </header>
 
-  <section id="about">
-    <h2><u>About Me</h2></u>
-    <p>
-      Hello there, I’m Perry — I am extremely passionate about hands-on tech; particularly networking, network architecture, and security tools. I enjoy learning new things and sharing that information with others! With extensive experience in IT, Digital Marketing as well as a decade of history in Sales and Leadership. These experiences combined with my innate pattern-recognition skills, critical thinking abilities and very strong verbal and written communication skills provide a unique perspective and the ability to effectively collaborate.    
-    </p>
-  </section>
-
-  <section id="Education">
-    <h2><u>Education & Certificates</h2></u>
-
-    <article>
-      <h3>Education</h3>
+  <main class="container">
+    <section id="about">
+      <h2><u>About Me</u></h2>
       <p>
-          Anticipated graduation date January 2026 with a Bachelor's degree in Cybersecurity and concentrations in Data Analytics and Project Management.
+        Hello there, I’m Perry — I am extremely passionate about hands-on tech; particularly networking, network architecture, and security tools. I enjoy learning new things and sharing that information with others! With extensive experience in IT, Digital Marketing as well as a decade of history in Sales and Leadership. These experiences combined with my innate pattern-recognition skills, critical thinking abilities and very strong verbal and written communication skills provide a unique perspective and the ability to effectively collaborate.    
       </p>
-    </article>
-    <article>
-      <h3>Certifications</h3>
-    <ul>
-        <li><a href="https://www.coursera.org/account/accomplishments/specialization/35I3HJ0IVM5M">Google Cybersecurity Specialization</li></a href>
-        <li><a href="https://www.coursera.org/account/accomplishments/specialization/J64JVMDOMEGK">Google Cloud Data Analytics Specialization </li></a href>
-        <li><a href="https://www.coursera.org/account/accomplishments/professional-cert/certificate/PPLZJ9G3K66G">Google Data Analytics Professional</li></a href>
-        <li><a href="https://www.coursera.org/account/accomplishments/specialization/MNGS1QRFIDZ3">Google IT Support Professional</li></a href>
-        <li><a href="https://credentials.edx.org/credentials/d4af0304eee1497bada767007718c51b/">Google Cloud Computing Foundations</li></a href>
-        <li><a href="https://www.coursera.org/account/accomplishments/specialization/certificate/W25VVQY573MH">Salesforce Admin</li></a href>
-    </ul>
-    </article>
-  
-  <section id="projects">
-    <h2><u>Projects</h2></u>
-    <article>
-      <h3>Pi-hole DNS Filtering & Network Monitoring</h3>
-      <p>
-        To reduce unnecessary telemetry and minimize ad-serving, I deployed Pi-hole on my local network using a Raspberry Pi Zero 2W. This effectively intercepts DNS queries and blocks known ad/tracking domains. It is setup as the DNS resolver for both primary and backup for every device on the network. 
-      </p>
+    </section>
+
+    <section id="Education">
+      <h2><u>Education & Certificates</u></h2>
+      <article>
+        <h3>Education</h3>
+        <p>
+            Anticipated graduation date January 2026 with a Bachelor's degree in Cybersecurity and concentrations in Data Analytics and Project Management.
+        </p>
+      </article>
+      <article>
+        <h3>Certifications</h3>
+        <ul>
+          <li><a href="https://www.coursera.org/account/accomplishments/specialization/35I3HJ0IVM5M" target="_blank" rel="noopener">Google Cybersecurity Specialization</a></li>
+          <li><a href="https://www.coursera.org/account/accomplishments/specialization/J64JVMDOMEGK" target="_blank" rel="noopener">Google Cloud Data Analytics Specialization</a></li>
+          <li><a href="https://www.coursera.org/account/accomplishments/professional-cert/certificate/PPLZJ9G3K66G" target="_blank" rel="noopener">Google Data Analytics Professional</a></li>
+          <li><a href="https://www.coursera.org/account/accomplishments/specialization/MNGS1QRFIDZ3" target="_blank" rel="noopener">Google IT Support Professional</a></li>
+          <li><a href="https://credentials.edx.org/credentials/d4af0304eee1497bada767007718c51b/" target="_blank" rel="noopener">Google Cloud Computing Foundations</a></li>
+          <li><a href="https://www.coursera.org/account/accomplishments/specialization/certificate/W25VVQY573MH" target="_blank" rel="noopener">Salesforce Admin</a></li>
+        </ul>
+      </article>
+    </section>
+
+    <section id="projects">
+      <h2><u>Projects</u></h2>
+      <article>
+        <h3>Pi-hole DNS Filtering & Network Monitoring</h3>
+        <p>
+          To reduce unnecessary telemetry and minimize ad-serving, I deployed Pi-hole on my local network using a Raspberry Pi Zero 2W. This effectively intercepts DNS queries and blocks known ad/tracking domains. It is setup as the DNS resolver for both primary and backup for every device on the network. 
+        </p>
+        <ul>
+          <li>Installed and configured Pi-hole with an assigned static IP</li>
+          <li>Set router DHCP to use Pi-hole as primary and backup DNS</li>
+          <li>Routinely analyze DNS logs for anomalies</li>
+          <li>Created custom blocklists</li>
+        </ul>
+        <p><strong>Tools used:</strong> Pi-hole, Raspberry Pi OS, SSH, DNS/DHCP settings</p>
+      </article>
+
+      <article>
+        <h3>Home Network Overhaul & Segmentation</h3> 
+        <p>
+          I redesigned my home network to improve security and performance, including isolating IoT devices and monitoring traffic.
+        </p>
+        <ul>
+          <li>Architecture is now: modem ISP, router handling DHCP, DNS, SPI firewall and whitelist rules, with 6 deco mesh nodes all under 1 SSID, beamforming and fast-roaming implemented, with all DNS handled by the pi-hole.</li>    
+          <li>This overhaul resulted in improved speeds, coverage and security without sacrificing any ease of connectivity for trusted devices by MAC address.</li>
+          <li>Set up VLANs to segment devices</li>
+          <li>Moved all IoT devices to segmented network to protect primary devices</li>
+          <li>Used pfSense for firewall and routing</li>
+          <li>Implemented traffic filtering rules and proper port policing</li>
+          <li>Used Wireshark and nmap to monitor activity to compare against network baseline</li>
+        </ul>
+        <p><strong>Tools used:</strong> pfSense, Wireshark, nmap, VLAN switch, network diagram tools</p>
+      </article>
+    </section>
+
+    <section id="skills">
+      <h2><u>Tools & Skills</u></h2>
       <ul>
-        <li>Installed and configured Pi-hole with an assigned static IP</li>
-        <li>Set router DHCP to use Pi-hole as primary and backup DNS</li>
-        <li>Routinely analyze DNS logs for anomalies</li>
-        <li>Created custom blocklists</li>
+        <li><strong>Networking:</strong> TCP/IP, DNS, DHCP, NAT, VLANs, subnetting</li>
+        <li><strong>Security:</strong> Pi-hole, firewall config, IDS basics</li>
+        <li><strong>Tools:</strong> Wireshark, nmap, pfSense, Splunk, Linux CLI, cloud dashboards</li>
+        <li><strong>Scripting:</strong> Basic Bash or Python, Java</li>
       </ul>
-      <p><strong>Tools used:</strong> Pi-hole, Raspberry Pi OS, SSH, DNS/DHCP settings</p>
-    </article>
+    </section>
 
-    <article>
-      <h3>Home Network Overhaul & Segmentation</h3> 
+    <section>
+      <h2><u>Simple Scripts</u></h2>
+      <p>I utilized Python to create a basic Caesar Cipher for encrypting plaintext and decrypting ciphertext back to plaintext.</p>
+      <iframe src="https://www.onlinegdb.com/embed/2CkeTFyns?theme=dark" 
+          width="100%" 
+          height="500px" 
+          frameborder="0">
+      </iframe>
+    </section>
+
+    <section id="contact">
+      <h2><u>Resume & Contact</u></h2>
+      <p>You can download my resume <a href="[link to your resume PDF]" target="_blank" rel="noopener">here</a>.</p>
       <p>
-        I redesigned my home network to improve security and performance, including isolating IoT devices and monitoring traffic.
-        <li>Architecture is now: modem ISP, router handling DHCP, DNS, SPI firewall and whitelist rules, with 6 deco mesh nodes all under 1 SSID, beamforming and fast-roaming implemented, with all DNS handled by the pi-hole. </li>    
-        <li>This overhaul resulted in improved speeds, coverage and security without sacrificing any ease of connectivity for trusted devices by MAC address. </li>
-      </p>
-      <ul>
-        <li>Set up VLANs to segment devices</li>
-        <li>Moved all IoT devices to segmented network to protect primary devices</li>
-        <li>Used pfSense for firewall and routing</li>
-        <li>Implemented traffic filtering rules and proper port policing </li>
-        <li>Used Wireshark and nmap to monitor activity to compare against network baseline</li>
-      </ul>
-      <p><strong>Tools used:</strong> pfSense, Wireshark, nmap,  VLAN switch, network diagram tools</p>
-    </article>
-  </section>
-
-  <section id="skills">
-    <h2><u>Tools & Skills</h2></u>
-    <ul>
-      <li><strong>Networking:</strong> TCP/IP, DNS, DHCP, NAT, VLANs, subnetting</li>
-      <li><strong>Security:</strong> Pi-hole, firewall config, IDS basics</li>
-      <li><strong>Tools:</strong> Wireshark, nmap, pfSense, Splunk, Linux CLI, cloud dashboards</li>
-      <li><strong>Scripting:</strong> Basic Bash or Python, Java</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2><u>Simple Scripts</u></h2>
-    <p>I utilized Python to create a basic Caesar Cipher for encrypting plaintext and decrypting ciphertext back to plaintext. </p>
-    <iframe src="https://www.onlinegdb.com/embed/2CkeTFyns?theme=dark" 
-        width="100%" 
-        height="500px" 
-        frameborder="0">
-</iframe>
-  </section>
-
-  <section id="contact">
-    <h2><u>Resume & Contact</h2></u>
-    <p>You can download my resume <a href="[link to your resume PDF]" target="_blank" rel="noopener">here</a>.</p>
-    <p>
-      Connect with me on <a href="https://www.linkedin.com/in/perry-kingston/" target="_blank" rel="noopener">LinkedIn</a> or <a href="[Your GitHub URL]" target="_blank" rel="noopener">GitHub</a>.<br />
-      Email: <a href="mailto:perry.kingston@proton.me">perry.kingston@proton.me</a>
-    </p>
-  </section>
-
-  <footer>
-    <p>© 2025. PK. All rights reserved.</p>
-  </footer>
-</body>
-</html>
+        Connect with me on <a href="https://www.linkedin.com/in/perry-kingston/" target="_blank" rel="noopener">LinkedIn</a> or <a href="[Your GitHub URL]" target="_blank" rel="noopener">GitHub</a>.<br />
+        Email: <a href="mailto:perry.kingston@proton.me">perry.kingston@proton.me</
