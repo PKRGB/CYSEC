@@ -48,17 +48,38 @@
   <section id="about">
     <h2>About Me</h2>
     <p>
-      Hi, I’m Perry — a cybersecurity student with concentrations in data analytics and project management. I’m passionate about hands-on tech, especially networking, network architecture, and security tools. I hold certifications including the Google IT Support Professional Certificate and cloud/data analytics credentials, and I’m currently finishing my Bachelor’s in Cybersecurity.
+      Hello there, I’m Perry — a Cybersecurity student with concentrations in Data Analytics and Project Management. I’m passionate about hands-on tech, especially networking, network architecture, and security tools. 
     </p>
   </section>
 
+  <section id="Education">
+    <h2>Education & Certificates</h2>
+
+    <article>
+      <h3>Education</h3>
+      <p>
+          Anticipated graduation date January 2026 with a Bachelor's degree in Cybersecurity and concentrations in Data Analytics and Project Management.
+      </p>
+    </article>
+    <article>
+      <h3>Certifications</h3>
+    <ul>
+        <li>Google Cybersecurity Specialization</li>
+        <li>Google Cloud Data Analytics Specialization </li>
+        <li>Google Data Analytics Professional</li>
+        <li>Google IT Support Professional</li>
+        <li>Google Cloud Computing Foundations</li>
+        <li>Salesforce Admin</li>
+    </ul>
+    </article>
+  
   <section id="projects">
     <h2>Projects</h2>
 
     <article>
       <h3>Pi-hole DNS Filtering & Network Monitoring</h3>
       <p>
-        To reduce unnecessary telemetry and minimize unnecessary ad-serving, I deployed Pi-hole on my local network using a Raspberry Pi Zero 2W. This effectively intercepts DNS queries and blocks known ad/tracking domains. It is setup as the DNS resolver for both primary and backup for every device on the network. 
+        To reduce unnecessary telemetry and minimize ad-serving, I deployed Pi-hole on my local network using a Raspberry Pi Zero 2W. This effectively intercepts DNS queries and blocks known ad/tracking domains. It is setup as the DNS resolver for both primary and backup for every device on the network. 
       </p>
       <ul>
         <li>Installed and configured Pi-hole with an assigned static IP</li>
@@ -73,6 +94,8 @@
       <h3>Home Network Overhaul & Segmentation</h3>
       <p>
         I redesigned my home network to improve security and performance, including isolating IoT devices and monitoring traffic.
+        <li>Architecture is now: modem ISP, router handling DHCP, DNS, SPI firewall and whitelist rules, with 6 deco mesh nodes all under 1 SSID, beamforming and fast-roaming implemented, with all DNS handled by the pi-hole. </li>    
+        <li>This overhaul resulted in improved speeds, coverage and security without sacrificing any ease of connectivity for trusted devices by MAC address. </li>
       </p>
       <ul>
         <li>Set up VLANs to segment devices</li>
