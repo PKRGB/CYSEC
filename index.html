@@ -46,10 +46,10 @@
     }
 
     .navbar a.active {
-  color: #1c5980;  /* Darker blue or your highlight color */
-  text-decoration: underline !important;
-  font-weight: 700;
-}
+      color: #1c5980;  /* Darker blue or your highlight color */
+      text-decoration: underline !important;
+      font-weight: 700;
+    }
 
     .hamburger {
       display: none;
@@ -108,7 +108,7 @@
       margin-top: 3em;
     }
 
-       /* Fix large gap between header and About Me */
+    /* Fix large gap between header and About Me */
     header {
       margin-bottom: 1em; /* was probably more before */
     }
@@ -121,6 +121,28 @@
       margin-top: 0; /* remove extra spacing on the heading itself */
     }
 
+    /* Back to Top Button Styles */
+    #backToTop {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      display: none;  /* Hidden by default */
+      background-color: #2980b9;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      font-size: 1.8em;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      transition: background-color 0.3s ease;
+      z-index: 1001;
+    }
+
+    #backToTop:hover {
+      background-color: #1c5980;
+    }
 
     @media screen and (max-width: 600px) {
       .hamburger {
@@ -256,7 +278,8 @@
     <p>© 2025 Perry Kingston</p>
   </footer>
 
-    <!-- ...all your content here... -->
+  <!-- Back to Top Button -->
+  <button id="backToTop" aria-label="Back to top">↑</button>
 
   <script>
     const hamburger = document.querySelector('.hamburger');
@@ -276,29 +299,43 @@
     });
 
     const sections = document.querySelectorAll('section');
-const navLinks = document.querySelectorAll('.navbar a');
+    const navLinksAll = document.querySelectorAll('.navbar a');
 
-window.addEventListener('scroll', () => {
-  let current = '';
-  
-  sections.forEach(section => {
-    const sectionTop = section.offsetTop - 120; // Adjust for navbar height + some padding
-    const sectionHeight = section.clientHeight;
-    
-    if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
-      current = section.getAttribute('id');
-    }
-  });
+    window.addEventListener('scroll', () => {
+      let current = '';
 
-  navLinks.forEach(link => {
-    link.classList.remove('active');
-    if (link.getAttribute('href') === '#' + current) {
-      link.classList.add('active');
-    }
-  });
-});
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 120; // Adjust for navbar height + some padding
+        const sectionHeight = section.clientHeight;
 
+        if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinksAll.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+
+      // Back to Top Button show/hide logic
+      const backToTopBtn = document.getElementById('backToTop');
+      if (window.pageYOffset > 300) {
+        backToTopBtn.style.display = 'block';
+      } else {
+        backToTopBtn.style.display = 'none';
+      }
+    });
+
+    // Back to Top Button click scroll
+    document.getElementById('backToTop').addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
   </script>
 </body>
 </html>
-
