@@ -102,14 +102,19 @@
       margin-top: 3em;
     }
 
-       /* Fix spacing between header and About section */
+       /* Fix large gap between header and About Me */
     header {
-      margin-bottom: 0;
+      margin-bottom: 1em; /* was probably more before */
     }
 
     section#about {
-      margin-top: 0;
+      margin-top: 0; /* remove extra space from section */
     }
+
+    section#about h2 {
+      margin-top: 0; /* remove extra spacing on the heading itself */
+    }
+
 
     @media screen and (max-width: 600px) {
       .hamburger {
