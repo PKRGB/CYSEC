@@ -270,5 +270,13 @@
     <p>© 2025 Perry Kingston</p>
   </footer>
 
-  <script>
-    const hamburger = document
+ <script>
+  const hamburger = document.querySelector('.hamburger');
+  const navbar = document.querySelector('.navbar');
+
+  hamburger.addEventListener('click', () => {
+    navbar.classList.toggle('active');
+  });
+</script>
+</body>
+</html>
