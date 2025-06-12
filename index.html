@@ -250,13 +250,25 @@
     <p>© 2025 Perry Kingston</p>
   </footer>
 
+    <!-- ...all your content here... -->
+
   <script>
     const hamburger = document.querySelector('.hamburger');
     const navbar = document.querySelector('.navbar');
+    const navLinks = document.querySelectorAll('.navbar a');
 
+    // Toggle menu on hamburger click
     hamburger.addEventListener('click', () => {
       navbar.classList.toggle('active');
+    });
+
+    // Hide menu when any nav link is clicked
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        navbar.classList.remove('active');
+      });
     });
   </script>
 </body>
 </html>
+
