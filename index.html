@@ -45,6 +45,12 @@
       text-decoration: underline;
     }
 
+    .navbar a.active {
+  color: #1c5980;  /* Darker blue or your highlight color */
+  text-decoration: underline;
+  font-weight: 700;
+}
+
     .hamburger {
       display: none;
       font-size: 1.8em;
@@ -268,6 +274,30 @@
         navbar.classList.remove('active');
       });
     });
+
+    const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('.navbar a');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 120; // Adjust for navbar height + some padding
+    const sectionHeight = section.clientHeight;
+    
+    if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+      current = section.getAttribute('id');
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#' + current) {
+      link.classList.add('active');
+    }
+  });
+});
+
   </script>
 </body>
 </html>
