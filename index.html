@@ -33,6 +33,7 @@
       z-index: 1000;
       border-bottom-left-radius: 10px;
       border-bottom-right-radius: 10px;
+      align-items: center;
     }
 
     .navbar a {
@@ -45,6 +46,16 @@
     .navbar a:hover {
       color: #1c5980;
       text-decoration: underline;
+    }
+
+    /* Hamburger Button */
+    .hamburger {
+      display: none;
+      font-size: 1.8em;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #2980b9;
     }
 
     .container {
@@ -88,39 +99,51 @@
       margin-bottom: 1em;
     }
 
-footer {
-  text-align: center;
-  font-size: 0.9em;
-  color: #888;
-  margin-top: 3em;
-}
+    footer {
+      text-align: center;
+      font-size: 0.9em;
+      color: #888;
+      margin-top: 3em;
+    }
 
-/* Add this outside of any other rule block */
-h2 {
-  scroll-margin-top: 100px; /* or adjust to match navbar height */
-}
+    /* Add this outside of any other rule block */
+    h2 {
+      scroll-margin-top: 100px; /* or adjust to match navbar height */
+    }
 
+    /* Responsive Styles */
     @media screen and (max-width: 600px) {
-  .navbar {
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 15px;
-  }
+      .hamburger {
+        display: block;
+      }
 
-  .navbar a {
-    font-size: 1em;
-    width: 100%;
-    text-align: center;
-  }
-}
-    
+      .navbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 10px 15px;
+      }
+
+      /* Hide nav links by default on mobile */
+      .navbar a {
+        display: none;
+        font-size: 1em;
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+      }
+
+      /* Show nav links when .active class is toggled */
+      .navbar.active a {
+        display: block;
+      }
+    }
   </style>
 </head>
 <body>
 
   <nav class="navbar">
+    <button class="hamburger" aria-label="Toggle navigation">&#9776;</button>
     <a href="#about">About</a>
     <a href="#Education">Education</a>
     <a href="#projects">Projects</a>
@@ -207,26 +230,28 @@ h2 {
       </ul>
     </section>
 
-      <section id="Scripts">
+    <section id="Scripts">
       <h2><u>Scripts</u></h2>
-      <h3> Python</h3><p>I utilized Python to create a basic <a href="https://onlinegdb.com/D-MPYpCOb">Caesar Cipher</a href> for encrypting plaintext and decrypting ciphertext back to plaintext.</p>
+      <h3> Python</h3>
+      <p>I utilized Python to create a basic <a href="https://onlinegdb.com/D-MPYpCOb" target="_blank" rel="noopener">Caesar Cipher</a> for encrypting plaintext and decrypting ciphertext back to plaintext.</p>
       <div style="text-align: center;">
         <iframe src="https://www.onlinegdb.com/embed/2CkeTFyns?theme=dark" 
           width="80%" 
           height="200px" 
           frameborder="0">
-      </iframe>
+        </iframe>
       </div>
 
       <section>
-      <h3>Java</h3><p>I created a <a href="https://onlinegdb.com/OGPANFiFN">password strength checker</a href> in Java, which also provides suggested improvements to users if they input a weak, or moderate strength password.</p>
-      <div style="text-align: center;">
-        <iframe src="https://onlinegdb.com/AHrczY9Td"
-          width="80%" 
-          height="200px" 
-          frameborder="0">
-      </iframe>
-      </div>
+        <h3>Java</h3>
+        <p>I created a <a href="https://onlinegdb.com/OGPANFiFN" target="_blank" rel="noopener">password strength checker</a> in Java, which also provides suggested improvements to users if they input a weak, or moderate strength password.</p>
+        <div style="text-align: center;">
+          <iframe src="https://onlinegdb.com/AHrczY9Td"
+            width="80%" 
+            height="200px" 
+            frameborder="0">
+          </iframe>
+        </div>
       </section>
     </section>
 
@@ -235,4 +260,15 @@ h2 {
       <p>You can download my resume <a href="https://www.dropbox.com/scl/fi/4bl1qw5rry9nwukhkbx6o/Perry-Kingston-Resume-5-2025.pdf?rlkey=qaz7i98wogougf47k4zt3mqtd&st=gmgwnhtr&dl=0" target="_blank" rel="noopener">here</a>.</p>
       <p>
         Connect with me on <a href="https://www.linkedin.com/in/perry-kingston/" target="_blank" rel="noopener">LinkedIn!</a> <br />
-        Email: <a href="mailto:perry.kingston@proton.me">perry.kingston@proton.me</
+        Email: <a href="mailto:perry.kingston@proton.me">perry.kingston@proton.me</a>
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2025 Perry Kingston</p>
+  </footer>
+
+  <script>
+    const hamburger = document
