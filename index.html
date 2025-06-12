@@ -5,21 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Perry Kingston - Cybersecurity Portfolio</title>
   <style>
-    /* Modern professional font stack */
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
-      padding: 40px 0; /* top/bottom padding only; sides handled by container */
+      padding: 40px 0;
       line-height: 1.75;
       background-color: #f7f9fc;
       background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
       background-repeat: repeat;
       color: #333;
-      scroll-behavior: smooth; /* smooth scrolling */
-      scroll-padding-top: 70px; /* prevents content from hiding under navbar */
+      scroll-behavior: smooth;
     }
 
-    /* Sticky Navbar */
     .navbar {
       position: sticky;
       top: 0;
@@ -48,7 +45,6 @@
       text-decoration: underline;
     }
 
-    /* Hamburger Button */
     .hamburger {
       display: none;
       font-size: 1.8em;
@@ -91,6 +87,7 @@
 
     section {
       margin-bottom: 1.5em;
+      scroll-margin-top: 100px; /* Prevent navbar overlap */
     }
 
     header, footer {
@@ -100,18 +97,11 @@
     }
 
     footer {
-      text-align: center;
       font-size: 0.9em;
       color: #888;
       margin-top: 3em;
     }
 
-    /* Add this outside of any other rule block */
-    h2 {
-      scroll-margin-top: 100px; /* or adjust to match navbar height */
-    }
-
-    /* Responsive Styles */
     @media screen and (max-width: 600px) {
       .hamburger {
         display: block;
@@ -124,7 +114,6 @@
         padding: 10px 15px;
       }
 
-      /* Hide nav links by default on mobile */
       .navbar a {
         display: none;
         font-size: 1em;
@@ -133,7 +122,6 @@
         padding: 10px 0;
       }
 
-      /* Show nav links when .active class is toggled */
       .navbar.active a {
         display: block;
       }
@@ -158,30 +146,26 @@
   </header>
 
   <main class="container">
-    <section id="about" class="anchor-offset">
+    <section id="about">
       <h2><u>About Me</u></h2>
-      <p>
-        Hello there, I’m Perry — I am extremely passionate about hands-on tech; particularly networking, network architecture, and security tools. I enjoy learning new things and sharing that information with others! I have extensive experience in IT, Digital Marketing as well as a decade of history in Sales and Leadership. These experiences combined with my innate pattern-recognition skills, critical thinking abilities and very strong verbal and written communication skills provide a unique perspective and the ability to effectively collaborate.    
-      </p>
+      <p>Hello there, I’m Perry — I am extremely passionate about hands-on tech; particularly networking, network architecture, and security tools. I enjoy learning new things and sharing that information with others! I have extensive experience in IT, Digital Marketing as well as a decade of history in Sales and Leadership...</p>
     </section>
 
     <section id="Education">
       <h2><u>Education & Certificates</u></h2>
       <article>
         <h3>Education</h3>
-        <p>
-            Anticipated graduation date January 2026 with a Bachelor's Degree in Cybersecurity and concentrations in Data Analytics and Project Management.
-        </p>
+        <p>Anticipated graduation date January 2026 with a Bachelor's Degree in Cybersecurity and concentrations in Data Analytics and Project Management.</p>
       </article>
       <article>
         <h3>Certifications</h3>
         <ul>
-          <li><a href="https://www.coursera.org/account/accomplishments/specialization/35I3HJ0IVM5M" target="_blank" rel="noopener">Google Cybersecurity Specialization</a></li>
-          <li><a href="https://www.coursera.org/account/accomplishments/specialization/J64JVMDOMEGK" target="_blank" rel="noopener">Google Cloud Data Analytics Specialization</a></li>
-          <li><a href="https://www.coursera.org/account/accomplishments/professional-cert/certificate/PPLZJ9G3K66G" target="_blank" rel="noopener">Google Data Analytics Professional</a></li>
-          <li><a href="https://www.coursera.org/account/accomplishments/specialization/MNGS1QRFIDZ3" target="_blank" rel="noopener">Google IT Support Professional</a></li>
-          <li><a href="https://credentials.edx.org/credentials/d4af0304eee1497bada767007718c51b/" target="_blank" rel="noopener">Google Cloud Computing Foundations</a></li>
-          <li><a href="https://www.coursera.org/account/accomplishments/specialization/certificate/W25VVQY573MH" target="_blank" rel="noopener">Salesforce Admin</a></li>
+          <li><a href="https://www.coursera.org/account/accomplishments/specialization/35I3HJ0IVM5M" target="_blank">Google Cybersecurity Specialization</a></li>
+          <li><a href="https://www.coursera.org/account/accomplishments/specialization/J64JVMDOMEGK" target="_blank">Google Cloud Data Analytics Specialization</a></li>
+          <li><a href="https://www.coursera.org/account/accomplishments/professional-cert/certificate/PPLZJ9G3K66G" target="_blank">Google Data Analytics Professional</a></li>
+          <li><a href="https://www.coursera.org/account/accomplishments/specialization/MNGS1QRFIDZ3" target="_blank">Google IT Support Professional</a></li>
+          <li><a href="https://credentials.edx.org/credentials/d4af0304eee1497bada767007718c51b/" target="_blank">Google Cloud Computing Foundations</a></li>
+          <li><a href="https://www.coursera.org/account/accomplishments/specialization/certificate/W25VVQY573MH" target="_blank">Salesforce Admin</a></li>
         </ul>
       </article>
     </section>
@@ -190,33 +174,26 @@
       <h2><u>Projects</u></h2>
       <article>
         <h3>Pi-hole DNS Filtering & Network Monitoring</h3>
-        <p>
-          To reduce unnecessary telemetry and minimize ad-serving, I deployed Pi-hole on my local network using a Raspberry Pi Zero 2W. This effectively intercepts DNS queries and blocks known ad/tracking domains. It is setup as the DNS resolver for both primary and backup for every device on the network. 
-        </p>
+        <p>To reduce unnecessary telemetry and minimize ad-serving, I deployed Pi-hole on my local network...</p>
         <ul>
-          <li>Installed and configured Pi-hole with an assigned static IP</li>
-          <li>Set router DHCP to use Pi-hole as primary and backup DNS</li>
-          <li>Routinely analyze DNS logs for anomalies</li>
+          <li>Installed and configured Pi-hole with static IP</li>
+          <li>Set router DHCP to use Pi-hole as DNS</li>
+          <li>Analyzed DNS logs for anomalies</li>
           <li>Created custom blocklists</li>
         </ul>
-        <p><strong>Tools used:</strong> Pi-hole, Raspberry Pi OS, SSH, DNS/DHCP settings</p>
+        <p><strong>Tools:</strong> Pi-hole, Raspberry Pi OS, SSH, DNS/DHCP settings</p>
       </article>
 
       <article>
-        <h3>Home Network Overhaul & Segmentation</h3> 
-        <p>
-          I redesigned my home network to improve security and performance, including isolating IoT devices and monitoring traffic.
-        </p>
+        <h3>Home Network Overhaul & Segmentation</h3>
+        <p>I redesigned my home network to improve security and performance, including isolating IoT devices and monitoring traffic...</p>
         <ul>
-          <li>Architecture is now: modem ISP, router handling DHCP, DNS, SPI firewall and whitelist rules, with 6 deco mesh nodes all under 1 SSID, beamforming and fast-roaming implemented, with all DNS handled by the pi-hole.</li>    
-          <li>This overhaul resulted in improved speeds, coverage and security without sacrificing any ease of connectivity for trusted devices by MAC address.</li>
-          <li>Set up VLANs to segment devices</li>
-          <li>Moved all IoT devices to segmented network to protect primary devices</li>
-          <li>Used pfSense for firewall and routing</li>
-          <li>Implemented traffic filtering rules and proper port policing</li>
-          <li>Used Wireshark and nmap to monitor activity to compare against network baseline</li>
+          <li>Set up VLANs for segmentation</li>
+          <li>Moved IoT to isolated VLAN</li>
+          <li>Used pfSense for firewall</li>
+          <li>Analyzed traffic with Wireshark/nmap</li>
         </ul>
-        <p><strong>Tools used:</strong> pfSense, Wireshark, nmap, VLAN switch, network diagram tools</p>
+        <p><strong>Tools:</strong> pfSense, Wireshark, nmap, VLAN switch</p>
       </article>
     </section>
 
@@ -225,58 +202,47 @@
       <ul>
         <li><strong>Networking:</strong> TCP/IP, DNS, DHCP, NAT, VLANs, subnetting</li>
         <li><strong>Security:</strong> Pi-hole, firewall config, IDS basics</li>
-        <li><strong>Tools:</strong> Wireshark, nmap, pfSense, Splunk, Linux CLI, cloud dashboards</li>
-        <li><strong>Scripting:</strong> Basic Bash or Python, Java</li>
+        <li><strong>Tools:</strong> Wireshark, nmap, pfSense, Splunk, Linux CLI</li>
+        <li><strong>Scripting:</strong> Basic Bash, Python, Java</li>
       </ul>
     </section>
 
     <section id="Scripts">
       <h2><u>Scripts</u></h2>
-      <h3> Python</h3>
-      <p>I utilized Python to create a basic <a href="https://onlinegdb.com/D-MPYpCOb" target="_blank" rel="noopener">Caesar Cipher</a> for encrypting plaintext and decrypting ciphertext back to plaintext.</p>
+      <h3>Python</h3>
+      <p>I utilized Python to create a <a href="https://onlinegdb.com/D-MPYpCOb" target="_blank">Caesar Cipher</a> for encryption/decryption.</p>
       <div style="text-align: center;">
-        <iframe src="https://www.onlinegdb.com/embed/2CkeTFyns?theme=dark" 
-          width="80%" 
-          height="200px" 
-          frameborder="0">
-        </iframe>
+        <iframe src="https://www.onlinegdb.com/embed/2CkeTFyns?theme=dark" width="80%" height="200" frameborder="0"></iframe>
       </div>
 
-      <section>
-        <h3>Java</h3>
-        <p>I created a <a href="https://onlinegdb.com/OGPANFiFN" target="_blank" rel="noopener">password strength checker</a> in Java, which also provides suggested improvements to users if they input a weak, or moderate strength password.</p>
-        <div style="text-align: center;">
-          <iframe src="https://onlinegdb.com/AHrczY9Td"
-            width="80%" 
-            height="200px" 
-            frameborder="0">
-          </iframe>
-        </div>
-      </section>
+      <h3>Java</h3>
+      <p>I created a <a href="https://onlinegdb.com/OGPANFiFN" target="_blank">password strength checker</a> in Java that gives improvement suggestions.</p>
+      <div style="text-align: center;">
+        <iframe src="https://onlinegdb.com/AHrczY9Td" width="80%" height="200" frameborder="0"></iframe>
+      </div>
     </section>
 
     <section id="contact">
       <h2><u>Resume & Contact</u></h2>
-      <p>You can download my resume <a href="https://www.dropbox.com/scl/fi/4bl1qw5rry9nwukhkbx6o/Perry-Kingston-Resume-5-2025.pdf?rlkey=qaz7i98wogougf47k4zt3mqtd&st=gmgwnhtr&dl=0" target="_blank" rel="noopener">here</a>.</p>
+      <p>Download my resume <a href="https://www.dropbox.com/scl/fi/4bl1qw5rry9nwukhkbx6o/Perry-Kingston-Resume-5-2025.pdf?rlkey=qaz7i98wogougf47k4zt3mqtd&st=gmgwnhtr&dl=0" target="_blank">here</a>.</p>
       <p>
-        Connect with me on <a href="https://www.linkedin.com/in/perry-kingston/" target="_blank" rel="noopener">LinkedIn!</a> <br />
+        Connect on <a href="https://www.linkedin.com/in/perry-kingston/" target="_blank">LinkedIn</a><br>
         Email: <a href="mailto:perry.kingston@proton.me">perry.kingston@proton.me</a>
       </p>
     </section>
-
   </main>
 
   <footer>
     <p>© 2025 Perry Kingston</p>
   </footer>
 
- <script>
-  const hamburger = document.querySelector('.hamburger');
-  const navbar = document.querySelector('.navbar');
+  <script>
+    const hamburger = document.querySelector('.hamburger');
+    const navbar = document.querySelector('.navbar');
 
-  hamburger.addEventListener('click', () => {
-    navbar.classList.toggle('active');
-  });
-</script>
+    hamburger.addEventListener('click', () => {
+      navbar.classList.toggle('active');
+    });
+  </script>
 </body>
 </html>
