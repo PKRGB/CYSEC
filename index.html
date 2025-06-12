@@ -121,12 +121,11 @@
       margin-top: 0; /* remove extra spacing on the heading itself */
     }
 
-    /* Back to Top Button Styles */
+    /* Back to Top Button Styles with smooth fade effect */
     #backToTop {
       position: fixed;
       bottom: 30px;
       right: 30px;
-      display: none;  /* Hidden by default */
       background-color: #2980b9;
       color: white;
       border: none;
@@ -136,12 +135,19 @@
       font-size: 1.8em;
       cursor: pointer;
       box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-      transition: background-color 0.3s ease;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+      opacity: 0;
+      visibility: hidden;
       z-index: 1001;
     }
 
     #backToTop:hover {
       background-color: #1c5980;
+    }
+
+    #backToTop.show {
+      opacity: 1;
+      visibility: visible;
     }
 
     @media screen and (max-width: 600px) {
@@ -320,12 +326,12 @@
         }
       });
 
-      // Back to Top Button show/hide logic
+      // Back to Top Button show/hide logic with fade effect
       const backToTopBtn = document.getElementById('backToTop');
       if (window.pageYOffset > 300) {
-        backToTopBtn.style.display = 'block';
+        backToTopBtn.classList.add('show');
       } else {
-        backToTopBtn.style.display = 'none';
+        backToTopBtn.classList.remove('show');
       }
     });
 
