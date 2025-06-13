@@ -262,7 +262,7 @@
        </div><p>This is a sanitized overview of my segmented home network setup. The ISP modem is bridged, and all routing, DHCP, and DNS control is handled by a custom router with firewall rules. Instead of allowing clients to choose their own DNS, all DNS queries are routed through Pi-hole at the firewall level, ensuring consistent blocking and visibility across the entire network.
 The network is segmented into:
   <ul><li>VLAN 10: Primary/trusted devices</li>
-  <li>VLAN 20: IoT devices, isolated from the trusted LAN</li>
+  <li>VLAN 20: IoT devices, isolated from the trusted devices subnet</li>
 </ul>Logs from Pi-hole are exported to a local SIEM system (Splunk) to support alerting, analysis, and automation experiments.
 
          <p><strong>Tools:</strong> pfSense, Wireshark, nmap, VLAN switch</p>
