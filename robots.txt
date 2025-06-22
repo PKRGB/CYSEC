@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: /assets/
-Disallow: https://pkrgb.github.io/CYSEC/incident-analysis.html
+Disallow: /CYSEC/incident-analysis.html
 
