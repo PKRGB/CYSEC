@@ -109,25 +109,30 @@
   </div>
 
   <script>
-    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-    const container = document.getElementById('pdfContainer');
-    const pdfUrl = "https://pkrgb.github.io/CYSEC/assets/Incident_Analysis_Brief_Case_Study.pdf";
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const container = document.getElementById('pdfContainer');
+  const pdfUrl = "https://pkrgb.github.io/CYSEC/assets/Incident_Analysis_Brief_Case_Study.pdf";
 
-    if (isMobile) {
-      container.innerHTML = `
-        <p>This report is best viewed in a dedicated PDF reader on mobile devices.</p>
-        <a href="${pdfUrl}" target="_blank" rel="noopener noreferrer" class="fallback-link">
-          Open Full Report in New Tab
-        </a>
-      `;
-    } else {
-      container.innerHTML = `
-        <iframe src="${pdfUrl}" aria-label="Incident Analysis Brief PDF"></iframe>
-        <p style="text-align:center; margin-top:15px;">
-        </p>
-      `;
-    }
-  </script>
+  if (isMobile) {
+    container.innerHTML = `
+      <p>This report is best viewed in a dedicated PDF reader on mobile devices.</p>
+      <a href="${pdfUrl}" target="_blank" rel="noopener noreferrer" class="fallback-link">
+        Open Full Report in New Tab
+      </a>
+    `;
+  } else {
+    const encodedUrl = encodeURIComponent(pdfUrl);
+    container.innerHTML = `
+      <iframe 
+        src="https://docs.google.com/gview?url=${encodedUrl}&embedded=true"
+        style="width:100%; height:90vh; border:1px solid #ccc; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);" 
+        frameborder="0"
+        aria-label="Incident Analysis Brief PDF via Google Viewer">
+      </iframe>
+    `;
+  }
+</script>
+
 
 </body>
 
