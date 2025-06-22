@@ -23,7 +23,7 @@
       text-align: center;
       color: #2980b9;
       margin-bottom: 30px;
-      padding-top: 50px; /* space for sticky back button */
+      padding-top: 50px;
     }
 
     .fallback-link {
@@ -52,81 +52,3 @@
       background-color: #2980b9;
       color: white;
       padding: 8px 14px;
-      border-radius: 6px;
-      font-weight: 600;
-      text-decoration: none;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      z-index: 10000;
-      transition: background-color 0.3s ease;
-      font-size: 1em;
-      user-select: none;
-    }
-
-    .back-button:hover {
-      background-color: #1c5980;
-    }
-
-    .back-button svg {
-      width: 18px;
-      height: 18px;
-      fill: white;
-      flex-shrink: 0;
-    }
-
-    /* Responsive padding for body top so content doesn't hide behind fixed button */
-    @media (max-width: 500px) {
-      h1 {
-        padding-top: 60px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <a href="index.html" class="back-button" aria-label="Back to Portfolio">
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
-    </svg>
-    Back to Portfolio
-  </a>
-
-  <h1>Incident Analysis Brief</h1>
-
-  <div id="pdfContainer" class="pdf-container">
-    <!-- Content rendered by JavaScript -->
-  </div>
-
-  <script>
-    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-    const container = document.getElementById('pdfContainer');
-    const pdfUrl = "https://pkrgb.github.io/CYSEC/assets/Incident_Analysis_Brief_Case_Study.pdf";
-
-    if (isMobile) {
-      container.innerHTML = `
-        <p>This report is best viewed in a dedicated PDF reader on mobile devices.</p>
-        <a href="${pdfUrl}" target="_blank" rel="noopener noreferrer" class="fallback-link">
-          Open Full Report in New Tab
-        </a>
-      `;
-    } else {
-      const encodedUrl = encodeURIComponent(pdfUrl);
-      container.innerHTML = `
-        <div style="height: 90vh; overflow-y: scroll; border:1px solid #ccc; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
-          <iframe 
-            src="https://docs.google.com/gview?url=${encodedUrl}&embedded=true"
-            style="width: 100%; height: 150vh; border: none;"
-            frameborder="0"
-            aria-label="Incident Analysis Brief PDF via Google Viewer">
-          </iframe>
-        </div>
-      `;
-    }
-  </script>
-
-</body>
-
-</html>
