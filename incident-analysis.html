@@ -96,6 +96,23 @@ h2 {
         padding-top: 60px;
       }
     }
+  @keyframes scrollHint {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+  .scrollbar-hint {
+    position: fixed;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: #888;
+    user-select: none;
+    pointer-events: none;
+    animation: scrollHint 2s infinite;
+    z-index: 10000;
+  }
+
   </style>
 </head>
 
@@ -161,7 +178,8 @@ h2 {
   });
 </script>
 
-
+  <div class="scrollbar-hint" aria-hidden="true" title="Use scrollbar to navigate">
+    &#8675; <!-- down arrow symbol -->
 
 </body>
 
