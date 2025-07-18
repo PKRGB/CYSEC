@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Programming Screenshots Showcase</title>
+  <title>Object-Oriented Programming Examples</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -34,6 +34,7 @@
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       overflow: hidden;
+      cursor: pointer;
       transition: transform 0.3s ease;
     }
 
@@ -57,6 +58,68 @@
       background-color: #fafafa;
     }
 
+    /* Modal Styles */
+    .modal {
+      display: none; /* hidden by default */
+      position: fixed;
+      z-index: 9999;
+      left: 0; top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.8);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 8px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+      animation: zoomIn 0.3s ease;
+    }
+
+    .modal-content img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+    }
+
+    .modal-caption {
+      margin-top: 8px;
+      color: #ddd;
+      text-align: center;
+      font-size: 1.1rem;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      color: white;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      user-select: none;
+    }
+    .close-btn:hover {
+      color: #ccc;
+    }
+
+    @keyframes zoomIn {
+      from {
+        transform: scale(0.7);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
     /* Responsive adjustments */
     @media (max-width: 500px) {
       body {
@@ -69,26 +132,78 @@
   </style>
 </head>
 <body>
-  <h1>Programming Screenshots Showcase</h1>
+  <h1>Python</h1>
 
   <div class="gallery">
-    <div class="gallery-item">
-      <img src="assets/Python_Code_Snippet.png" alt="Python Sample Code" />
+    <div class="gallery-item" data-full="assets/Python_Code_Snippet.png" data-caption="Python Code Snippet">
+      <img src="screenshots/code1.png" alt="Code Screenshot 1" />
       <div class="caption">JavaScript Function Example</div>
     </div>
-    <div class="gallery-item">
+    <div class="gallery-item" data-full="screenshots/code2.png" data-caption="Python Data Processing">
       <img src="screenshots/code2.png" alt="Code Screenshot 2" />
       <div class="caption">Python Data Processing</div>
     </div>
-    <div class="gallery-item">
+    <div class="gallery-item" data-full="screenshots/code3.png" data-caption="CSS Styling Snippet">
       <img src="screenshots/code3.png" alt="Code Screenshot 3" />
       <div class="caption">CSS Styling Snippet</div>
     </div>
-    <div class="gallery-item">
+    <div class="gallery-item" data-full="screenshots/code4.png" data-caption="React Component">
       <img src="screenshots/code4.png" alt="Code Screenshot 4" />
       <div class="caption">React Component</div>
     </div>
     <!-- Add more gallery items as needed -->
   </div>
+
+  <!-- Modal container -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-caption">
+    <div class="modal-content">
+      <span class="close-btn" id="modal-close" aria-label="Close modal">&times;</span>
+      <img id="modal-img" src="" alt="" />
+      <div id="modal-caption" class="modal-caption"></div>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modal-img');
+    const modalCaption = document.getElementById('modal-caption');
+    const modalClose = document.getElementById('modal-close');
+
+    // Open modal with clicked image
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const fullSrc = item.getAttribute('data-full');
+        const caption = item.getAttribute('data-caption');
+        modalImg.src = fullSrc;
+        modalImg.alt = caption;
+        modalCaption.textContent = caption;
+        modal.style.display = 'flex';
+        // Optional: prevent body scroll while modal open
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    // Close modal on close button click
+    modalClose.addEventListener('click', () => {
+      modal.style.display = 'none';
+      modalImg.src = '';
+      modalCaption.textContent = '';
+      document.body.style.overflow = '';
+    });
+
+    // Close modal when clicking outside the modal content
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        modalClose.click();
+      }
+    });
+
+    // Close modal on ESC key press
+    document.addEventListener('keydown', (event) => {
+      if(event.key === 'Escape' && modal.style.display === 'flex') {
+        modalClose.click();
+      }
+    });
+  </script>
 </body>
 </html>
