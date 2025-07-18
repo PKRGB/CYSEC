@@ -154,12 +154,36 @@
         height: 140px;
       }
     }
+
+    .language-section {
+  margin-top: 60px;
+  padding: 30px 20px;
+  border-radius: 8px;
+  background-color: #f0f4f8;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.python-section {
+  border-left: 5px solid #4caf50; /* green accent */
+}
+
+.java-section {
+  border-left: 5px solid #e67e22; /* orange accent */
+}
+
+.language-section h2 {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
   </style>
 </head>
 <body>
-  <h1>Object-Oriented Programming Examples</h1>
+<h1>Object-Oriented Programming Examples</h1>
 
-  <h2 style="text-align: left;">Python</h2>
+<section class="language-section python-section">
+  <h2>🐍 Python</h2>
   <div class="gallery">
     <div class="gallery-item" data-full="assets/Python_Code_Snippet.png" data-caption="Python Code Snippet">
       <img src="assets/Python_Code_Snippet.png" alt="Python Code Snippet" />
@@ -174,18 +198,22 @@
       <div class="caption">Python Example Result</div>
     </div>
   </div>
+</section>
 
-  <h2 style="text-align: left; margin-top: 40px;">Java</h2>
+<section class="language-section java-section">
+  <h2>☕ Java</h2>
   <div class="gallery">
-    <div class="gallery-item" data-full="screenshots/code4.png" data-caption="React Component">
-      <img src="screenshots/code4.png" alt="Code Screenshot 4" />
-      <div class="caption">React Component</div>
+    <div class="gallery-item" data-full="screenshots/code4.png" data-caption="Java Example 1">
+      <img src="screenshots/code4.png" alt="Java Example 1" />
+      <div class="caption">Java Example 1</div>
     </div>
-    <div class="gallery-item" data-full="screenshots/code5.png" data-caption="Java Example">
-      <img src="screenshots/code5.png" alt="Code Screenshot 5" />
-      <div class="caption">Java Example</div>
+    <div class="gallery-item" data-full="screenshots/code4.png" data-caption="Java Example 2">
+      <img src="screenshots/code4.png" alt="Java Example 2" />
+      <div class="caption">Java Example 2</div>
     </div>
   </div>
+</section>
+
 
 </body>
 
