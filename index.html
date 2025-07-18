@@ -15,7 +15,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Perry Kingston - Cybersecurity Portfolio</title>
+  
   <style>
+   
+  .swiper-container {
+    width: 90%;
+    max-width: 800px;
+    height: auto;
+    margin: 2rem auto;
+  }
+
+  .swiper-slide {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .swiper-slide img {
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  }
+</style>
+<style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
@@ -238,6 +261,15 @@ justify-content: center;
     line-height: 1.4;
     margin-bottom: 1px;
   }
+    <!-- Swiper CSS -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/swiper/swiper-bundle.min.css"
+/>
+
+<!-- Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
 </style>
 </head>
   
@@ -353,7 +385,18 @@ The network is segmented into:
   </article>
   </section>
     
+ <h2><u>Scripts</u></h2>
+<div class="swiper-container">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><img src="img/screenshot1.webp" alt="Code Screenshot 1"></div>
+    <div class="swiper-slide"><img src="img/screenshot2.webp" alt="Output Screenshot 2"></div>
+    <div class="swiper-slide"><img src="img/screenshot3.webp" alt="Terminal Output 3"></div>
+  </div>
 
+  <!-- Optional buttons -->
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
 
     <!--
     <section id="Scripts">
@@ -442,6 +485,22 @@ The network is segmented into:
         behavior: 'smooth'
       });
     });
+    
+    <script>
+  const swiper = new Swiper('.swiper-container', {
+    loop: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    spaceBetween: 20,
+    slidesPerView: 1,
+    breakpoints: {
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 }
+    }
+  });
+
   </script>
 </body>
 </html>
