@@ -204,17 +204,15 @@ body {
   color: #222;
   margin: 0;
   padding: 20px;
-  /* Remove max-width for mobile */
+  text-align: center; /* ensure inline content like headers is centered */
 }
 
-/* Centered iframe container */
 .iframe-container {
   display: flex;
   justify-content: center;
-  width: 100%; /* make container full width */
+  width: 100%;
 }
 
-/* Responsive iframe */
 .report-frame {
   width: 77%;
   max-width: 100%;
@@ -225,11 +223,11 @@ body {
 /* Mobile adjustments */
 @media (max-width: 768px) {
   body {
-    padding: 10px; /* reduce padding on mobile */
+    padding: 10px;
   }
 
   .report-frame {
-    width: 100%; /* fill screen width */
+    width: 100%;
     height: 600px;
   }
 }
