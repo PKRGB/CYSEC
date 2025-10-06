@@ -198,23 +198,50 @@
   color: #2c3e50;
 }
 
-    @media (max-width: 768px) {
-  iframe {
-    width: 95% !important;
-    height: 600px !important;
+/* Center the iframe container */
+.iframe-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px; /* optional spacing below iframe */
+}
+
+/* Desktop & default iframe styling */
+.report-frame {
+  width: 77%;
+  max-width: 100%;
+  height: 900px;
+  border: none;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .report-frame {
+    width: 95%;
+    height: 600px;
   }
 }
 
+
   </style>
 </head>
-<body>
+
+  <body>
 <h1>Data Analytics Demo Report</h1>
-  <div style="display: flex; justify-content: center;">
+
+    <div class="iframe-container">
+    <iframe
+      class="report-frame"
+      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ68sumJulqMfpVB8TRJ9i5HOWfpA2k3STz68_CfKrBi_9dOW5q2XbCkyh7oiXCoyk5ahD0ERtiabqO/pubhtml?gid=0&single=true&widget=true&headers=false"
+      loading="lazy"
+      title="Demo Summary Report">
+    </iframe>
+  </div>
+    <!-- <div style="display: flex; justify-content: center;">
   <iframe
   src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ68sumJulqMfpVB8TRJ9i5HOWfpA2k3STz68_CfKrBi_9dOW5q2XbCkyh7oiXCoyk5ahD0ERtiabqO/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"""
   style="width:77%; height:900px; border:none; display:block; margin:0 auto;"
   loading="lazy"
-  title="Demo Summary Report"></iframe>
+  title="Demo Summary Report"></iframe> -->
 
 </body>
 
