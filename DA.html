@@ -198,14 +198,23 @@
   color: #2c3e50;
 }
 
-/* Center the iframe container */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f9f9f9;
+  color: #222;
+  margin: 0;
+  padding: 20px;
+  /* Remove max-width for mobile */
+}
+
+/* Centered iframe container */
 .iframe-container {
   display: flex;
   justify-content: center;
-  margin-bottom: 40px; /* optional spacing below iframe */
+  width: 100%; /* make container full width */
 }
 
-/* Desktop & default iframe styling */
+/* Responsive iframe */
 .report-frame {
   width: 77%;
   max-width: 100%;
@@ -215,11 +224,16 @@
 
 /* Mobile adjustments */
 @media (max-width: 768px) {
+  body {
+    padding: 10px; /* reduce padding on mobile */
+  }
+
   .report-frame {
-    width: 95%;
+    width: 100%; /* fill screen width */
     height: 600px;
   }
 }
+
 
 
   </style>
