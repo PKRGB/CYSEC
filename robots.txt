@@ -2,5 +2,6 @@ User-agent: *
 Disallow: /assets/
 Disallow: /CYSEC/incident-analysis.html
 Disallow: /CYSEC
-Disallow: https://pkrgb.github.io/CYSEC/
 Disallow: /CYSEC/index.html
+Disallow: /CYSEC/DA.html
+Disallow: /scripts.html
