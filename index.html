@@ -1,3 +1,12 @@
+<meta http-equiv="Content-Security-Policy" 
+content="
+  default-src 'self';
+  script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
+  connect-src 'self' https://www.google-analytics.com;
+  img-src 'self' data:;
+  style-src 'self';
+">
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -532,6 +541,7 @@ The network is segmented into:
   </script>
 </body>
 </html>
+
 
 
 
