@@ -23,7 +23,7 @@ content="
 
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Network IDS Setup with Suricata - Preston Kellogg</title>
+<title>Network IDS Setup with Suricata on Rasp. Pi OS - Perry Kingston</title>
 
 <style>
   body {
@@ -49,7 +49,7 @@ content="
   .pdf-wrapper {
     position: relative;
     width: 100%;
-    padding-bottom: 130%; /* taller for mobile */
+    padding-bottom: 130%; /* mobile-friendly aspect ratio */
     height: 0;
     overflow: hidden;
     border-radius: 8px;
@@ -70,30 +70,43 @@ content="
     .pdf-wrapper { padding-bottom: 80%; }
   }
 
-  .back-button {
-    position: fixed;
-    top: 10px;
-    left: 20px;
+  .back-button,
+  .download-button {
     background-color: #2980b9;
     color: white;
     padding: 8px 14px;
     border-radius: 6px;
     font-weight: 600;
     text-decoration: none;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 8px;
-    z-index: 1000;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease;
   }
 
-  .back-button:hover { background-color: #1c5980; }
+  .back-button:hover,
+  .download-button:hover {
+    background-color: #1c5980;
+  }
 
-  .back-button svg {
+  .back-button svg,
+  .download-button svg {
     width: 18px;
     height: 18px;
     fill: white;
+  }
+
+  .back-button {
+    position: fixed;
+    top: 10px;
+    left: 20px;
+    z-index: 1000;
+  }
+
+  .download-container {
+    text-align: center;
+    margin-top: 1rem;
   }
 
   .description {
@@ -105,25 +118,37 @@ content="
 
 <body>
 
+<!-- Back to Portfolio -->
 <a href="index.html" class="back-button" aria-label="Back to Portfolio">
   <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
   Back to Portfolio
 </a>
 
+<!-- Project Title and Intro -->
 <h1>Network IDS Setup with Suricata</h1>
-<h2>Raspberry Pi OS Lite Configuration & Security Hardening</h2>
+<h2>Raspberry Pi OS Configuration, IDS install and Configuration & Security Hardening</h2>
 
 <p class="description">
-  This project demonstrates the full installation and configuration of Suricata on Raspberry Pi OS Lite, including 
-  steps for system hardening and backup automation.
+  This project demonstrates the complete installation and configuration of Suricata on Raspberry Pi OS, providing a clear, step-by-step guide for users of any experience level with steps outlined from preparing a blank SD card and installing the OS, to securely configuring and validating Suricata for network monitoring. This guide reflects the constraints of the hardware which was on hand and thus used, specifically a Raspberry Pi Zero 2 W. For instance, despite implementing a swap file, Fail2Ban could not be installed due to CPU limitations. On newer, stronger models, installing Fail2Ban is a useful hardening tactic to protect against SSH login-abuse. A Readme regarding System Hardening, including Fail2Ban, can be found <a href="sample.html">here </a href>
 </p>
 
+<!-- PDF Embed -->
 <div class="pdf-wrapper">
-  <iframe src="Suricata_Setup_Guide.pdf" title="Suricata Setup PDF"></iframe>
+  <iframe src="assets/Suricata_Setup_Guide.pdf" title="Suricata Setup Guide PDF"></iframe>
 </div>
 
+<!-- Download Button ##commented out until I decide yes or no on download
+<div class="download-container">
+  <a href="assets/Suricata_Setup_Guide.pdf" download class="download-button" aria-label="Download Suricata Setup PDF">
+    <svg viewBox="0 0 24 24">
+      <path d="M5 20h14v-2H5v2zm7-18L5.33 9h3.67v6h4V9h3.67L12 2z"/>
+    </svg>
+    Download PDF
+  </a>
+</div> -->
+
 <p class="description" style="margin-top:1rem;font-size:0.9rem;color:#555;">
-  © 2025 Preston Kellogg — For educational and demonstration use.
+  © 2025 Perry Kingston — For educational and demonstration use.
 </p>
 
 </body>
