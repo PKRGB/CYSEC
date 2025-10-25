@@ -106,4 +106,214 @@ content="
     overflow: auto;
     background-color: rgba(0,0,0,0.8);
     align-items: center;
-    justify-
+    justify-content: center;
+  }
+
+  .modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+    animation: zoomIn 0.3s ease;
+  }
+
+  .modal-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+  }
+
+  .modal-caption {
+    margin-top: 8px;
+    color: #ddd;
+    text-align: center;
+    font-size: 1.1rem;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .close-btn:hover {
+    color: #ccc;
+  }
+
+  @keyframes zoomIn {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  @media (max-width: 500px) {
+    body { padding: 15px; }
+    .gallery-item img { height: 140px; }
+  }
+
+  .language-section {
+    margin-top: 60px;
+    padding: 30px 20px;
+    border-radius: 8px;
+    background-color: #f0f4f8;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+
+  .python-section {
+    border-left: 5px solid #4caf50;
+    border-right: 5px solid #4caf50;
+  }
+
+  .java-section {
+    border-left: 5px solid #e67e22;
+    border-right: 5px solid #e67e22;
+  }
+
+  .language-section h2 {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    color: #2c3e50;
+  }
+
+  /* Floating circular back button (matches working Backup Guide page) */
+  .back-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #2980b9;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    transition: background-color 0.3s ease;
+    z-index: 1000;
+    cursor: pointer;
+    border: none;
+    outline: none;
+  }
+
+  .back-button:hover {
+    background-color: #555;
+  }
+
+  .back-button svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: white;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+</style>
+</head>
+<body>
+
+<h1>Object-Oriented Programming Examples</h1>
+
+<section class="language-section python-section">
+  <h2>Python</h2>
+  <h3>Caesar Cipher Program</h3>
+  <div class="gallery">
+    <div class="gallery-item" data-full="assets/Python_Code_Snippet.png" data-caption="Python Code Snippet">
+      <img src="assets/Python_Code_Snippet.png" alt="Python Code Snippet" />
+      <div class="caption">Python Code Snippet</div>
+    </div>
+    <div class="gallery-item" data-full="assets/Python_Code_Menu.png" data-caption="Python Program Menu">
+      <img src="assets/Python_Code_Menu.png" alt="Python Program Menu" />
+      <div class="caption">Python Program Menu</div>
+    </div>
+    <div class="gallery-item" data-full="assets/Python_Code_Example.png" data-caption="Python Example Result">
+      <img src="assets/Python_Code_Example.png" alt="Python Example Result" />
+      <div class="caption">Python Example Result</div>
+    </div>
+  </div>
+  <p>
+    Built a bidirectional Caesar cipher program demonstrating legacy cryptography concepts, with functionality for encrypting plaintext and decrypting ciphertext based on a user-specified shift key. 
+    Developed as a Python learning exercise to practice string manipulation, control flow, user input handling and applying defensive programming tactics to handle edge cases, prevent runtime errors and ensure robust input validation.
+  </p>
+</section>
+
+<section class="language-section java-section">
+  <h2>Java</h2>
+  <h3>Password Strength Checking Program</h3>
+  <div class="gallery">
+    <div class="gallery-item" data-full="assets/Java_Code_Snippet.png" data-caption="Java Code Snippet">
+      <img src="assets/Java_Code_Snippet.png" alt="Java Example 1" />
+      <div class="caption">Java Code Snippet</div>
+    </div>
+    <div class="gallery-item" data-full="assets/Java_Program_Example.png" data-caption="Java Program Example">
+      <img src="assets/Java_Program_Example.png" alt="Java Program Example" />
+      <div class="caption">Java Program Example</div>
+    </div>
+  </div>
+  <p>
+    Implemented a Java-based password validation tool demonstrating basic security principles, evaluating user passwords against multiple criteria (presence/absence of uppercase, lowercase, symbols/special characters, minimum character length, etc) and providing automatic enhancements to strengthen weak entries. Developed as a project to reinforce programming fundamentals, effective input handling, and foundational security concepts.
+  </p>
+</section>
+
+<!-- Modal container -->
+<div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-caption">
+  <div class="modal-content">
+    <span class="close-btn" id="modal-close" aria-label="Close modal">&times;</span>
+    <img id="modal-img" src="" alt="" />
+    <div id="modal-caption" class="modal-caption"></div>
+  </div>
+</div>
+
+<!-- Floating Back Button -->
+<button class="back-button" aria-label="Go Back" id="backBtn">
+  <svg viewBox="0 0 24 24">
+    <path d="M16 18l-8-6 8-6" />
+  </svg>
+</button>
+
+<script>
+  // Back button functionality
+  document.getElementById('backBtn').addEventListener('click', function() {
+    history.back();
+  });
+
+  // Modal functionality
+  const modal = document.getElementById('modal');
+  const modalImg = document.getElementById('modal-img');
+  const modalCaption = document.getElementById('modal-caption');
+  const modalClose = document.getElementById('modal-close');
+
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    item.addEventListener('click', () => {
+      modalImg.src = item.getAttribute('data-full');
+      modalImg.alt = item.getAttribute('data-caption');
+      modalCaption.textContent = item.getAttribute('data-caption');
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  modalClose.addEventListener('click', () => {
+    modal.style.display = 'none';
+    modalImg.src = '';
+    modalCaption.textContent = '';
+    document.body.style.overflow = '';
+  });
+
+  modal.addEventListener('click', (event) => {
+    if(event.target === modal) modalClose.click();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if(event.key === 'Escape' && modal.style.display === 'flex') modalClose.click();
+  });
+</script>
+</body>
+</html>
