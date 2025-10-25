@@ -37,13 +37,19 @@ content="
     min-height: 100vh;
   }
 
-  h1, h2 { text-align: center; margin: 0.5em 0; }
-  h1 { padding-top: 60px; }
+  h1, h2 {
+    text-align: center;
+    margin: 0.5em 0;
+  }
+
+  h1 {
+    padding-top: 60px;
+  }
 
   .pdf-wrapper {
     position: relative;
     width: 100%;
-    padding-bottom: 130%;
+    padding-bottom: 130%; /* mobile-friendly aspect ratio */
     height: 0;
     overflow: hidden;
     border-radius: 8px;
@@ -51,37 +57,44 @@ content="
     background: #fff;
   }
 
-  .pdf-wrapper iframe { position: absolute; top:0; left:0; width:100%; height:100%; border:none; }
+  .pdf-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
 
-  @media (min-width: 768px) { .pdf-wrapper { padding-bottom: 80%; } }
+  @media (min-width: 768px) {
+    .pdf-wrapper { padding-bottom: 80%; }
+  }
 
-  /* Floating back button (replaces Return to Portfolio) */
+  /* Floating back button */
   .back-button {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    top: 10px;
+    left: 20px;
     background-color: #2980b9;
     color: white;
-    font-size: 24px;
-    padding: 10px 14px;
-    border-radius: 50%;
+    padding: 6px;
+    border-radius: 6px;
     text-decoration: none;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    transition: background-color 0.3s ease;
-    z-index: 1000;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    z-index: 1000;
     cursor: pointer;
   }
 
   .back-button:hover {
-    background-color: #555;
+    background-color: #1c5980;
   }
 
   .back-button svg {
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
     fill: white;
   }
 
@@ -92,40 +105,36 @@ content="
 </style>
 </head>
 
-  .description {
-    text-align: center;
-    margin-bottom: 1.5rem;
-  }
-</style>
-</head>
-
 <body>
 
-<!-- Back Button -->
+<!-- Floating Back Button -->
 <a href="index.html" class="back-button" aria-label="Back to Portfolio">
   <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-  Back to Portfolio
 </a>
 
-<!-- Title / Intro -->
+<!-- Page Title and Intro -->
 <h1>Raspberry Pi Backup Guide</h1>
 <h2>System & Network Backup Procedure</h2>
 
 <p class="description">
   This guide demonstrates a simple method to back up a Raspberry Pi system using a mounted USB drive. 
-  A single-line backup command preserves critical configurations; including network settings, Pi-hole data, and other essential system files, allowing easy restoration or migration to a new SD card.
+  A single-line backup command preserves critical configurations, including network settings, Pi-hole data, and other essential system files, allowing easy restoration or migration to a new SD card.
 </p>
 
 <!-- PDF Embed -->
 <div class="pdf-wrapper">
-  <iframe src="assets/Pi_Backup_Guide.pdf" title="Raspberry Pi Backup Guide PDF"></iframe>
+  <iframe src="assets/Pi_Backup_Guide.pdf#zoom=100&pagemode=none" 
+          title="Raspberry Pi Backup Guide PDF">
+  </iframe>
 </div>
 
-<!-- Download Button (comment out if desired) -->
+<!-- Optional Download Button (commented out) -->
 <!--
 <div class="download-container">
   <a href="assets/Pi_Backup_Guide.pdf" download class="download-button" aria-label="Download Backup Guide PDF">
-    <svg viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zm7-18L5.33 9h3.67v6h4V9h3.67L12 2z"/></svg>
+    <svg viewBox="0 0 24 24">
+      <path d="M5 20h14v-2H5v2zm7-18L5.33 9h3.67v6h4V9h3.67L12 2z"/>
+    </svg>
     Download PDF
   </a>
 </div>
