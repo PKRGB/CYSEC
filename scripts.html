@@ -7,7 +7,6 @@ content="
   style-src 'self' 'unsafe-inline';
 ">
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,322 +16,94 @@ content="
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-YXC3GLYKFL');
-  
 </script>
-  
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Object-Oriented Programming Examples</title>
-  <style>
-    
-   
-    .back-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #2980b9;
-  color: white;
-  font-size: 24px;
-  padding: 10px 14px;
-  border-radius: 50%;
-  text-decoration: none;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-  transition: background-color 0.3s ease;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
 
-.back-button:hover {
-  background-color: #555;
-}
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Object-Oriented Programming Examples</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f9f9f9;
+    color: #222;
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 1000px;
+  }
 
-    
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f9f9f9;
-      color: #222;
-      margin: 0;
-      padding: 20px;
-      max-width: 1000px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 700;
+    color: #333;
+  }
 
-    h1 {
-      text-align: center !important;
-      margin-bottom: 30px;
-      font-weight: 700;
-      color: #333;
-    }
-    
-    h2, h3 {
+  h2, h3 {
     margin-top: 0;
     margin-bottom: 0;
-}
+  }
 
+  h2 {
+    text-align: center;
+    margin-bottom: 0;
+    font-weight: 700;
+    color: #333;
+  }
 
-        h2 {
-      text-align: center !important;
-      margin-bottom: 0;
-      font-weight: 700;
-      color: #333;
-    }
-
-    h3 {
-    text-align: center !important;
+  h3 {
+    text-align: center;
     margin-top: 0;
     margin-bottom: 20px;    
     font-weight: 500;        
     font-size: 1.5em;        
     color: #444;             
-}
+  }
 
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
 
-    .gallery-item {
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
+  .gallery-item {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
 
-    .gallery-item:hover {
-      transform: scale(1.03);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-    }
+  .gallery-item:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  }
 
-    .gallery-item img {
-      width: 100%;
-      display: block;
-      object-fit: cover;
-      height: 160px;
-    }
+  .gallery-item img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    height: 160px;
+  }
 
-    .caption {
-      padding: 12px 15px;
-      font-size: 1rem;
-      color: #555;
-      text-align: center;
-      background-color: #fafafa;
-    }
+  .caption {
+    padding: 12px 15px;
+    font-size: 1rem;
+    color: #555;
+    text-align: center;
+    background-color: #fafafa;
+  }
 
-    /* Modal Styles */
-    .modal {
-      display: none; /* hidden by default */
-      position: fixed;
-      z-index: 9999;
-      left: 0; top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.8);
-      align-items: center;
-      justify-content: center;
-    }
-
-    .modal-content {
-      position: relative;
-      max-width: 90%;
-      max-height: 90%;
-      border-radius: 8px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.7);
-      animation: zoomIn 0.3s ease;
-    }
-
-    .modal-content img {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-      display: block;
-    }
-
-    .modal-caption {
-      margin-top: 8px;
-      color: #ddd;
-      text-align: center;
-      font-size: 1.1rem;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      color: white;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
-      user-select: none;
-    }
-    .close-btn:hover {
-      color: #ccc;
-    }
-
-    @keyframes zoomIn {
-      from {
-        transform: scale(0.7);
-        opacity: 0;
-      }
-      to {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 500px) {
-      body {
-        padding: 15px;
-      }
-      .gallery-item img {
-        height: 140px;
-      }
-    }
-
-    .language-section {
-  margin-top: 60px;
-  padding: 30px 20px;
-  border-radius: 8px;
-  background-color: #f0f4f8;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-
-.python-section {
-  border-left: 5px solid #4caf50; /* green accent */
-  border-right: 5px solid #4caf50;
-}
-
-.java-section {
-  border-left: 5px solid #e67e22; /* orange accent */
-  border-right: 5px solid #e67e22;
-}
-
-.language-section h2 {
-  font-size: 1.6rem;
-  margin-bottom: 20px;
-  color: #2c3e50;
-}
-
-  </style>
-</head>
-<body>
-<h1>Object-Oriented Programming Examples</h1>
-
-<section class="language-section python-section">
-  <h2>Python</h2>
-  <h3>Caesar Cipher Program</h3>
-  <div class="gallery">
-    <div class="gallery-item" data-full="assets/Python_Code_Snippet.png" data-caption="Python Code Snippet">
-      <img src="assets/Python_Code_Snippet.png" alt="Python Code Snippet" />
-      <div class="caption">Python Code Snippet</div>
-    </div>
-    <div class="gallery-item" data-full="assets/Python_Code_Menu.png" data-caption="Python Program Menu">
-      <img src="assets/Python_Code_Menu.png" alt="Python Program Menu" />
-      <div class="caption">Python Program Menu</div>
-    </div>
-    <div class="gallery-item" data-full="assets/Python_Code_Example.png" data-caption="Python Example Result">
-      <img src="assets/Python_Code_Example.png" alt="Python Example Result" />
-      <div class="caption">Python Example Result</div>
-       </div>
-  </div>
-       <p>Built a bidirectional Caesar cipher program demonstrating legacy cryptography concepts, with functionality for encrypting plaintext and decrypting ciphertext based on a user-specified shift key. 
-  Developed as a Python learning exercise to practice string manipulation, control flow, user input handling and applying defensive programming tactics to handle edge cases, prevent runtime errors and ensure robust input validation.</p>
-   
-</section>
-
-<section class="language-section java-section">
-  <h2>Java</h2>
-  <h3>Password Strength Checking Program</h3>
-  <div class="gallery">
-    <div class="gallery-item" data-full="assets/Java_Code_Snippet.png" data-caption="Java Code Snippet">
-      <img src="assets/Java_Code_Snippet.png" alt="Java Example 1" />
-      <div class="caption">Java Code Snippet</div>
-    </div>
-    <div class="gallery-item" data-full="assets/Java_Program_Example.png" data-caption="Java Program Example">
-      <img src="assets/Java_Program_Example.png" alt="Java Program Example" />
-      <div class="caption">Java Program Example</div>
-     </div>
-  </div>
-     <p>Implemented a Java-based password validation tool demonstrating basic security principles, evaluating user passwords against multiple criteria (presence/absence of uppercase, lowercase, symbols/special characters, minimum character length, etc) and providing automatic enhancements to strengthen weak entries. Developed as a project to reinforce programming fundamentals, effective input handling, and foundational security concepts.</p>
-</section>
-
-
-</body>
-
-  <!-- Modal container -->
-  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-caption">
-    <div class="modal-content">
-      <span class="close-btn" id="modal-close" aria-label="Close modal">&times;</span>
-      <img id="modal-img" src="" alt="" />
-      <div id="modal-caption" class="modal-caption"></div>
-    </div>
-  </div>
-
-  <script>
-    const modal = document.getElementById('modal');
-    const modalImg = document.getElementById('modal-img');
-    const modalCaption = document.getElementById('modal-caption');
-    const modalClose = document.getElementById('modal-close');
-
-    // Open modal with clicked image
-    document.querySelectorAll('.gallery-item').forEach(item => {
-      item.addEventListener('click', () => {
-        const fullSrc = item.getAttribute('data-full');
-        const caption = item.getAttribute('data-caption');
-        modalImg.src = fullSrc;
-        modalImg.alt = caption;
-        modalCaption.textContent = caption;
-        modal.style.display = 'flex';
-        // Optional: prevent body scroll while modal open
-        document.body.style.overflow = 'hidden';
-      });
-    });
-
-    // Close modal on close button click
-    modalClose.addEventListener('click', () => {
-      modal.style.display = 'none';
-      modalImg.src = '';
-      modalCaption.textContent = '';
-      document.body.style.overflow = '';
-    });
-
-    // Close modal when clicking outside the modal content
-    modal.addEventListener('click', (event) => {
-      if (event.target === modal) {
-        modalClose.click();
-      }
-    });
-
-    // Close modal on ESC key press
-    document.addEventListener('keydown', (event) => {
-      if(event.key === 'Escape' && modal.style.display === 'flex') {
-        modalClose.click();
-      }
-    });
-    
-  </script>
-   // Back button functionality
-    document.getElementById('backBtn').addEventListener('click', function() {
-        history.back();
-    });
-</script>
-
-<!-- Floating Back Button -->
-<button class="back-button" aria-label="Go Back" id="backBtn">
-  <svg viewBox="0 0 24 24">
-    <path d="M16 18l-8-6 8-6" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</button>
-
-</body>
-</html>
+  /* Modal Styles */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0; top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8);
+    align-items: center;
+    justify-
