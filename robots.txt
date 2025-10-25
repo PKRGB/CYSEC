@@ -5,3 +5,6 @@ Disallow: /CYSEC
 Disallow: /CYSEC/index.html
 Disallow: /CYSEC/DA.html
 Disallow: /scripts.html
+Disallow: /IDS.html
+Disallow: /backup.html
+Disallow: /hardening.html
