@@ -1,26 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta http-equiv="Content-Security-Policy"
-content="
-  default-src 'self';
-  script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
-  connect-src 'self' https://www.google-analytics.com;
-  frame-src 'self';
-  img-src 'self' data:;
-  style-src 'self' 'unsafe-inline';
-  worker-src 'self' blob:;
-">
-
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YXC3GLYKFL"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-YXC3GLYKFL');
-</script>
-
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Raspberry Pi Backup Guide - Perry Kingston</title>
@@ -49,7 +29,7 @@ content="
   .pdf-wrapper {
     position: relative;
     width: 100%;
-    padding-bottom: 130%; /* mobile-friendly aspect ratio */
+    padding-bottom: 130%;
     height: 0;
     overflow: hidden;
     border-radius: 8px;
@@ -70,88 +50,73 @@ content="
     .pdf-wrapper { padding-bottom: 80%; }
   }
 
- <style>
-/* Floating circular back button (icon-only, bottom-right) */
-.back-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #2980b9;
-  color: white;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-  transition: background-color 0.3s ease;
-  z-index: 1000;
-  cursor: pointer;
-  border: none;
-  outline: none;
-}
+  /* Floating circular back button */
+  .back-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #2980b9;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    transition: background-color 0.3s ease;
+    z-index: 1000;
+    cursor: pointer;
+    border: none;
+    outline: none;
+  }
 
-.back-button:hover {
-  background-color: #555;
-}
+  .back-button:hover {
+    background-color: #555;
+  }
 
-.back-button svg {
-  width: 24px;
-  height: 24px;
-  fill: none;
-  stroke: white;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
+  .back-button svg {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: white;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
 </style>
-
+</head>
 <body>
-  <!-- Page content -->
 
-  <!-- Floating Back Button -->
-  <button class="back-button" aria-label="Go Back" onclick="history.back()">
-    <svg viewBox="0 0 24 24">
-      <!-- Full arrowhead -->
-      <path d="M19 12H5M5 12l6 6M5 12l6-6" />
-    </svg>
-  </button>
-
-
-
-
-<!-- Page Title and Intro -->
 <h1>Raspberry Pi Backup Guide</h1>
 <h2>System & Network Backup Procedure</h2>
 
 <p class="description">
   This guide demonstrates a simple method to back up a Raspberry Pi system using a mounted USB drive. 
-  A single-line backup command preserves critical configurations, including network settings, Pi-hole data, and other essential system files, allowing easy restoration or migration to a new SD card.
 </p>
 
-<!-- PDF Embed -->
 <div class="pdf-wrapper">
   <iframe src="assets/Pi_Backup_Guide.pdf#zoom=100&pagemode=none" 
           title="Raspberry Pi Backup Guide PDF">
   </iframe>
 </div>
 
-<!-- Optional Download Button (commented out) -->
-<!--
-<div class="download-container">
-  <a href="assets/Pi_Backup_Guide.pdf" download class="download-button" aria-label="Download Backup Guide PDF">
-    <svg viewBox="0 0 24 24">
-      <path d="M5 20h14v-2H5v2zm7-18L5.33 9h3.67v6h4V9h3.67L12 2z"/>
-    </svg>
-    Download PDF
-  </a>
-</div>
--->
-
 <p class="description" style="margin-top:1rem;font-size:0.9rem;color:#555;">
   © 2025 Perry Kingston — For educational and demonstration use.
 </p>
+
+<!-- Floating Back Button -->
+<button class="back-button" aria-label="Go Back" id="backBtn">
+  <svg viewBox="0 0 24 24">
+    <path d="M15 18l-6-6 6-6" /> <!-- Left-pointing full arrow -->
+  </svg>
+</button>
+
+<script>
+  document.getElementById('backBtn').addEventListener('click', function() {
+    history.back();
+  });
+</script>
 
 </body>
 </html>
