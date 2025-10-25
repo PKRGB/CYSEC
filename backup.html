@@ -26,6 +26,12 @@
     padding-top: 60px;
   }
 
+  .description {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+  }
+
   .pdf-wrapper {
     position: relative;
     width: 100%;
@@ -76,13 +82,20 @@
   }
 
   .back-button svg {
-    width: 16px;
-    height: 16px;
+    width: 20px;      /* slightly larger for prominence */
+    height: 20px;
     fill: none;
     stroke: white;
     stroke-width: 2.5;
     stroke-linecap: round;
     stroke-linejoin: round;
+  }
+
+  .footer-text {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #555;
   }
 </style>
 </head>
@@ -93,6 +106,8 @@
 
 <p class="description">
   This guide demonstrates a simple method to back up a Raspberry Pi system using a mounted USB drive. 
+  A single-line backup command preserves critical configurations, including network settings, Pi-hole data, 
+  and other essential system files, allowing easy restoration or migration to a new SD card.
 </p>
 
 <div class="pdf-wrapper">
@@ -101,14 +116,15 @@
   </iframe>
 </div>
 
-<p class="description" style="margin-top:1rem;font-size:0.9rem;color:#555;">
+<p class="footer-text">
   © 2025 Perry Kingston — For educational and demonstration use.
 </p>
 
 <!-- Floating Back Button -->
 <button class="back-button" aria-label="Go Back" id="backBtn">
   <svg viewBox="0 0 24 24">
-    <path d="M15 18l-6-6 6-6" /> <!-- Left-pointing full arrow -->
+    <!-- Larger left-pointing chevron -->
+    <path d="M16 18l-8-6 8-6" />
   </svg>
 </button>
 
