@@ -70,31 +70,33 @@ content="
     .pdf-wrapper { padding-bottom: 80%; }
   }
 
-  /* Floating back button */
+  /* Floating circular back button (icon-only, bottom-right) */
   .back-button {
     position: fixed;
-    top: 10px;
-    left: 20px;
+    bottom: 20px;
+    right: 20px;
     background-color: #2980b9;
     color: white;
-    padding: 6px;
-    border-radius: 6px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    transition: background-color 0.3s ease;
     z-index: 1000;
     cursor: pointer;
   }
 
   .back-button:hover {
-    background-color: #1c5980;
+    background-color: #555;
   }
 
   .back-button svg {
-    width: 18px;
-    height: 18px;
+    width: 24px;
+    height: 24px;
     fill: white;
   }
 
