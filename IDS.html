@@ -130,13 +130,27 @@ content="
 
 <!-- PDF Embed -->
 <div id="pdfContainer" style="height: 90vh; position: relative;">
-  <iframe 
-    src="assets/IDS_Readme.pdf#zoom=100&pagemode=none"
-    style="width:100%; height:100%; border:1px solid #ccc; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);"
-    frameborder="0"
-    aria-label="Suricata Guide PDF">
-  </iframe>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('pdfContainer');
+    const pdfUrl = "https://pkrgb.github.io/CYSEC/assets/IDS_Readme.pdf";
+    const encodedUrl = encodeURIComponent(pdfUrl);
+
+    container.innerHTML += `
+      <div style="position: relative; width: 100%; height: 100%;">
+        <iframe 
+          src="https://docs.google.com/gview?url=${encodedUrl}&embedded=true"
+          style="width: 100%; height: 100%; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"
+          frameborder="0"
+          aria-label="Suricata Setup Guide PDF">
+        </iframe>
+      </div>
+    `;
+  });
+</script>
+
 
 <!--
 <div class="pdf-wrapper">
