@@ -95,12 +95,22 @@ content="
 <body>
 
 <!-- Floating Back Button -->
-<a href="javascript:history.back()" class="back-button" aria-label="Go Back">
+<a href="#" onclick="goBackOrDefault(event)" class="back-button" aria-label="Go Back">
   <svg viewBox="0 0 24 24">
     <path d="M15 18l-6-6 6-6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
 </a>
 
+<script>
+  function goBackOrDefault(event, defaultUrl = '/CYSEC/') {
+    event.preventDefault();
+    if (document.referrer && document.referrer !== window.location.href) {
+      window.history.back();
+    } else {
+      window.location.href = defaultUrl;
+    }
+  }
+</script>
 
 <!-- Title / Intro -->
 <h1>Raspberry Pi OS System Hardening</h1>
