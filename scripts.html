@@ -279,11 +279,21 @@ content="
 </button>
 
 <script>
-  // Back button functionality
-  document.getElementById('backBtn').addEventListener('click', function() {
-    history.back();
-  });
+  function goBackOrDefault(event, defaultUrl = '/CYSEC/') {
+    event.preventDefault();
+    if (document.referrer && document.referrer !== window.location.href) {
+      window.history.back();
+    } else {
+      window.location.href = defaultUrl;
+    }
+  }
 
+  document.getElementById('backBtn').addEventListener('click', function(event) {
+    goBackOrDefault(event);
+  });
+</script>
+
+<script>
   // Modal functionality
   const modal = document.getElementById('modal');
   const modalImg = document.getElementById('modal-img');
