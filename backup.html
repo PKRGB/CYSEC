@@ -121,17 +121,21 @@
 </p>
 
 <!-- Floating Back Button -->
-<button class="back-button" aria-label="Go Back" id="backBtn">
+<a href="#" onclick="goBackOrDefault(event)" class="back-button" aria-label="Go Back">
   <svg viewBox="0 0 24 24">
-    <!-- Larger left-pointing chevron -->
-    <path d="M16 18l-8-6 8-6" />
+    <path d="M15 18l-6-6 6-6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
-</button>
+</a>
 
 <script>
-  document.getElementById('backBtn').addEventListener('click', function() {
-    history.back();
-  });
+  function goBackOrDefault(event, defaultUrl = '/CYSEC/') {
+    event.preventDefault();
+    if (document.referrer && document.referrer !== window.location.href) {
+      window.history.back();
+    } else {
+      window.location.href = defaultUrl;
+    }
+  }
 </script>
 
 </body>
