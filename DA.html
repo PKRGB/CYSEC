@@ -273,12 +273,27 @@ content="
         modalClose.click();
       }
     });
-    
-  </script>
-  
-      <a href="index.html" class="back-button" aria-label="Go back to main page">
+
+ // back button with history or default portfolio if direct traffic   
+ <button class="back-button" aria-label="Go Back" id="backBtn">
   &#8592;
-</a>
+</button>
+
+<script>
+  function goBackOrDefault(event, defaultUrl = '/CYSEC/') {
+    event.preventDefault();
+    if (document.referrer && document.referrer !== window.location.href) {
+      window.history.back();
+    } else {
+      window.location.href = defaultUrl;
+    }
+  }
+
+  document.getElementById('backBtn').addEventListener('click', function(event) {
+    goBackOrDefault(event);
+  });
+</script>
+
   
 </body>
 </html>
