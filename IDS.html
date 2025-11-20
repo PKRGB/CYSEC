@@ -118,7 +118,7 @@ content="
 </a>
 
 <script>
-  function goBackOrDefault(event, defaultUrl = '/') {
+  function goBackOrDefault(event, defaultUrl = '/CYSEC/') {
     event.preventDefault();
     if (document.referrer && document.referrer !== window.location.href) {
       window.history.back();
