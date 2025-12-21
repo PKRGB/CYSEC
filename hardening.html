@@ -120,6 +120,7 @@ content="
   This guide provides step-by-step instructions to harden a Raspberry Pi system and network settings; including SSH hardening, automated unattended updates implementation, package updates, and installation of Fail2Ban with email updates if Fail2Ban is triggered. <BR><B><U>Note:</U></B> Hardware constraints (Pi Zero 2 W) may prevent some features; for example, Fail2Ban may not install or run optimally due to CPU limitations. This document complements the <a href="https://pkrgb.github.io/CYSEC/IDS.html">Suricata IDS setup guide</a>, but was conducted on a different model, a Pi 3+ which is capable of handling Fail2Ban. There is also another walkthrough of how to implement <a href="https://pkrgb.github.io/CYSEC/UFW.html>Uncomplicated Firewall (UFW) </a> to further harden the system. 
 </p>
 
+<pre><code>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
 #!/bin/bash
 # Fail2Ban Email Setup with msmtp and Unattended Security Updates on Debian/Raspberry Pi
 # Run as root or with sudo
@@ -230,7 +231,7 @@ systemctl start unattended-upgrades
 
 echo "Fail2Ban email alert setup complete. Please check your inbox for the test email."
 echo "Unattended security updates installed and enabled."
-
+</pre></code>
 
 <p class="description" style="margin-top:1rem;font-size:0.9rem;color:#555;">
   © 2025 Perry Kingston — For educational and demonstration use.
