@@ -117,23 +117,120 @@ content="
 <h2>Security Hardening & Fail2Ban Configuration Guide</h2>
 
 <p class="description">
-  This guide provides step-by-step instructions to harden a Raspberry Pi system and network settings; including UFW firewall, SSH hardening, automated unattended updates implementation, package updates, and additional tools such as Fail2Ban. <BR><B><U>Note:</U></B> Hardware constraints (Pi Zero 2 W) may prevent some features; for example, Fail2Ban may not install or run optimally due to CPU limitations. This document complements the <a href="https://pkrgb.github.io/CYSEC/IDS.html">Suricata IDS setup guide</a>, but was conducted on a different model, a Pi 3+ which is capable of handling Fail2Ban.
+  This guide provides step-by-step instructions to harden a Raspberry Pi system and network settings; including SSH hardening, automated unattended updates implementation, package updates, and installation of Fail2Ban with email updates if Fail2Ban is triggered. <BR><B><U>Note:</U></B> Hardware constraints (Pi Zero 2 W) may prevent some features; for example, Fail2Ban may not install or run optimally due to CPU limitations. This document complements the <a href="https://pkrgb.github.io/CYSEC/IDS.html">Suricata IDS setup guide</a>, but was conducted on a different model, a Pi 3+ which is capable of handling Fail2Ban. There is also another walkthrough of how to implement <a href="https://pkrgb.github.io/CYSEC/UFW.html>Uncomplicated Firewall (UFW) </a> to further harden the system. 
 </p>
 
-<!-- PDF Embed -->
-<div class="pdf-wrapper">
-  <iframe src="assets/Pi_Hardening_Guide.pdf" title="Raspberry Pi Hardening Guide PDF"></iframe>
-</div>
+#!/bin/bash
+# Fail2Ban Email Setup with msmtp and Unattended Security Updates on Debian/Raspberry Pi
+# Run as root or with sudo
 
-<!-- Download Button (comment out if desired) -->
-<!--
-<div class="download-container">
-  <a href="assets/Pi_Hardening_Guide.pdf" download class="download-button" aria-label="Download Hardening PDF">
-    <svg viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zm7-18L5.33 9h3.67v6h4V9h3.67L12 2z"/></svg>
-    Download PDF
-  </a>
-</div>
--->
+# --- Email validation function ---
+validate_email() {
+  case "$1" in
+    *@*.com) return 0 ;;  # basic validation for emails ending with .com
+    *) return 1 ;;
+  esac
+}
+
+# --- Prompt for Gmail sender with validation ---
+while true; do
+  read -p "Enter your Gmail address (for sending emails): " GMAIL_USER
+  if validate_email "$GMAIL_USER"; then
+    break
+  else
+    echo "Invalid Gmail address format. Please enter a valid email ending with .com"
+  fi
+done
+
+# --- Prompt for Gmail App Password ---
+read -sp "Enter your Gmail App Password (see https://support.google.com/accounts/answer/185833): " GMAIL_PASS
+echo
+
+# --- Prompt for destination email with validation ---
+while true; do
+  read -p "Enter destination email for Fail2Ban alerts: " DEST_EMAIL
+  if validate_email "$DEST_EMAIL"; then
+    break
+  else
+    echo "Invalid destination email format. Please enter a valid email ending with .com"
+  fi
+done
+
+# --- Install required packages ---
+apt update
+apt install -y msmtp msmtp-mta mailutils fail2ban unattended-upgrades
+
+# --- Create /etc/msmtprc ---
+cat > /etc/msmtprc <<EOF
+defaults
+auth           on
+tls            on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+logfile        /var/log/msmtp.log
+
+account gmail
+host smtp.gmail.com
+port 587
+from $GMAIL_USER
+user $GMAIL_USER
+password $GMAIL_PASS
+
+account default : gmail
+EOF
+
+# --- Set secure permissions ---
+chmod 600 /etc/msmtprc
+chown root:root /etc/msmtprc
+
+touch /var/log/msmtp.log
+chmod 600 /var/log/msmtp.log
+chown root:root /var/log/msmtp.log
+
+# --- Test msmtp email sending ---
+echo -e "Subject: Fail2Ban test\n\nThis is a test from $(hostname)" | msmtp -a gmail "$GMAIL_USER" || {
+  echo "ERROR: msmtp test email failed. Check your Gmail credentials and network."
+  exit 1
+}
+
+# --- Confirm sendmail availability ---
+if ! command -v sendmail &> /dev/null; then
+  echo "sendmail not found. msmtp-mta package should provide it."
+  exit 1
+fi
+
+# --- Create Fail2Ban jail override for email notifications ---
+mkdir -p /etc/fail2ban/jail.d
+cat > /etc/fail2ban/jail.d/notify.conf <<EOF
+[DEFAULT]
+destemail = $DEST_EMAIL
+sender = fail2ban@raspberrypi
+mta = sendmail
+action = %(action_mwl)s
+
+[sshd]
+enabled = true
+port    = ssh
+filter  = sshd
+logpath = /var/log/auth.log
+maxretry = 5
+EOF
+
+# --- Reload Fail2Ban service ---
+systemctl reload fail2ban
+
+# --- Safe test: ban & unban localhost IP to trigger email ---
+fail2ban-client set sshd banip 127.0.0.1
+fail2ban-client set sshd unbanip 127.0.0.1
+
+# --- Enable and configure unattended security updates ---
+dpkg-reconfigure --priority=low unattended-upgrades
+
+systemctl enable unattended-upgrades
+systemctl start unattended-upgrades
+
+echo "Fail2Ban email alert setup complete. Please check your inbox for the test email."
+echo "Unattended security updates installed and enabled."
+
 
 <p class="description" style="margin-top:1rem;font-size:0.9rem;color:#555;">
   © 2025 Perry Kingston — For educational and demonstration use.
