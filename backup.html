@@ -100,6 +100,7 @@
 </style>
 </head>
 <body>
+<body>
 
 <h1>Raspberry Pi Backup Guide</h1>
 <h2>System & Network Backup Procedure</h2>
@@ -109,11 +110,32 @@
   A single-line backup command preserves critical configurations, including network settings, Pi-hole data, 
   and other essential system files, allowing easy restoration or migration to a new SD card.
 </p>
+<div class="code-container">
+<pre>
+<span class="keyword">#!/bin/bash</span>
 
-<div class="pdf-wrapper">
-  <iframe src="assets/Pi_Backup_Guide.pdf#zoom=100&pagemode=none" 
-          title="Raspberry Pi Backup Guide PDF">
-  </iframe>
+<span class="comment"># Plug in and mount USB/SSD</span>
+lsblk    <span class="comment"># confirm the mount point</span>
+
+<span class="comment"># Create new folder for backup called pihole-backup</span>
+sudo mkdir -p /mnt/usb/pihole-backup
+
+<span class="comment"># Create comprehensive backup archive for all config</span>
+sudo tar -czvf /mnt/usb/pihole-backup/pihole-full-backup-$(date +%F).tar.gz \
+    /etc/pihole \
+    /etc/dhcpcd.conf \
+    /etc/network \
+    /etc/ssh \
+    /etc/ufw \
+    /etc/fail2ban
+
+<span class="comment"># Verify backup</span>
+ls -lh /mnt/usb/pihole-backup
+tar -tzvf /mnt/usb/pihole-backup/pihole-full-backup-$(date +%F).tar.gz | head
+
+<span class="comment"># Unmount USB</span>
+sudo umount /mnt/usb
+</pre>
 </div>
 
 <p class="footer-text">
