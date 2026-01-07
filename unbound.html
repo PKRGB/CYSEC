@@ -70,6 +70,37 @@ content="
     .pdf-wrapper { padding-bottom: 80%; }
   }
 
+	 /* Sticky Back Button top left for portfolio */
+    .back-button {
+      position: fixed;
+      top: 10px;
+      left: 20px;
+      background-color: #2980b9;
+      color: white;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 10000;
+      transition: background-color 0.3s ease;
+      font-size: 1em;
+      user-select: none;
+    }
+
+    .back-button:hover {
+      background-color: #1c5980;
+    }
+
+    .back-button svg {
+      width: 18px;
+      height: 18px;
+      fill: white;
+      flex-shrink: 0;
+    }
  /* Floating circular back button (icon-only, bottom-right) */
   .back-button {
     position: fixed;
