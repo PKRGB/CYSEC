@@ -8,3 +8,6 @@ Disallow: /scripts.html
 Disallow: /IDS.html
 Disallow: /backup.html
 Disallow: /hardening.html
+Disallow: /unbound.html
+Disallow: /unbound-verify.html
+Disallow: /mount-backup.html
