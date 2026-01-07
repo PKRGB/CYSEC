@@ -180,15 +180,16 @@ content="
 <h2>Unbound install and Configuration with Option for Verbose Logging and Recursive Testing</h2>
 
 <p class="description">
-  This project demonstrates the creation of an automated script which executes complete installation and configuration of Unbound for DoT on Raspberry Pi OS.
-  unbound is intended to be used alongside Pihole, I have not created a walkthrough for Pihole installation as there is sufficient documentation existing 
-  that cover that and it is relatively straightforward. 
-  DoT (DNS over TLS) is an added privacy and security technique that encrypts DNS queries between your network and the DNS resolver upstream, 
-	which mitigates eavesdropping and potential manipulation by third parties. Utilizing Unbound, which is a local recursive resolver, along with
-	DoT significantly strengthens your networks defenses against both surveillance and spoofing attacks, by ensuring your DNS traffic is resolved
-	locally if possible, and is encrypted to retain Confidentiality and tamper-resistance if required to flow upstream, as opposed to those queries
-	being sent in plaintext with traditional Pi-hole implementation. <BR> The following script is meant to be automated and run, with prompts for the user
-	to input decisions on whether to enable logging, what level, what name to assign logs, a prompt to modify the Settings > DNS within Pihole GUI Admin page at 
+  This project demonstrates the creation of an automated script which executes complete installation and configuration of Unbound as a fully recursive DNS resolver 
+  on Raspberry Pi OS. Unbound is intended to be used alongside Pi-hole; I have not created a walkthrough for Pi-hole installation as sufficient documentation already 
+  exists and it is relatively straightforward. DNS over TLS (DoT) is a privacy and security technique that encrypts DNS queries between a client or local resolver and an upstream recursive DNS server. 
+  However, in this configuration, Unbound is set up to perform full recursive resolution locally and does not use DoT to encrypt queries to authoritative servers, as those servers do not support encrypted 
+  DNS transport. This setup strengthens your network defenses against spoofing and surveillance by validating DNSSEC locally and resolving queries without relying on third-party recursive resolvers, 
+  though queries to authoritative servers remain unencrypted due to protocol limitations.
+
+If you would like to implement DNS over TLS for encrypted DNS traffic leaving your network, Unbound must be configured in forwarding mode, where it forwards queries to an upstream recursive resolver that supports DoT. 
+	This involves trusting that upstream provider to perform recursion and DNSSEC validation on your behalf, rather than resolving fully and recursively yourself. <BR> The following script is meant to be automated 
+	and run, with prompts for the user to input decisions on whether to enable logging, what level, what name to assign logs, a prompt to modify the Settings > DNS within Pihole GUI Admin page at 
 	the relevant time to uncheck current upstream DNS servers and add the new custom one, then returning back to run a check for successful implementation. 
 	<BR><BR>The last command of @dig en.wikipedia.org@127.0.0.1 will provide insight into whether you successfully achieved configuration, but to confirm
 	full recursive serving and that you are not forwarding, as well as not experiencing any DNS leaks, following this successful execution you should run 
