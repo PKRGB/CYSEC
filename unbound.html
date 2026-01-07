@@ -191,7 +191,7 @@ ENABLE_LOGGING="$(echo "$ENABLE_LOGGING" | tr '[:upper:]' '[:lower:]')"
 ########################################
 UNBOUND_CONF="/etc/unbound/unbound.conf"
 
-cat > "$UNBOUND_CONF" <<'EOF'
+cat > "$UNBOUND_CONF" <<EOF
 server:
     verbosity: 0
 
@@ -266,7 +266,7 @@ fi
 
   sed -i "s/^    verbosity: .*/    verbosity: $VERBOSITY_LEVEL/" "$UNBOUND_CONF"
 
-  cat >> "$UNBOUND_CONF" <<'EOF'
+  cat >> "$UNBOUND_CONF" <<EOF
 
     logfile: "/var/log/unbound/$LOGFILE_NAME"
     log-time-ascii: yes
