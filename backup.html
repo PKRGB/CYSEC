@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Raspberry Pi Good Baseline Backup Script - Perry Kingston</title>
+
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 40px auto;
+    max-width: 900px;
+    background-color: #f7f9fc;
+    color: #333;
+    line-height: 1.6;
+    padding: 0 20px;
+    min-height: 100vh;
+  }
+
+  h1, h2 {
+    text-align: center;
+    margin: 0.5em 0;
+  }
+
+  h1 {
+    padding-top: 60px;
+  }
+
+  .description {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+  }
+
+  .pdf-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 130%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    background: #fff;
+  }
+
+  .pdf-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  @media (min-width: 768px) {
+    .pdf-wrapper { padding-bottom: 80%; }
+  }
+
+  /* Floating circular back button */
+  .back-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #2980b9;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    transition: background-color 0.3s ease;
+    z-index: 1000;
+    cursor: pointer;
+    border: none;
+    outline: none;
+  }
+
+  .back-button:hover {
+    background-color: #555;
+  }
+
+  .back-button svg {
+    width: 20px;      /* slightly larger for prominence */
+    height: 20px;
+    fill: none;
+    stroke: white;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  footer {
+      font-size: 0.9em;
+      color: #888;
+      text-align: center;
+      margin-top: 3em;
+    }
+</style>
+</head>
+<body>
+<body>
+
+<h1>Raspberry Pi Comprehensive Backup Script</h1>
+<h2>Simple Script to Create Backup of Critical Services</h2>
+
+<p class="description">
+  This guide demonstrates a simple method to create a comprehensive back up of a Raspberry Pi system. If placed within
+  a .sh and ran, it will prompt the user to specify a writable backup location, validate input and safely copy critical files 
+  and directories such as; Pi-hole configurations, firewall rules (UFW) if exist, systemd services, network settings and 
+  Pi-hole's Teleporter export. This backup is then compressed into an archive with a file documenting its contents and 
+  system details to assist with easy restoration or migration. <BR> This is a good first step to take, prior to making changes
+  to your system such as utilizing <a href="https://pkrgb.github.io/CYSEC/unbound.html">this script to install Unbound DoT</a href> in order to increase the privacy and security of your DNS queries.
+</p>
+<div class="code-container">
+<pre><code>
+#!/bin/bash
+#This script allows you to create a backup prior to implementing Unbound, in case you
+#want to revert to known settings/configurations. 
+#This stores pihole settings, UFW settings, systemd, resolver & network config. 
+
+# Pi-hole + system rollback snapshot script with user prompt for backup location
+# Use with: nohup ./backup-pihole-backup.sh > ~/backup.log 2>&1 &
+
+set -euo pipefail
+
+# Root check
+if [ "$(id -u)" -ne 0 ]; then
+  echo "[ERROR] Run as root or with sudo"
+  exit 1
+fi
+
+# Prompt user for backup directory
+read -rp "Enter full path to backup directory: " BACKUP_ROOT
+
+# Validate directory exists and is writable
+if [ ! -d "$BACKUP_ROOT" ]; then
+  echo "[ERROR] Directory does not exist: $BACKUP_ROOT"
+  exit 1
+fi
+
+if [ ! -w "$BACKUP_ROOT" ]; then
+  echo "[ERROR] Directory is not writable: $BACKUP_ROOT"
+  exit 1
+fi
+
+TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
+BACKUP_DIR="$BACKUP_ROOT/snapshot-$TIMESTAMP"
+
+echo "[INFO] Creating backup directory: $BACKUP_DIR"
+mkdir -p "$BACKUP_DIR"
+
+echo "[INFO] Backing up Pi-hole configuration..."
+nice -n 10 ionice -c3 cp -a /etc/pihole "$BACKUP_DIR/"
+sleep 1
+nice -n 10 ionice -c3 cp -a /etc/dnsmasq.d "$BACKUP_DIR/"
+sleep 1
+
+echo "[INFO] Backing up UFW configuration..."
+nice -n 10 ionice -c3 cp -a /etc/ufw "$BACKUP_DIR/"
+sleep 1
+
+echo "[INFO] Backing up systemd service files..."
+nice -n 10 ionice -c3 cp -a /etc/systemd/system "$BACKUP_DIR/systemd-system"
+sleep 1
+
+echo "[INFO] Backing up resolver and network configs..."
+nice -n 10 ionice -c3 cp -a /etc/resolv.conf "$BACKUP_DIR/"
+sleep 1
+if [ -d /etc/network ]; then
+  nice -n 10 ionice -c3 cp -a /etc/network "$BACKUP_DIR/"
+  sleep 1
+fi
+if [ -d /etc/NetworkManager ]; then
+  nice -n 10 ionice -c3 cp -a /etc/NetworkManager "$BACKUP_DIR/"
+  sleep 1
+fi
+
+echo "[INFO] Exporting Pi-hole Teleporter backup..."
+nice -n 10 ionice -c3 pihole -a -t "$BACKUP_DIR/pihole-teleporter.tar.gz"
+sleep 1
+
+echo "[INFO] Writing manifest..."
+cat <<EOF > "$BACKUP_DIR/MANIFEST.txt"
+Backup created: $TIMESTAMP
+Hostname: $(hostname)
+OS: $(uname -a)
+
+Included:
+- /etc/pihole
+- /etc/dnsmasq.d
+- /etc/ufw
+- /etc/systemd/system
+- /etc/resolv.conf
+- network configuration (if present)
+- Pi-hole Teleporter export
+EOF
+
+echo "[INFO] Creating compressed archive..."
+nice -n 10 ionice -c3 tar -czf "$BACKUP_DIR.tar.gz" -C "$BACKUP_ROOT" "snapshot-$TIMESTAMP"
+
+echo "[SUCCESS] Snapshot complete"
+echo "Backup archive:"
+echo "  $BACKUP_DIR.tar.gz"
+  
+#For education and demonstration purposes only. 
+#©RGBK
+
+</pre></code>
+</div>
+
+<footer>
+  <p>
+  © 2026 Perry Kingston — For educational and demonstration use.
+  </p>
+</footer>
+
+<!-- Floating Back Button -->
+<a href="#" onclick="goBackOrDefault(event)" class="back-button" aria-label="Go Back">
+  <svg viewBox="0 0 24 24">
+    <path d="M15 18l-6-6 6-6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</a>
+
+<script>
+  function goBackOrDefault(event, defaultUrl = '/CYSEC/') {
+    event.preventDefault();
+    if (document.referrer && document.referrer !== window.location.href) {
+      window.history.back();
+    } else {
+      window.location.href = defaultUrl;
+    }
+  }
+</script>
+
+</body>
+</html>
