@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy"
+content="
+  default-src 'self';
+  script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
+  connect-src 'self' https://www.google-analytics.com;
+  frame-src 'self' https://docs.google.com;
+  img-src 'self' data:;
+  style-src 'self' 'unsafe-inline';
+  worker-src 'self' blob:;
+">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YXC3GLYKFL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YXC3GLYKFL');
+</script>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Network IDS Setup with Suricata on Rasp. Pi OS - Perry Kingston</title>
+
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 40px auto;
+    max-width: 900px;
+    background-color: #f7f9fc;
+    color: #333;
+    line-height: 1.6;
+    padding: 0 20px;
+    min-height: 100vh;
+  }
+
+  h1, h2 {
+    text-align: center;
+    margin: 0.5em 0;
+  }
+
+  h1 {
+    padding-top: 60px;
+  }
+
+  .pdf-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 130%; /* mobile-friendly aspect ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    background: #fff;
+  }
+
+  .pdf-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  @media (min-width: 768px) {
+    .pdf-wrapper { padding-bottom: 80%; }
+  }
+
+ /* Floating circular back button (icon-only, bottom-right) */
+  .back-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #2980b9;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    transition: background-color 0.3s ease;
+    z-index: 1000;
+    cursor: pointer;
+  }
+
+  .back-button:hover {
+    background-color: #555;
+  }
+
+  .back-button svg {
+    width: 24px;
+    height: 24px;
+    fill: white;
+  }
+
+  .description {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  footer {
+      font-size: 0.9em;
+      color: #888;
+	  text-align: center;
+      margin-top: 3em;
+    }
+	
+</style>
+</head>
+
+
+<body>
+
+<!-- Floating Back Button -->
+<a href="#" onclick="goBackOrDefault(event)" class="back-button" aria-label="Go Back">
+  <svg viewBox="0 0 24 24">
+    <path d="M15 18l-6-6 6-6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</a>
+
+<script>
+  function goBackOrDefault(event, defaultUrl = '/CYSEC/') {
+    event.preventDefault();
+    if (document.referrer && document.referrer !== window.location.href) {
+      window.history.back();
+    } else {
+      window.location.href = defaultUrl;
+    }
+  }
+</script>
+
+
+<!-- Project Title and Intro -->
+<h1>Unbound Success Verification Script</h1>
+<h2>Unbound DoT Verification Script for Recursion and DNSSEC Validation</h2>
+
+<p class="description">
+  This script automates the verification of successful Unbound DNS over TLS (DoT) resolver setup by performing two different checks; one is 
+  a Recursion Mode Check which confirms whether Unbound is actually operating in full recursive mode, rather than forwarding DNS queries to another
+  resolver. This is critical for privacy and control, and the check is accomplished by inspecting the Unbound configuration for any possible 
+  forwarding zones that may be present. 
+	<BR>This script also conducts a DNSSEC Root Trust Anchor Validation by restarting Unbound after the first check then performing a DNSSEC-enabled 
+  query to dnssec.works and inspecting the response flags to ensure the root DNSSEC trust anchor is correctly loaded and persistent, which is in part why
+  it is restarted to ensure. The presence of the ad flag and DNSSEC signatures indicates successful installation and configuration, providing confidence in the
+  authenticity and integrity of your DNS responses moving forward. This script should be utilized in conjunction with visiting <a href="www.dnsleaktest.com">The DNS
+    Leak Test site</a href> to ensure your hostname is not returning as Cloudflare, or other upstream servers and that you do not see additional servers showing as a leak. 
+  <BR> All things combined, this provides the utmost confidence that your new Unbound DoT setup is functioning securely, consistently and correctly, providing you with
+  better privacy and security regarding all of your DNS queries. Congrats! 
+
+  <!--A Readme specifically regarding System Hardening, including Fail2Ban, can be found <a href="https://pkrgb.github.io/CYSEC/hardening.html">here</a>. -->
+</p>
+
+  <pre><code>
+	#!/bin/bash
+#A simple script by RGBK
+#This automated script will help you check your Unbound DoT is operating as expected
+#by performing two separate verification checks.
+#Combine this with utilizing a DNS leak check via: https://dnsleaktest.com
+#Your Hostname should include your local IP, not Cloudflare etc., and there should only 
+#be 1 server found if you have no leaks. 
+
+echo "=================================================="
+echo "UNBOUND VERIFICATION SCRIPT"
+echo "=================================================="
+echo
+echo "This script will verify:"
+echo "1) Unbound is NOT in pure forwarding mode"
+echo "2) Root trust anchor persistence (DNSSEC)"
+echo
+read -p "Press ENTER to begin check 1..."
+
+echo
+echo "--------------------------------------------------"
+echo "CHECK 1: Confirm Unbound is NOT in forwarding mode"
+echo "--------------------------------------------------"
+echo
+echo "Running: unbound-checkconf | grep forward-zone"
+echo
+
+sudo unbound-checkconf | grep forward-zone
+
+echo
+echo "INTERPRETATION:"
+echo "- If you see NO output above:"
+echo "  -> Unbound is running in FULLY RECURSIVE mode (PASS)"
+echo "- If you see 'forward-zone' for name '.':"
+echo "  -> Unbound is in forwarding mode (FAIL)"
+echo
+read -p "If this check looks correct, press ENTER for check 2..."
+
+echo
+echo "--------------------------------------------------"
+echo "CHECK 2: Confirm root trust anchor persistence"
+echo "--------------------------------------------------"
+echo
+echo "Restarting Unbound..."
+echo
+
+sudo systemctl restart unbound
+sleep 2
+
+echo
+echo "Querying dnssec.works with DNSSEC enabled..."
+echo
+
+dig dnssec.works @127.0.0.1 -p 5335 +dnssec
+
+echo
+echo "INTERPRETATION:"
+echo "- Look for the 'ad' flag in the response flags"
+echo "- Presence of RRSIG records is expected"
+echo "- 'ad' flag present AFTER restart means:"
+echo "  -> Root trust anchor is present and persistent (PASS)"
+echo "- SERVFAIL or missing 'ad' means DNSSEC failed (FAIL)"
+echo
+echo "=================================================="
+echo "VERIFICATION COMPLETE"
+echo "=================================================="
+
+#For education and demonstration purposes only. 
+#©RGBK
+
+
+  </pre></code>
+</div>
+
+<footer>  © 2026 Perry Kingston — For educational and demonstration use.</footer>
+</p>
+
+</body>
+</html>
