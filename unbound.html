@@ -144,9 +144,9 @@ content="
 <p class="description">
   This project demonstrates the creation of an automated script which executes complete installation and configuration of Unbound for DoT on Raspberry Pi OS.
   DoT (DNS over TLS) is an added privacy and security technique that encrypts DNS queries between your network and the DNS resolver upstream, 
-	which mitigates eavesdropping and potential manipulationby third parties. Utilizing Unbound, which is a local recursive resolver, along with
+	which mitigates eavesdropping and potential manipulation by third parties. Utilizing Unbound, which is a local recursive resolver, along with
 	DoT significantly strengthens your networks defenses against both surveillance and spoofing attacks, by ensuring your DNS traffic is resolved
-	locally if possible, and is encrypted to retain Confidential and tamper-resistance if required to flow upstream, as opposed to those queries
+	locally if possible, and is encrypted to retain Confidentiality and tamper-resistance if required to flow upstream, as opposed to those queries
 	being sent in plaintext with traditional Pi-hole implementation. <BR> The following script is meant to be automated and run, with prompts for the user
 	to input decisions on whether to enable logging, what level, what name to assign logs, a prompt to modify the Settings > DNS within Pihole GUI Admin page at 
 	the relevant time to uncheck current upstream DNS servers and add the new custom one, then returning back to run a check for successful implementation. 
