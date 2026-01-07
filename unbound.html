@@ -158,8 +158,7 @@ content="
 </p>
 <pre><code>
 #!/bin/bash
-#This simple automated script will walk you through Unbound install, configuration, ask if you want logging enabled and at what level, 
-#ask you the name of log file you want, tell you how to update Pihole Admin GUI, then do a simple test to ensure success. 
+#This simple automated script will walk you through Unbound install, configuration, ask if you want logging enabled and at what level, ask you the name of log file you want, tell you how to update Pihole Admin GUI, then do a simple test to ensure success. 
 
 set -euo pipefail
 
@@ -191,7 +190,7 @@ ENABLE_LOGGING="$(echo "$ENABLE_LOGGING" | tr '[:upper:]' '[:lower:]')"
 ########################################
 UNBOUND_CONF="/etc/unbound/unbound.conf"
 
-cat > "$UNBOUND_CONF" <<EOF
+cat > "$UNBOUND_CONF" <<'EOF'
 server:
     verbosity: 0
 
@@ -365,9 +364,10 @@ echo
 echo "To confirm full recursion (no forwarding) and check for DNS leaks,"
 echo "run your verify_unbound.sh script."
 echo "=================================================="
-</pre></code>
+
 #For education and demonstration purposes only. 
 #©RGBK
+</pre></code>
 
 </div>
 
