@@ -156,8 +156,7 @@ content="
 	suggests you utilize <a href="https://www.dnsleaktest.com" target="_blank" rel="noopener noreferrer">The DNS Leak Test site</a> to confirm you only see one server, with your hostname listed. 
   <!--A Readme specifically regarding System Hardening, including Fail2Ban, can be found <a href="https://pkrgb.github.io/CYSEC/hardening.html">here</a>. -->
 </p>
-
-```bash
+<pre><code>
 #!/bin/bash
 #This simple automated script will walk you through Unbound install, configuration, ask if you want logging enabled and at what level, 
 #ask you the name of log file you want, tell you how to update Pihole Admin GUI, then do a simple test to ensure success. 
@@ -266,9 +265,9 @@ fi
   fi
 
   sed -i "s/^    verbosity: .*/    verbosity: $VERBOSITY_LEVEL/" "$UNBOUND_CONF"
-
-  cat >> "$UNBOUND_CONF" <<EOF
-
+```bash
+  cat >> "$UNBOUND_CONF" <<ENDCONFIG
+```
     logfile: "/var/log/unbound/$LOGFILE_NAME"
     log-time-ascii: yes
 EOF
@@ -366,7 +365,7 @@ echo
 echo "To confirm full recursion (no forwarding) and check for DNS leaks,"
 echo "run your verify_unbound.sh script."
 echo "=================================================="
-```
+</pre></code>
 #For education and demonstration purposes only. 
 #©RGBK
 
