@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy"
+content="
+  default-src 'self';
+  script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
+  connect-src 'self' https://www.google-analytics.com;
+  frame-src 'self' https://docs.google.com;
+  img-src 'self' data:;
+  style-src 'self' 'unsafe-inline';
+  worker-src 'self' blob:;
+">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YXC3GLYKFL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YXC3GLYKFL');
+</script>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Network IDS Setup with Suricata on Rasp. Pi OS - Perry Kingston</title>
+
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 40px auto;
+    max-width: 900px;
+    background-color: #f7f9fc;
+    color: #333;
+    line-height: 1.6;
+    padding: 0 20px;
+    min-height: 100vh;
+  }
+
+  h1, h2 {
+    text-align: center;
+    margin: 0.5em 0;
+  }
+
+  h1 {
+    padding-top: 60px;
+  }
+
+  .pdf-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 130%; /* mobile-friendly aspect ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    background: #fff;
+  }
+
+  .pdf-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  @media (min-width: 768px) {
+    .pdf-wrapper { padding-bottom: 80%; }
+  }
+
+ /* Floating circular back button (icon-only, bottom-right) */
+  .back-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #2980b9;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    transition: background-color 0.3s ease;
+    z-index: 1000;
+    cursor: pointer;
+  }
+
+  .back-button:hover {
+    background-color: #555;
+  }
+
+  .back-button svg {
+    width: 24px;
+    height: 24px;
+    fill: white;
+  }
+
+  .description {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  footer {
+      font-size: 0.9em;
+      color: #888;
+	  text-align: center;
+      margin-top: 3em;
+    }
+	
+</style>
+</head>
+
+
+<body>
+
+<!-- Floating Back Button -->
+<a href="#" onclick="goBackOrDefault(event)" class="back-button" aria-label="Go Back">
+  <svg viewBox="0 0 24 24">
+    <path d="M15 18l-6-6 6-6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</a>
+
+<script>
+  function goBackOrDefault(event, defaultUrl = '/CYSEC/') {
+    event.preventDefault();
+    if (document.referrer && document.referrer !== window.location.href) {
+      window.history.back();
+    } else {
+      window.location.href = defaultUrl;
+    }
+  }
+</script>
+
+
+<!-- Project Title and Intro -->
+<h1>Unbound DoT (DNS over TLS)</h1>
+<h2>Unbound install and Configuration with Option for Verbose Logging and Recursive Testing</h2>
+
+<p class="description">
+  This project demonstrates the complete installation and configuration of Unbound for DoT on Raspberry Pi OS, providing a clear, step-by-step guide for users of any experience level with steps outlined from preparing a blank SD card and installing the OS, to securely configuring and validating Suricata for network monitoring. 
+  <b><u>Note:</u></b> This guide reflects the constraints of the hardware which was on hand and thus used, specifically a Raspberry Pi Zero 2 W. For instance, despite implementing a swap file to increase memory size, Fail2Ban could not be installed due to CPU limitations but on newer, stronger models, installing Fail2Ban is a useful hardening tactic to protect against SSH login-abuse. 
+  <!--A Readme specifically regarding System Hardening, including Fail2Ban, can be found <a href="https://pkrgb.github.io/CYSEC/hardening.html">here</a>. -->
+</p>
+
+  <pre><code>
+	#!/bin/bash
+#This simple automated script will walk you through Unbound install, configuration, ask if you want logging enabled and at what level, ask you the name of log file you want, tell you how to update Pihole Admin GUI, then do a simple test to ensure success. 
+
+set -euo pipefail
+
+########################################
+# Root check
+########################################
+if [[ "$(id -u)" -ne 0 ]]; then
+  echo "[ERROR] This script must be run as root. Exiting."
+  exit 1
+fi
+
+########################################
+# Install Unbound
+########################################
+echo "[INFO] Installing Unbound..."
+apt update
+apt install -y unbound
+
+########################################
+# Ask user about logging
+########################################
+echo
+read -rp "Do you want to enable Unbound logging? (yes/no): " ENABLE_LOGGING
+
+ENABLE_LOGGING="$(echo "$ENABLE_LOGGING" | tr '[:upper:]' '[:lower:]')"
+
+########################################
+# Base Unbound configuration (no logging)
+########################################
+UNBOUND_CONF="/etc/unbound/unbound.conf"
+
+cat > "$UNBOUND_CONF" <<'EOF'
+server:
+    verbosity: 0
+
+    interface: 127.0.0.1
+    port: 5335
+    do-ip4: yes
+    do-udp: yes
+    do-tcp: yes
+
+    do-ip6: yes
+    prefer-ip6: no
+
+    harden-glue: yes
+    harden-dnssec-stripped: yes
+    use-caps-for-id: no
+
+    edns-buffer-size: 1232
+    prefetch: yes
+    num-threads: 1
+    so-rcvbuf: 1m
+
+    private-address: 192.168.0.0/16
+    private-address: 169.254.0.0/16
+    private-address: 172.16.0.0/12
+    private-address: 10.0.0.0/8
+    private-address: fd00::/8
+    private-address: fe80::/10
+
+    private-address: 192.0.2.0/24
+    private-address: 198.51.100.0/24
+    private-address: 203.0.113.0/24
+    private-address: 255.255.255.255/32
+    private-address: 2001:db8::/32
+EOF
+
+########################################
+# Logging decision tree
+########################################
+LOGFILE_NAME=""
+
+if [[ "$ENABLE_LOGGING" == "yes" ]]; then
+  echo
+  echo "Unbound verbosity levels:"
+  echo "0 = errors only"
+  echo "1 = operational information"
+  echo "2 = detailed operational information"
+  echo "3 = query-level information"
+  echo "4 = algorithm-level information"
+  echo "5 = client identification for cache misses"
+  echo
+  echo "[WARNING] High verbosity levels consume significant disk space and resources."
+  echo
+
+  read -rp "Select verbosity level (0-5): " VERBOSITY_LEVEL
+
+  if ! [[ "$VERBOSITY_LEVEL" =~ ^[0-5]$ ]]; then
+    echo "[ERROR] Invalid verbosity level. Exiting."
+    exit 1
+  fi
+
+  read -rp "Enter log file name (example: unbound.log): " LOGFILE_NAME
+
+# Force append of .log at end of user input log name.
+if [[ "$LOGFILE_NAME" != *.log ]]; then
+  LOGFILE_NAME="${LOGFILE_NAME}.log"
+fi
+
+  if [[ -z "$LOGFILE_NAME" ]]; then
+    echo "[ERROR] Log file name cannot be empty. Exiting."
+    exit 1
+  fi
+
+  sed -i "s/^    verbosity: .*/    verbosity: $VERBOSITY_LEVEL/" "$UNBOUND_CONF"
+
+  cat >> "$UNBOUND_CONF" <<EOF
+
+    logfile: "/var/log/unbound/$LOGFILE_NAME"
+    log-time-ascii: yes
+EOF
+fi
+
+########################################
+# Restart and test Unbound
+########################################
+echo
+echo "[INFO] Starting local recursive resolver..."
+service unbound restart
+
+echo
+echo "[INFO] Testing basic resolution..."
+dig pi-hole.net @127.0.0.1 -p 5335
+
+echo
+echo "[INFO] Testing DNSSEC validation."
+echo "[INFO] First query should return SERVFAIL."
+dig fail01.dnssec.works @127.0.0.1 -p 5335
+
+echo
+echo "[INFO] Second query should return NOERROR with an IP."
+dig +ad dnssec.works @127.0.0.1 -p 5335
+
+########################################
+# Pi-hole manual instructions
+########################################
+echo
+echo "=================================================="
+echo "MANUAL STEP REQUIRED"
+echo "=================================================="
+echo "Open Pi-hole Admin GUI:"
+echo "Settings > DNS"
+echo "- Uncheck existing upstream DNS servers"
+echo "- Add Custom DNS Server:"
+echo "  127.0.0.1#5335"
+echo "=================================================="
+echo
+
+read -p "Press enter once you have made this change within Pihole GUI." 
+
+########################################
+# Disable unbound-resolvconf if present
+########################################
+echo "[INFO] Checking for unbound-resolvconf service..."
+
+if systemctl is-active --quiet unbound-resolvconf.service; then
+  echo "[INFO] Disabling unbound-resolvconf.service..."
+  systemctl disable --now unbound-resolvconf.service
+
+  sed -Ei 's/^unbound_conf=/#unbound_conf=/' /etc/resolvconf.conf
+  rm -f /etc/unbound/unbound.conf.d/resolvconf_resolvers.conf
+else
+  echo "[INFO] unbound-resolvconf.service not active or not installed. Continuing."
+fi
+
+########################################
+# Create log directory and permissions (if logging enabled)
+########################################
+if [[ "$ENABLE_LOGGING" == "yes" ]]; then
+  echo "[INFO] Creating Unbound log directory and setting permissions..."
+  mkdir -p /var/log/unbound
+  touch "/var/log/unbound/$LOGFILE_NAME"
+  chown unbound "/var/log/unbound/$LOGFILE_NAME"
+fi
+
+########################################
+# Restart Unbound again
+########################################
+service unbound restart
+
+########################################
+# Verify Pi-hole → Unbound
+########################################
+echo
+echo "[INFO] Verifying Pi-hole is querying Unbound..."
+dig en.wikipedia.org @127.0.0.1
+
+echo
+echo "[INFO] Showing recent Pi-hole log entries:"
+tail /var/log/pihole/pihole.log
+
+echo
+echo "If you see replies corresponding to the query, Pi-hole is using Unbound."
+
+########################################
+# Final message
+########################################
+echo
+echo "=================================================="
+echo "Congratulations!"
+echo "Your system is now using Unbound as a local recursive resolver."
+echo
+echo "To confirm full recursion (no forwarding) and check for DNS leaks,"
+echo "run your verify_unbound.sh script."
+echo "=================================================="
+
+#For education and demonstration purposes only. 
+#©RGBK
+
+
+  </pre></code>
+</div>
+
+<footer>  © 2026 Perry Kingston — For educational and demonstration use.</footer>
+</p>
+
+</body>
+</html>
