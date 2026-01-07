@@ -265,9 +265,9 @@ fi
   fi
 
   sed -i "s/^    verbosity: .*/    verbosity: $VERBOSITY_LEVEL/" "$UNBOUND_CONF"
-```bash
-  cat >> "$UNBOUND_CONF" <<ENDCONFIG
-```
+
+  cat >> "$UNBOUND_CONF" <<'EOF'
+
     logfile: "/var/log/unbound/$LOGFILE_NAME"
     log-time-ascii: yes
 EOF
