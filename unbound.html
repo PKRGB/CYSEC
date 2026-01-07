@@ -142,8 +142,18 @@ content="
 <h2>Unbound install and Configuration with Option for Verbose Logging and Recursive Testing</h2>
 
 <p class="description">
-  This project demonstrates the complete installation and configuration of Unbound for DoT on Raspberry Pi OS, providing a clear, step-by-step guide for users of any experience level with steps outlined from preparing a blank SD card and installing the OS, to securely configuring and validating Suricata for network monitoring. 
-  <b><u>Note:</u></b> This guide reflects the constraints of the hardware which was on hand and thus used, specifically a Raspberry Pi Zero 2 W. For instance, despite implementing a swap file to increase memory size, Fail2Ban could not be installed due to CPU limitations but on newer, stronger models, installing Fail2Ban is a useful hardening tactic to protect against SSH login-abuse. 
+  This project demonstrates the creation of an automated script which executes complete installation and configuration of Unbound for DoT on Raspberry Pi OS.
+  DoT (DNS over TLS) is an added privacy and security technique that encrypts DNS queries between your network and the DNS resolver upstream, 
+	which mitigates eavesdropping and potential manipulationby third parties. Utilizing Unbound, which is a local recursive resolver, along with
+	DoT significantly strengthens your networks defenses against both surveillance and spoofing attacks, by ensuring your DNS traffic is resolved
+	locally if possible, and is encrypted to retain Confidential and tamper-resistance if required to flow upstream, as opposed to those queries
+	being sent in plaintext with traditional Pi-hole implementation. <BR> The following script is meant to be automated and run, with prompts for the user
+	to input decisions on whether to enable logging, what level, what name to assign logs, a prompt to modify the Settings > DNS within Pihole GUI Admin page at 
+	the relevant time to uncheck current upstream DNS servers and add the new custom one, then returning back to run a check for successful implementation. 
+	<BR><BR>The last command of @dig en.wikipedia.org@127.0.0.1 will provide insight into whether you successfully achieved configuration, but to confirm
+	full recursive serving and that you are not forwarding, as well as not experiencing any DNS leaks, following this successful execution you should run 
+    <a href="https://pkrgb.github.io/CYSEC/unbound-verify.html">this Unbound_verify.sh script</a href> which does two stronger checks to ensure success and also 
+	suggests you utilize <a href="www.dnsleaktest.com">DNS Leak Test</a href> website to confirm you only see one server, with your hostname listed. 
   <!--A Readme specifically regarding System Hardening, including Fail2Ban, can be found <a href="https://pkrgb.github.io/CYSEC/hardening.html">here</a>. -->
 </p>
 
