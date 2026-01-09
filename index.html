@@ -26,6 +26,24 @@ content="
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Perry Kingston - Cybersecurity & Data Portfolio</title>
   <style>
+      .cert-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  max-width: 800px;
+  margin: 0;
+}
+
+.cert-grid div {
+  padding: 5px 0;
+}
+
+/* Mobile responsive - stack on small screens */
+@media (max-width: 768px) {
+  .cert-grid {
+    grid-template-columns: 1fr;
+  }
+}
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
@@ -292,6 +310,7 @@ justify-content: center;
         </p>
       </article>
       <article id="Certifications">
+        <div class="cert-grid">
         <h3>Certifications</h3>
         <ul>
           <li><a href="https://www.coursera.org/account/accomplishments/specialization/35I3HJ0IVM5M" target="_blank" rel="noopener noreferrer">Google Cybersecurity Specialization</a></li>
@@ -529,6 +548,7 @@ justify-content: center;
   </script>
 </body>
 </html>
+
 
 
 
