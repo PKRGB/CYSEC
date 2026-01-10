@@ -312,7 +312,7 @@ justify-content: center;
           <img src="assets/topology.jpg" alt="Sanitized Network Architecture." style="max-width:60%; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" /> 
         </a>
         </div>
-<p>In my updated network architecture, the ISP modem provides connectivity to both production and honeypot networks via separate ports. All routing, DHCP, and DNS control is handled by a custom router with strict firewall rules. DNS queries are forced through Pi-hole with Unbound for recursive resolution at the firewall level, ensuring consistent ad-blocking and eliminating reliance on third-party DNS providers.</p>
+<p>In my updated network architecture, the ISP modem provides connectivity to both production and honeypot networks via separate ports. All routing, DHCP, and DNS control in the production network is handled by a custom router with strict firewall rules. DNS queries are forced through Pi-hole with Unbound for recursive resolution at the firewall level, ensuring consistent ad-blocking and eliminating reliance on third-party DNS providers.</p>
 
 <p>My updated network architecture includes:</p>
 <ul>
@@ -320,7 +320,7 @@ justify-content: center;
   <li><strong>VLAN 10:</strong> IoT devices (smart home, cameras, sensors) - isolated from trusted network to prevent lateral movement</li>
   <li><strong>IDS Monitoring:</strong> Suricata passive IDS deployed with SPAN port mirroring for complete traffic visibility without inline performance impact</li>
   <li><strong>DNS Security:</strong> Pi-hole + Unbound for ad-blocking and fully recursive DNS resolution</li>
-  <li><strong>Honeypot Network:</strong> Isolated Cowrie SSH/Telnet honeypot on separate subnet for threat intelligence and attack pattern analysis</li>
+  <li><strong>Honeypot Network:</strong> Isolated Cowrie SSH/Telnet honeypot on separate subnet via isolated router on different subnet than production network, for threat intelligence and attack pattern analysis</li>
   <li><strong>Centralized Logging:</strong> All security events aggregated to external storage for correlation and forensic analysis</li>
 </ul>
 
