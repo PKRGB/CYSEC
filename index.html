@@ -310,7 +310,7 @@ justify-content: center;
         </p>
       </article>
       <article id="Certifications">
-          <h3>Certifications</h3>
+         <center> <h3>Certifications</h3> </center>
 
         <div class="cert-grid">
         
@@ -408,8 +408,10 @@ justify-content: center;
 
         </ul>
         <div style="text-align: center; margin-top:20px;">
-           <img src="assets/topology.jpg" alt="Sanitized Network Architecture." style="max-width:60%; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" /> 
-      </div>
+        <a href= "assets/topology.jpg" target="_blank" rel="noopener noreferrer">  
+          <img src="assets/topology.jpg" alt="Sanitized Network Architecture." style="max-width:60%; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" /> 
+        </a>
+        </div>
 <p>In my updated network architecture, the ISP modem provides connectivity to both production and honeypot networks via separate ports. All routing, DHCP, and DNS control is handled by a custom router with strict firewall rules. DNS queries are forced through Pi-hole with Unbound for recursive resolution at the firewall level, ensuring consistent ad-blocking and eliminating reliance on third-party DNS providers.</p>
 
 <p>My updated network architecture includes:</p>
@@ -549,6 +551,7 @@ justify-content: center;
   </script>
 </body>
 </html>
+
 
 
 
