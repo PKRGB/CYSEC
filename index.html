@@ -110,7 +110,7 @@ content="
 
     h1, h2, h3 {
       color: #2c3e50;
-      font-weight: 600;
+      font-weight: bold; /* was 600 */
       margin-top: 1em; /* down from 1.5 */
       margin-bottom: 0.5em;
       line-height: 1.2;
@@ -302,7 +302,7 @@ justify-content: center;
     </section>
 
      <h2><u>Projects</u></h2>
-
+     <section id="projects"><article id="projects">
      <h2>Home Network Overhaul & Segmentation</h2>
 <p>Below is a sanitized overview of my home network topology, with a focus on security monitoring and threat detection. The architecture implements defense-in-depth principles through network segmentation, passive IDS monitoring, honeypot deployment, and centralized logging.</p>
 
@@ -330,7 +330,6 @@ justify-content: center;
       </article>
     </section>
 
-     <section id="projects"><article id="projects">
        <h2>Pi-hole + Unbound: DNS Security & Privacy</h2>
 <p>To eliminate ad-serving, block telemetry, and achieve complete DNS privacy, I deployed Pi-hole with Unbound for fully recursive DNS resolution. This configuration ensures all DNS queries are resolved directly from root nameservers without relying on third-party DNS providers like Google or Cloudflare, eliminating a common privacy and security risk.</p>
 
@@ -557,6 +556,7 @@ justify-content: center;
   </script>
 </body>
 </html>
+
 
 
 
