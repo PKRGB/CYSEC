@@ -90,8 +90,57 @@ content="
     margin-bottom: 1.5rem;
   }
 
+  footer {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #fff;
+}
 
-  
+footer div {
+    border-top: 1.5px solid #ddd;
+    padding-top: 20px;
+    margin-top: 5px;
+    text-align: center;
+}
+
+footer p {
+    margin: 10px auto;
+    padding: 0;
+    line-height: 1.5;
+}
+
+footer p.security-note {
+    font-size: 1em;
+    color: #666;
+    max-width: 800px;
+}
+
+footer p.design-note {
+    font-size: 1em;
+    color: #999;
+}
+
+footer a {
+    color: #2980b9;
+    text-decoration: none;
+}
+
+footer p.analytics-note {
+    font-size: 0.9em;
+    color: #999;
+    margin-top: 5px;
+}
+
+footer a.privacy-link { 
+    font-size: 0.75em; 
+}
+
 </style>
 </head>
 
@@ -237,18 +286,18 @@ echo "Unattended security updates installed and enabled."
 </pre></code>
 
 <footer>
-  <div style="border-top: 1.5px solid #ddd; padding-top: 5px !important; margin-top: 5px; text-align: center;">
+  <div>
     <p>&copy; 2026 Perry Kingston | Cybersecurity Professional</p>
-    <p style="font-size: 1em; color: #666; max-width: 800px; margin: 10px auto !important;">
+    <p class="security-note">
       <strong>Site Security:</strong> This portfolio implements 
       <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP" target="_blank" rel="noopener noreferrer" style="color: #2980b9; text-decoration: none !important;">Content Security Policy (CSP)</a> headers, 
       HTTPS-only connections, and follows 
       <a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener noreferrer" style="color: #2980b9; text-decoration: none !important;">OWASP</a> security best practices.
     </p>
-    <p style="font-size: 1em; color: #999 !important;">
+    <p class="design-note">
       Designed with responsive mobile-first approach | Optimized for performance & security
     </p>
-    <p style="font-size: 0.9em; color: #999; margin-top: 5px !important;">
+    <p class="analytics-note">
       This site uses Google Analytics for traffic analysis. No personal information is collected or stored.<br>
       By using this site, you acknowledge standard web analytics practices.
       For more information, see <a href="privacy.html" target="_blank" rel = "noopener noreferrer" style="color: #2980b9; font-size: 0.75em !important;">Privacy Policy</a>
