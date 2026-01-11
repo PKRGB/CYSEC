@@ -1,10 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta http-equiv="Content-Security-Policy"
+content="
+  default-src 'self';
+  script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
+  connect-src 'self' https://www.google-analytics.com;
+  frame-src 'self';
+  img-src 'self' data:;
+  style-src 'self' 'unsafe-inline';
+  worker-src 'self' blob:;
+">
+  
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YXC3GLYKFL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YXC3GLYKFL');
+</script>
+
+<link rel="stylesheet" href="footer.css">
+<link rel="stylesheet" href="code-styles.css">
+  
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Raspberry Pi Good Baseline Backup Script - RGBK</title>
-
+  
 <style>
   body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -91,12 +114,6 @@
     stroke-linejoin: round;
   }
 
-  footer {
-      font-size: 0.9em;
-      color: #888;
-      text-align: center;
-      margin-top: 3em;
-    }
 </style>
 </head>
 <body>
@@ -113,6 +130,7 @@
   system details to assist with easy restoration or migration. <BR> This is a good first step to take, prior to making changes
   to your system such as utilizing <a href="https://pkrgb.github.io/CYSEC/unbound.html">this script to install Unbound for Fully Recursive DNS Resolution</a href> in order to increase the privacy and security of your DNS queries.
 </p>
+  
 <div class="code-container">
 <pre><code>
 #!/bin/bash
@@ -211,9 +229,20 @@ echo "  $BACKUP_DIR.tar.gz"
 </div>
 
 <footer>
-  <p>
-  © 2026 Perry Kingston — For educational and demonstration use.
-  </p>
+  <div>
+    <p>&copy; 2026 Perry Kingston | Cybersecurity Professional</p>
+    <p>
+      <strong>Site Security:</strong> This portfolio implements 
+      <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP" target="_blank" rel="noopener noreferrer">Content Security Policy (CSP)</a> headers, 
+      HTTPS-only connections, and follows 
+      <a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener noreferrer">OWASP</a> security best practices.
+    </p>
+    <p>
+      This site uses Google Analytics for traffic analysis. No personal information is collected or stored.<br>
+      By using this site, you acknowledge standard web analytics practices.
+      For more information, see <a href="privacy.html" target="_blank" rel="noopener noreferrer" class="privacy-link">Privacy Policy</a>
+    </p>
+  </div>
 </footer>
 
 <!-- Floating Back Button -->
