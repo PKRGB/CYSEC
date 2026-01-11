@@ -1,27 +1,29 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Security-Policy" 
+<meta http-equiv="Content-Security-Policy"
 content="
   default-src 'self';
   script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
   connect-src 'self' https://www.google-analytics.com;
-  img-src 'self' data: https://www.transparenttextures.com;
+  frame-src 'self';
+  img-src 'self' data:;
   style-src 'self' 'unsafe-inline';
-
+  worker-src 'self' blob:;
 ">
-
-<html lang="en">
+  
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YXC3GLYKFL"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-YXC3GLYKFL');
-  
 </script>
 
+<link rel="stylesheet" href="footer.css">
+<link rel="stylesheet" href="code-styles.css">
+  
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Perry Kingston - Cybersecurity & Data Analytics Portfolio</title>
@@ -143,13 +145,6 @@ content="
       text-align: center;
       margin-top: 1em;
       margin-bottom: .2em; /* was .5em prior */
-    }
-
-    footer {
-      font-size: 0.9em;
-      color: #888;
-      text-align: center;
-      margin-top: 3em;
     }
 
     /* Fix large gap between header and About Me */
@@ -384,11 +379,6 @@ justify-content: center;
   </article>
   </section>
         
-
-
-      <article>
-        
- 
         <!-- Screenshot 
         <div style="text-align: center; margin-top:20px;">
           <img src="assets/pihole.png" alt="Pi-hole Dashboard showing DNS query types" style="max-width:100%; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" />
@@ -492,9 +482,22 @@ justify-content: center;
     </section>
   </main>
 
-  <footer>
-    <p>© 2026 Perry Kingston</p>
-  </footer>
+ <footer>
+  <div>
+    <p>&copy; 2026 Perry Kingston | Cybersecurity Professional</p>
+    <p>
+      <strong>Site Security:</strong> This portfolio implements 
+      <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP" target="_blank" rel="noopener noreferrer">Content Security Policy (CSP)</a> headers, 
+      HTTPS-only connections, and follows 
+      <a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener noreferrer">OWASP</a> security best practices.
+    </p>
+    <p>
+      This site uses Google Analytics for traffic analysis. No personal information is collected or stored.<br>
+      By using this site, you acknowledge standard web analytics practices.
+      For more information, see <a href="privacy.html" target="_blank" rel="noopener noreferrer" class="privacy-link">Privacy Policy</a>
+    </p>
+  </div>
+</footer>
 
   <!-- Back to Top Button -->
   <button id="backToTop" aria-label="Back to top">↑</button>
@@ -557,6 +560,7 @@ justify-content: center;
   </script>
 </body>
 </html>
+
 
 
 
