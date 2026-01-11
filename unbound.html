@@ -6,12 +6,12 @@ content="
   default-src 'self';
   script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
   connect-src 'self' https://www.google-analytics.com;
-  frame-src 'self' https://docs.google.com;
+  frame-src 'self';
   img-src 'self' data:;
   style-src 'self' 'unsafe-inline';
   worker-src 'self' blob:;
 ">
-
+  
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YXC3GLYKFL"></script>
 <script>
@@ -20,6 +20,9 @@ content="
   gtag('js', new Date());
   gtag('config', 'G-YXC3GLYKFL');
 </script>
+
+<link rel="stylesheet" href="footer.css">
+<link rel="stylesheet" href="code-styles.css">
 
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -137,13 +140,6 @@ content="
     margin-bottom: 1.5rem;
   }
 
-  footer {
-      font-size: 0.9em;
-      color: #888;
-	  text-align: center;
-      margin-top: 3em;
-    }
-	
 </style>
 </head>
 
@@ -409,12 +405,26 @@ echo "=================================================="
 
 #For education and demonstration purposes only. 
 #©RGBK
-</pre></code>
+</code></pre>
 
 </div>
 
-<footer>  © 2026 Perry Kingston — For educational and demonstration use.</footer>
-</p>
+<footer>
+  <div>
+    <p>&copy; 2026 Perry Kingston | Cybersecurity Professional</p>
+    <p>
+      <strong>Site Security:</strong> This portfolio implements 
+      <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP" target="_blank" rel="noopener noreferrer">Content Security Policy (CSP)</a> headers, 
+      HTTPS-only connections, and follows 
+      <a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener noreferrer">OWASP</a> security best practices.
+    </p>
+    <p>
+      This site uses Google Analytics for traffic analysis. No personal information is collected or stored.<br>
+      By using this site, you acknowledge standard web analytics practices.
+      For more information, see <a href="privacy.html" target="_blank" rel="noopener noreferrer" class="privacy-link">Privacy Policy</a>
+    </p>
+  </div>
+</footer>
 
 </body>
 </html>
