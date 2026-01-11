@@ -1,4 +1,27 @@
- <h2>Privacy Policy</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy"
+content="
+  default-src 'self';
+  script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
+  connect-src 'self' https://www.google-analytics.com;
+  frame-src 'self';
+  img-src 'self' data:;
+  style-src 'self' 'unsafe-inline';
+  worker-src 'self' blob:;
+">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YXC3GLYKFL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YXC3GLYKFL');
+</script>
+ 
+  <h2>Privacy Policy</h2>
 <p>This portfolio uses Google Analytics to understand how visitors interact with the site. Analytics data includes:</p>
 <ul>
   <li>Pages visited</li>
@@ -6,6 +29,19 @@
   <li>Referring sources</li>
   <li>Device and browser information</li>
 </ul>
-<p><u>No personally identifiable information (PII) is collected. </u>
+<p><u>No personally identifiable information (PII) is collected.</u><BR>
    All data is anonymized and used solely for improving site performance and content.</p>
 <p>For more information about Google's data practices, visit: <a href="https://policies.google.com/privacy">Google Privacy Policy</a></p>
+
+ <footer>
+  <div style="border-top: 1.5px solid #ddd; padding-top: 20px; margin-top: 5px; text-align: center;">
+    <p>&copy; 2025 Perry Kingston | Cybersecurity Professional</p>
+    <p style="font-size: 1em; color: #666; max-width: 800px; margin: 10px auto;">
+      <strong>Site Security:</strong> This portfolio implements 
+      <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP" target="_blank" rel="noopener noreferrer" style="color: #2980b9; text-decoration: none;">Content Security Policy (CSP)</a> headers, 
+      HTTPS-only connections, and follows 
+      <a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener noreferrer" style="color: #2980b9; text-decoration: none;">OWASP</a> security best practices.
+    </p>
+    <p style="font-size: 1em; color: #999;">
+      Designed with responsive mobile-first approach | Optimized for performance & security
+    </p>
