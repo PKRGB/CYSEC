@@ -3,7 +3,7 @@ pre {
     max-width: 100%;
     overflow-x: auto;
     white-space: pre;
-    background-color: red !important; /* #f4f4f4 */
+    background-color: #e8e8e8 !important;    
     padding: 15px;
     border-radius: 5px;
     box-sizing: border-box;
