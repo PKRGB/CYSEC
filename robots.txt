@@ -11,3 +11,6 @@ Disallow: /hardening.html
 Disallow: /unbound.html
 Disallow: /unbound-verify.html
 Disallow: /mount-backup.html
+Disallow: /privacy.html
+Disallow: /footer.css
+Disallow: /code-styles.css
