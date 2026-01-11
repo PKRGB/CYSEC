@@ -114,12 +114,6 @@ content="
     stroke-linejoin: round;
   }
 
-  footer {
-      font-size: 0.9em;
-      color: #888;
-      text-align: center;
-      margin-top: 3em;
-    }
 </style>
 </head>
 <body>
@@ -134,7 +128,7 @@ content="
   and other essential system files, allowing easy restoration or migration to a new SD card.
 </p>
 <div class="code-container">
-<pre>
+<pre><code>
 <span class="keyword">#!/bin/bash</span>
 
 <span class="comment"># Plug in and mount USB/SSD</span>
@@ -158,7 +152,7 @@ tar -tzvf /mnt/usb/pihole-backup/pihole-full-backup-$(date +%F).tar.gz | head
 
 <span class="comment"># Unmount USB</span>
 sudo umount /mnt/usb
-</pre>
+</code></pre>
 </div>
 
 <footer>
