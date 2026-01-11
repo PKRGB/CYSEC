@@ -39,7 +39,11 @@ content="
     padding: 0 20px;
     min-height: 100vh;
   }
-
+	
+pre {
+    background-color: #f4f4f4 !important;
+}
+	
   h1, h2 {
     text-align: center;
     margin: 0.5em 0;
@@ -277,7 +281,8 @@ THIS MEANS WE ARE 'READY FOR LIVE CAPTURE'. Now it can be placed in the architec
 • Suricata Configuration: In suricata.yaml, double-check af-packet or pfring capture interface settings point to the mirrored NIC.
 • Logs: They will now start populating with network events; your external SSD plan can be applied later if needed.
 
-IMPORTANT: Because of where this device sits, it's essentially a public-facing host even only running suricata. You will need to consider security here. Do not give the pi an IP address, implement UFW, SSH hardening and other security protocols. 
+IMPORTANT: Because of where this device sits, it's essentially a public-facing host even only running suricata. You will need to consider security here. 
+	  Do not give the pi an IP address, implement UFW, SSH hardening and other security protocols. 
 
 
 	16. Enable Firewall (UFW)
@@ -405,7 +410,7 @@ Use Lite or ET Open rules instead of full rule set on old model like 2w
 #Restart suricata
 	sudo systemctl start suricata
 	sudo systemctl status suricata
-  </pre></code>
+  </code></pre>
 </div>
 
 <footer>
