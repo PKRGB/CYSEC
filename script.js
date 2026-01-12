@@ -18,6 +18,11 @@ if (accordionHeader) {
       
       content.classList.remove('active');
       arrow.classList.remove('rotate');
+    
+      // Scroll back to reports section
+    document.getElementById('reports').scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'start'
     });
   }
 }
