@@ -21,9 +21,12 @@ body, html {
 /* Accordion for Reports dropdown */ 
 .accordion-header {
   cursor: pointer;
-  display: flex;
-  justify-content: space-between;
+  display: inline-flex;
   align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  background: rgba(0,0,0,0.05);
+  border-radius: 8px;
 }
 
 .accordion-content {
