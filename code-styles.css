@@ -42,7 +42,7 @@ body, html {
   transition: max-height 0.3s ease;
 }
 .accordion-content.active {
-  max-height: 1000px; 
+  max-height: 9999px; 
 }
 .arrow {
   margin-left: auto;
