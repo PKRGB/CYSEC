@@ -24,6 +24,7 @@ if (accordionHeader) {
       behavior: 'smooth',
       block: 'start'
     });
+  });
   }
 }
 
