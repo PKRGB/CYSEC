@@ -1,4 +1,4 @@
-/* Code block styling and overflow protection */
+/* Bash Code block styling and overflow protection */
 pre {
     max-width: 100%;
     overflow-x: auto;
@@ -16,4 +16,30 @@ code {
 
 body, html {
     overflow-x: hidden;
+}
+
+/* Accordion for Reports dropdown */ 
+.accordion-header {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.accordion-content.active {
+  max-height: 1000px; 
+}
+
+.arrow {
+  transition: transform 0.3s ease;
+}
+
+.arrow.rotate {
+  transform: rotate(-180deg);
 }
