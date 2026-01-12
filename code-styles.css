@@ -17,7 +17,7 @@ body, html {
 }
 /* Accordion for Reports dropdown */ 
 .accordion-wrapper { /* dynamic box around all content */
-  padding: 10px;
+  padding: 5px;
   background: rgba(0,0,0,0.05);
   border-radius: 8px;
 }
