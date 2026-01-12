@@ -8,47 +8,46 @@ pre {
     border-radius: 5px;
     box-sizing: border-box;
 }
-
 code {
     display: block;
     overflow-x: auto;
 }
-
 body, html {
     overflow-x: hidden;
 }
-
 /* Accordion for Reports dropdown */ 
 .accordion-wrapper { /* dynamic box around all content */
   padding: 20px;
   background: rgba(0,0,0,0.05);
   border-radius: 8px;
 }
-
 .accordion-header {
   cursor: pointer;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 20px;
-  background: rgba(0,0,0,0.05);
-  border-radius: 8px;
+  flex-wrap: wrap;
 }
-
+.header-main {
+  font-size: 1.5em;
+}
+.header-subtitle {
+  font-size: 0.9em;
+  font-weight: normal;
+  color: #666;
+}
 .accordion-content {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease;
 }
-
 .accordion-content.active {
   max-height: 1000px; 
 }
-
 .arrow {
+  margin-left: auto;
   transition: transform 0.3s ease;
 }
-
 .arrow.rotate {
   transform: rotate(-180deg);
 }
