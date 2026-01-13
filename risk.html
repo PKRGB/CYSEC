@@ -75,16 +75,21 @@ content="
      width: 12px;
     }
 
-      #pdfContainer::-webkit-scrollbar-track {
-      background: #ccc;
-    }
-
     #pdfContainer::-webkit-scrollbar-thumb {
-    background-color: #e0e0e0;
-    border-radius: 6px;
-    border: 3px solid #ccc;
-    }
+  background-color: #e0e0e0 !important; /* light grey */
+  border-radius: 6px;
+  border: 3px solid #ccc;
+}
 
+/* Keep the same color on hover */
+#pdfContainer::-webkit-scrollbar-thumb:hover {
+  background-color: #e0e0e0 !important;
+}
+
+/* Keep the same color on active (drag) */
+#pdfContainer::-webkit-scrollbar-thumb:active {
+  background-color: #e0e0e0 !important;
+}
     .fallback-link {
       display: inline-block;
       padding: 12px 20px;
