@@ -1,26 +1,205 @@
-/* Bash Code block styling and overflow protection */
-pre {
-    max-width: 100%;
-    overflow-x: auto;
-    white-space: pre;
-    background-color: #e8e8e8 !important;    
-    padding: 15px;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-code {
-    display: block;
-    overflow-x: auto;
-}
+/* Base styles */
 body, html {
-    overflow-x: hidden;
+  overflow-x: hidden;
 }
-/* Accordion for Reports dropdown */ 
-.accordion-wrapper { /* dynamic box around all content */
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 40px 0px;
+  line-height: 1.75;
+  background-color: #ffffff;
+  background-image: url('assets/cubes.png');
+  background-repeat: repeat;
+  color: #333;
+  scroll-behavior: smooth;
+}
+
+h1, h2, h3 {
+  color: #2c3e50;
+  font-weight: bold;
+  margin-top: 1em;
+  margin-bottom: 0.2em;
+  line-height: 1.2;
+}
+
+h1 { 
+  text-align: center;
+}
+
+p, li {
+  font-size: 1.05em;
+  margin-bottom: .3em;
+}
+
+a {
+  color: #2980b9;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 10px 40px;
+  border-radius: 10px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+}
+
+section {
+  margin-bottom: 1.5em;
+  scroll-margin-top: 100px;
+}
+
+header {
+  text-align: center;
+  margin-top: 1em;
+  margin-bottom: .2em;
+}
+
+section#about {
+  margin-top: 0;
+}
+
+section#about h2 {
+  margin-top: 0;
+}
+
+/* Navigation */
+.navbar {
+  position: sticky;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 15px 30px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  font-weight: 600;
+  z-index: 1000;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  align-items: center;
+}
+
+.navbar a {
+  color: #2980b9;
+  text-decoration: none;
+  font-size: 1.1em;
+  transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+  color: #1c5980;
+  text-decoration: underline;
+}
+
+.navbar a.active {
+  color: #1c5980;
+  text-decoration: underline !important;
+  font-weight: 700;
+}
+
+.hamburger {
+  display: none;
+  font-size: 1.8em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #2980b9;
+}
+
+/* Certifications grid */
+.cert-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  max-width: 800px;
+  margin: 0;
+}
+
+.cert-grid div {
+  padding: 2px 0;
+}
+
+#Certifications ul li {
+  line-height: 1.2;
+  margin-bottom: 1px;
+}
+
+#skills ul li {
+  line-height: 1.4;
+  margin-bottom: 1px;
+}
+
+/* Brief highlight section */
+.brief-highlight {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+  margin-top: -20px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.brief-thumb {
+  width: 150px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+}
+
+.brief-text {
+  flex: 1;
+  min-width: 250px;
+}
+
+.cta-button {
+  background-color: #2980b9;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  display: block;
+  width: fit-content;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #1c5980;
+}
+
+/* Code blocks */
+pre {
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre;
+  background-color: #e8e8e8 !important;    
+  padding: 15px;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+code {
+  display: block;
+  overflow-x: auto;
+}
+
+/* Accordion for reports */
+.accordion-wrapper {
   padding: 7px;
   background: rgba(0,0,0,0.05);
   border-radius: 8px;
 }
+
 .accordion-header {
   cursor: pointer;
   display: flex;
@@ -28,33 +207,41 @@ body, html {
   gap: 12px;
   flex-wrap: wrap;
 }
+
 .header-main {
  
 }
+
 .header-subtitle {
   font-size: 0.7em;
   font-weight: normal;
-  color: #2c3e50; /* changed from 666 */
+  color: #2c3e50;
 }
+
 .accordion-content {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease;
 }
+
 .accordion-content.active {
   max-height: 9999px; 
 }
+
 .arrow {
   margin-left: auto;
   transition: transform 0.3s ease;
 }
+
 .arrow.rotate {
   transform: rotate(-180deg);
 }
+
 .accordion-footer {
   text-align: right;
   padding: 15px 0 0 0;
 }
+
 .collapse-btn {
   background: rgba(0,0,0,0.1);
   border: none;
@@ -68,4 +255,74 @@ body, html {
 
 .collapse-btn:hover {
   background: rgba(0,0,0,0.2);
+}
+
+/* Back to top button */
+#backToTop {
+  position: fixed;
+  bottom: 3px; 
+  right: 20px;
+  background-color: #2980b9;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  font-size: 1.8em;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  transition: opacity 2s ease, visibility 2s ease;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#backToTop:hover {
+  background-color: #1c5980;
+}
+
+#backToTop.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Mobile responsive */
+@media (min-width: 768px) {
+  body {
+    padding: 40px 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cert-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .hamburger {
+    display: block;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 10px 15px;
+  }
+
+  .navbar a {
+    display: none;
+    font-size: 1em;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  .navbar.active a {
+    display: block;
+  }
 }
