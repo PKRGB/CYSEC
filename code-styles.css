@@ -286,6 +286,11 @@ code {
 .accordion-footer {
   text-align: right;
   padding: 15px 0 0 0;
+  display: none;
+}
+
+.accordion-content.active + .accordion-footer {
+  display: block; 
 }
 
 .collapse-btn {
