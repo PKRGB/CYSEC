@@ -72,24 +72,25 @@ content="
     }
   
      #pdfContainer::-webkit-scrollbar {
-     width: 12px;
-    }
+  width: 10px; /* or your preferred width */
+}
 
-    #pdfContainer::-webkit-scrollbar-thumb {
+#pdfContainer::-webkit-scrollbar-track {
+  background: #ccc; /* your scrollbar track color */
+}
+
+#pdfContainer::-webkit-scrollbar-thumb {
   background-color: #e0e0e0 !important; /* light grey */
   border-radius: 6px;
-  border: 3px solid #ccc;
+  border: 2px solid #ccc; /* create some padding */
 }
 
-/* Keep the same color on hover */
-#pdfContainer::-webkit-scrollbar-thumb:hover {
-  background-color: #e0e0e0 !important;
-}
-
-/* Keep the same color on active (drag) */
+/* Override hover and active states */
+#pdfContainer::-webkit-scrollbar-thumb:hover,
 #pdfContainer::-webkit-scrollbar-thumb:active {
   background-color: #e0e0e0 !important;
 }
+
     .fallback-link {
       display: inline-block;
       padding: 12px 20px;
