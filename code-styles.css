@@ -241,8 +241,8 @@ code {
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
-  font-size: inherit;
-  font-weight: inherit;
+  font-size: 1em;
+  font-weight: normal;
 }
 
 .header-main {
@@ -311,6 +311,10 @@ code {
   color: #5b8fb9;
   font-size: inherit;
   font-weight: inherit;
+}
+
+#Certifications {
+  display: inline-block;
 }
 
 /* Cert Accordion Wrapper */
