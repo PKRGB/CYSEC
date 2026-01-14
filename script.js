@@ -28,6 +28,36 @@ if (accordionHeader) {
   }
 }
 
+  // Certifications accordion
+const certAccordionHeader = document.querySelector('#Certifications .accordion-header');
+if (certAccordionHeader) {
+  certAccordionHeader.addEventListener('click', function() {
+    const content = this.nextElementSibling;
+    const arrow = this.querySelector('.arrow');
+    
+    content.classList.toggle('active');
+    arrow.classList.toggle('rotate');
+  });
+  
+  // Add collapse button functionality
+  const collapseBtnCerts = document.querySelector('.collapse-btn-certs');
+  if (collapseBtnCerts) {
+    collapseBtnCerts.addEventListener('click', function() {
+      const content = document.querySelector('#Certifications .accordion-content');
+      const arrow = document.querySelector('#Certifications .arrow');
+      
+      content.classList.remove('active');
+      arrow.classList.remove('rotate');
+      
+      // Scroll back to certifications section
+      document.getElementById('Certifications').scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    });
+  }
+}
+
 // Hamburger Navigation js // 
     const hamburger = document.querySelector('.hamburger');
     const navbar = document.querySelector('.navbar');
