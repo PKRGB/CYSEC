@@ -241,8 +241,8 @@ code {
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
-  font-size: 1em;
-  font-weight: normal;
+/*  font-size: 1.5em; */
+  font-weight: bold;
 }
 
 .header-main {
@@ -321,6 +321,7 @@ code {
 .accordion-wrapper-certs {
   display: inline-block;
   width: auto;
+  padding: 4px 7px; 
 }
 
 /* Accordion for Certifications */
