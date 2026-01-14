@@ -298,16 +298,17 @@ code {
 }
 
 .featured-certs {
-  margin: 20px 0;
+  margin: 10 0 5px 0;
 }
 
 .cert-item {
   padding: 4px;
-  margin-bottom: 4px;
-  background: rgba(255, 255, 255, 0.7);
+  margin-bottom: 2px;
+  background: transparent;
   border-radius: 5px;
   color: #5b8fb9;
-  font-size: 1.1em;
+  font-size: inherit;
+  font-weight: inherit;
 }
 
 /* Accordion for Certifications */
@@ -317,7 +318,7 @@ code {
   align-items: center;
   gap: 12px;
   font-size: 0.9em;
-  margin-top: 15px;
+  margin-top: 5px;
 }
 
 /* Back to top button */
