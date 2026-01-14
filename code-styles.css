@@ -233,8 +233,6 @@ code {
   padding: 7px;
   background: rgba(0,0,0,0.05);
   border-radius: 8px;
-  font-size: inherit;
-  font-weight: inherit;
 }
 
 .accordion-header {
@@ -243,6 +241,8 @@ code {
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
+  font-size: inherit;
+  font-weight: inherit;
 }
 
 .header-main {
@@ -300,17 +300,23 @@ code {
 }
 
 .featured-certs {
-  margin: 10 0 5px 0;
+  margin: 10px 0 0 0;
 }
 
 .cert-item {
   padding: 2px;
-  margin-bottom: 2px;
+  margin-bottom: 0px;
   background: transparent;
   border-radius: 5px;
   color: #5b8fb9;
   font-size: inherit;
   font-weight: inherit;
+}
+
+/* Cert Accordion Wrapper */
+.accordion-wrapper-certs {
+  display: inline-block;
+  width: auto;
 }
 
 /* Accordion for Certifications */
@@ -320,7 +326,7 @@ code {
   align-items: center;
   gap: 12px;
   font-size: 0.9em;
-  margin-top: 5px;
+  margin-top: 2px;
 }
 
 /* Back to top button */
