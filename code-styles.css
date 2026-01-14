@@ -159,18 +159,7 @@ footer a {
   color: #2980b9;
 }
 
-/* Certifications grid */
-.cert-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  max-width: 800px;
-  margin: 0;
-}
-
-.cert-grid div {
-  padding: 2px 0;
-}
+/* Certifications padding */
 
 #Certifications ul li {
   line-height: 1.2;
@@ -306,6 +295,29 @@ code {
 
 .collapse-btn:hover {
   background: rgba(0,0,0,0.2);
+}
+
+.featured-certs {
+  margin: 20px 0;
+}
+
+.cert-item {
+  padding: 4px;
+  margin-bottom: 4px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+  color: #5b8fb9;
+  font-size: 1.1em;
+}
+
+/* Accordion for Certifications */
+.certifications .accordion-header {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9em;
+  margin-top: 15px;
 }
 
 /* Back to top button */
