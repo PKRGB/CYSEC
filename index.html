@@ -90,16 +90,17 @@ content="
 <p>My updated network architecture includes:</p>
 <ul>
   <li><strong>VLAN 20:</strong> Primary/trusted devices (workstations, laptops, mobile devices)</li>
-  <li><strong>VLAN 10:</strong> IoT devices (smart home, cameras, sensors) - isolated from trusted network to prevent lateral movement</li>
-  <li><strong>IDS Monitoring:</strong> Suricata passive IDS deployed with SPAN port mirroring for complete LAN traffic visibility without inline performance impact</li>
-  <li><strong>DNS Security:</strong> Pi-hole + Unbound for ad-blocking and fully recursive DNS resolution</li>
-  <li><strong>Honeypot Network:</strong> Isolated Cowrie SSH/Telnet honeypot via isolated router on different subnet than production network, for threat intelligence and attack pattern analysis</li>
+  <li><strong>VLAN 10:</strong> IoT devices (smart home, cameras, sensors) - isolated from trusted network to prevent potential lateral movement in the event device is compromised</li>
+  <li><strong>IDS Monitoring:</strong> Suricata passive IDS deployed with SPAN port mirroring for complete LAN traffic visibility without inline performance impact, and implemented real-time security 
+    alerting via custom bash script that monitors Suricata IDS logs and triggers desktop notifications on Pi's 7-inch display for immediate threat visibility</li>
+  <li><strong>DNS Security:</strong> Pi-hole + Unbound for ad-blocking and telemetry-reduction via fully recursive DNS resolution</li>
+  <li><strong>Honeypot Network:</strong> Isolated Cowrie SSH/Telnet honeypot via separate router on different subnet than production network, for threat intelligence and attack pattern analysis</li>
   <li><strong>Centralized Logging:</strong> All security events aggregated to external storage for correlation and forensic analysis</li>
 </ul>
 
 <p><strong>Security Features:</strong> VLAN segmentation, passive IDS monitoring, SSH hardening (key-based auth, fail2ban), strict firewall rules, honeypot deployment, zero-trust architecture</p>
 
-<p><strong>Tools & Technologies:</strong> Suricata IDS, Pi-hole, Unbound DNS, Cowrie Honeypot, pfSense/custom router, VLAN (802.1Q), Wireshark, nmap, tcpdump, SPAN/port mirroring, Linux (Debian/Raspberry Pi OS)</p>
+<p><strong>Tools & Technologies:</strong> Suricata IDS, Pi-hole, Unbound DNS, Cowrie Honeypot, pfSense/custom router, VLAN (802.1Q), Wireshark, nmap, tcpdump, SPAN/port mirroring, Linux (Debian/Raspberry Pi OS), Python</p>
       </article>
     </section>
 
@@ -318,6 +319,7 @@ content="
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
