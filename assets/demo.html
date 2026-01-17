@@ -1,8 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta http-equiv="Content-Security-Policy"
+content="
+  default-src 'self';
+  script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
+  connect-src 'self' https://www.google-analytics.com;
+  frame-src 'self';
+  img-src 'self' data:;
+  style-src 'self' 'unsafe-inline';
+  worker-src 'self' blob:;
+">
+  
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YXC3GLYKFL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YXC3GLYKFL');
+</script>
+
+<link rel="stylesheet" href="code-styles.css">
+
     <meta charset="UTF-8">
-    <title>Pi-hole Analysis Demo Report (91 Days)</title>
+    <title>Pi-hole Analysis Demo Report</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -260,7 +282,7 @@
     <p class="timestamp">Generated: Sat 17 Jan 13:06:15 CST 2026</p>
     <div class="demo-notice">
         🔒 DEMO MODE: All IPs and domains have been sanitized for portfolio use. 
-        Data patterns are real, but identifying information has been anonymized.
+        Data patterns are real, but identifying information has been anonymized/sanitized.
     </div>
     <div class="info-box">
         <strong>Analysis Period:</strong> Last 91 days<br>
