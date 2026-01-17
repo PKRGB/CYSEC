@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pi-hole Time-Based Analysis (7 Days)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+        }
+        h2 {
+            color: #666;
+            border-bottom: 2px solid #96060a;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 800px;
+            background-color: white;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        th {
+            background-color: #96060a;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            user-select: none;
+        }
+        th.sortable {
+            cursor: pointer;
+            position: relative;
+            padding-right: 25px;
+        }
+        th.sortable:hover {
+            background-color: #7a0508;
+        }
+        th.sortable::after {
+            content: '⇅';
+            position: absolute;
+            right: 8px;
+            opacity: 0.5;
+        }
+        th.sort-asc::after {
+            content: '▲';
+            opacity: 1;
+        }
+        th.sort-desc::after {
+            content: '▼';
+            opacity: 1;
+        }
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+        .bar {
+            background-color: #96060a;
+            height: 20px;
+            display: inline-block;
+            min-width: 2px;
+        }
+        .timestamp {
+            color: #999;
+            font-size: 0.9em;
+        }
+        .info-box {
+            background-color: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .count {
+            font-weight: bold;
+            color: #96060a;
+        }
+        .percent {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .client-table {
+            overflow-x: auto;
+        }
+        
+        /* Mobile responsive styles */
+        @media screen and (max-width: 768px) {
+            body {
+                margin: 10px;
+            }
+            table {
+                font-size: 0.85em;
+            }
+            th, td {
+                padding: 6px;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+            h2 {
+                font-size: 1.2em;
+            }
+            .bar {
+                height: 15px;
+            }
+            /* Stack table cells on very small screens */
+            @media screen and (max-width: 480px) {
+                table, thead, tbody, th, td, tr {
+                    display: block;
+                }
+                thead tr {
+                    position: absolute;
+                    top: -9999px;
+                    left: -9999px;
+                }
+                tr {
+                    margin-bottom: 15px;
+                    border: 1px solid #ddd;
+                }
+                td {
+                    border: none;
+                    position: relative;
+                    padding-left: 50%;
+                }
+                td:before {
+                    position: absolute;
+                    left: 6px;
+                    width: 45%;
+                    padding-right: 10px;
+                    white-space: nowrap;
+                    font-weight: bold;
+                }
+            }
+        }
+    </style>
+    <script>
+        // Make tables sortable
+        function sortTable(tableId, columnIndex) {
+            const table = document.getElementById(tableId);
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            
+            // Determine sort direction
+            const currentSort = table.dataset.sortColumn;
+            const currentDir = table.dataset.sortDir || 'asc';
+            const newDir = (currentSort == columnIndex && currentDir === 'asc') ? 'desc' : 'asc';
+            
+            // Sort rows
+            rows.sort((a, b) => {
+                let aVal = a.cells[columnIndex].textContent.trim();
+                let bVal = b.cells[columnIndex].textContent.trim();
+                
+                // Try to parse as number (handles percentages too)
+                const aNum = parseFloat(aVal.replace(/[^0-9.-]/g, ''));
+                const bNum = parseFloat(bVal.replace(/[^0-9.-]/g, ''));
+                
+                if (!isNaN(aNum) && !isNaN(bNum)) {
+                    return newDir === 'asc' ? aNum - bNum : bNum - aNum;
+                }
+                
+                // String comparison
+                return newDir === 'asc' ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
+            });
+            
+            // Clear and re-append rows
+            rows.forEach(row => tbody.appendChild(row));
+            
+            // Update sort indicators
+            table.dataset.sortColumn = columnIndex;
+            table.dataset.sortDir = newDir;
+            
+            // Update header arrows
+            const headers = table.querySelectorAll('th.sortable');
+            headers.forEach((th, idx) => {
+                th.classList.remove('sort-asc', 'sort-desc');
+                if (idx === columnIndex) {
+                    th.classList.add(newDir === 'asc' ? 'sort-asc' : 'sort-desc');
+                }
+            });
+        }
+        
+        // Initialize sortable tables on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('table').forEach((table, tableIdx) => {
+                table.id = table.id || 'table-' + tableIdx;
+                const headers = table.querySelectorAll('thead th');
+                headers.forEach((th, colIdx) => {
+                    th.classList.add('sortable');
+                    th.addEventListener('click', () => sortTable(table.id, colIdx));
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Pi-hole DNS Query Analysis</h1>
+    <p class="timestamp">Generated: Sat 17 Jan 01:30:16 CST 2026</p>
+    <div class="info-box">
+        <strong>Analysis Period:</strong> Last 7 days<br>
+        <strong>Database Coverage:</strong> 91 days available
+    </div>
+<p><strong>Total Queries Analyzed:</strong> <span class='count'>745647</span></p>
+<h2>Queries by Hour of Day (Last 7 Days)</h2>
+<table><thead><tr><th>Hour</th><th>Query Count</th><th>Visual</th></tr></thead><tbody>
+<tr><td>00:00</td><td>33264</td><td><div class='bar' style='width: 149px;'></div></td></tr>
+<tr><td>01:00</td><td>31035</td><td><div class='bar' style='width: 139px;'></div></td></tr>
+<tr><td>02:00</td><td>31187</td><td><div class='bar' style='width: 139px;'></div></td></tr>
+<tr><td>03:00</td><td>22254</td><td><div class='bar' style='width: 99px;'></div></td></tr>
+<tr><td>04:00</td><td>16761</td><td><div class='bar' style='width: 75px;'></div></td></tr>
+<tr><td>05:00</td><td>16206</td><td><div class='bar' style='width: 72px;'></div></td></tr>
+<tr><td>06:00</td><td>18153</td><td><div class='bar' style='width: 81px;'></div></td></tr>
+<tr><td>07:00</td><td>17251</td><td><div class='bar' style='width: 77px;'></div></td></tr>
+<tr><td>08:00</td><td>22550</td><td><div class='bar' style='width: 101px;'></div></td></tr>
+<tr><td>09:00</td><td>25005</td><td><div class='bar' style='width: 112px;'></div></td></tr>
+<tr><td>10:00</td><td>24378</td><td><div class='bar' style='width: 109px;'></div></td></tr>
+<tr><td>11:00</td><td>25643</td><td><div class='bar' style='width: 114px;'></div></td></tr>
+<tr><td>12:00</td><td>22664</td><td><div class='bar' style='width: 101px;'></div></td></tr>
+<tr><td>13:00</td><td>22057</td><td><div class='bar' style='width: 98px;'></div></td></tr>
+<tr><td>14:00</td><td>39762</td><td><div class='bar' style='width: 178px;'></div></td></tr>
+<tr><td>15:00</td><td>49513</td><td><div class='bar' style='width: 221px;'></div></td></tr>
+<tr><td>16:00</td><td>89228</td><td><div class='bar' style='width: 400px;'></div></td></tr>
+<tr><td>17:00</td><td>45288</td><td><div class='bar' style='width: 203px;'></div></td></tr>
+<tr><td>18:00</td><td>37204</td><td><div class='bar' style='width: 166px;'></div></td></tr>
+<tr><td>19:00</td><td>28564</td><td><div class='bar' style='width: 128px;'></div></td></tr>
+<tr><td>20:00</td><td>28578</td><td><div class='bar' style='width: 128px;'></div></td></tr>
+<tr><td>21:00</td><td>34922</td><td><div class='bar' style='width: 156px;'></div></td></tr>
+<tr><td>22:00</td><td>32759</td><td><div class='bar' style='width: 146px;'></div></td></tr>
+<tr><td>23:00</td><td>31409</td><td><div class='bar' style='width: 140px;'></div></td></tr>
+</tbody></table>
+<h2>Queries by Day of Week (Last 7 Days)</h2>
+<table><thead><tr><th>Day</th><th>Query Count</th><th>Visual</th></tr></thead><tbody>
+<tr><td>Sunday</td><td>86083</td><td><div class='bar' style='width: 166px;'></div></td></tr>
+<tr><td>Monday</td><td>85064</td><td><div class='bar' style='width: 164px;'></div></td></tr>
+<tr><td>Tuesday</td><td>94933</td><td><div class='bar' style='width: 183px;'></div></td></tr>
+<tr><td>Wednesday</td><td>102984</td><td><div class='bar' style='width: 198px;'></div></td></tr>
+<tr><td>Thursday</td><td>207395</td><td><div class='bar' style='width: 400px;'></div></td></tr>
+<tr><td>Friday</td><td>91181</td><td><div class='bar' style='width: 175px;'></div></td></tr>
+<tr><td>Saturday</td><td>77987</td><td><div class='bar' style='width: 150px;'></div></td></tr>
+</tbody></table>
+<h2>Daily Query Volume (Last 7 Days)</h2>
+<table><thead><tr><th>Date</th><th>Query Count</th><th>Visual</th></tr></thead><tbody>
+<tr><td>2026-01-17</td><td>8127</td><td><div class='bar' style='width: 15px;'></div></td></tr>
+<tr><td>2026-01-16</td><td>91181</td><td><div class='bar' style='width: 175px;'></div></td></tr>
+<tr><td>2026-01-15</td><td>207395</td><td><div class='bar' style='width: 400px;'></div></td></tr>
+<tr><td>2026-01-14</td><td>102984</td><td><div class='bar' style='width: 198px;'></div></td></tr>
+<tr><td>2026-01-13</td><td>94933</td><td><div class='bar' style='width: 183px;'></div></td></tr>
+<tr><td>2026-01-12</td><td>85064</td><td><div class='bar' style='width: 164px;'></div></td></tr>
+<tr><td>2026-01-11</td><td>86083</td><td><div class='bar' style='width: 166px;'></div></td></tr>
+<tr><td>2026-01-10</td><td>69850</td><td><div class='bar' style='width: 134px;'></div></td></tr>
+</tbody></table>
+<h2>Client Activity Summary (Last 7 Days)</h2>
+<p style='color: #666; font-size: 0.9em;'>Showing clients with at least one blocked query</p>
+<div class='client-table'>
+<table><thead><tr><th>Client IP</th><th>Total Queries</th><th>Blocked</th><th>Block %</th><th>Top Domain</th><th>Peak Hour</th></tr></thead><tbody>
+<tr>
+<td>192.168.0.186</td>
+<td>97219</td>
+<td>44020</td>
+<td><span class='percent'>45.3%</span></td>
+<td>logs.netflix.com</td>
+<td>15:00</td>
+</tr>
+<tr>
+<td>192.168.0.39</td>
+<td>96158</td>
+<td>27868</td>
+<td><span class='percent'>29.0%</span></td>
+<td>firebaselogging-pa.googleapis.com</td>
+<td>12:00</td>
+</tr>
+<tr>
+<td>192.168.0.29</td>
+<td>80738</td>
+<td>16594</td>
+<td><span class='percent'>20.6%</span></td>
+<td>b79c66077e27a1c100292a6aa5da291cfa7da7ef982a7d0d2708be38d76b31f.us-east-1.prod.service.minerva.devices.a2z.com</td>
+<td>10:00</td>
+</tr>
+<tr>
+<td>192.168.0.144</td>
+<td>51514</td>
+<td>46038</td>
+<td><span class='percent'>89.4%</span></td>
+<td>global.telemetry.insights.video.a2z.com</td>
+<td>00:00</td>
+</tr>
+<tr>
+<td>192.168.0.187</td>
+<td>49949</td>
+<td>13087</td>
+<td><span class='percent'>26.2%</span></td>
+<td>connectivitycheck.gstatic.com</td>
+<td>16:00</td>
+</tr>
+<tr>
+<td>192.168.0.36</td>
+<td>38539</td>
+<td>8283</td>
+<td><span class='percent'>21.5%</span></td>
+<td>firebaselogging-pa.googleapis.com</td>
+<td>17:00</td>
+</tr>
+<tr>
+<td>192.168.0.210</td>
+<td>35096</td>
+<td>27329</td>
+<td><span class='percent'>77.9%</span></td>
+<td>global.telemetry.insights.video.a2z.com</td>
+<td>02:00</td>
+</tr>
+<tr>
+<td>192.168.0.126</td>
+<td>30767</td>
+<td>4729</td>
+<td><span class='percent'>15.4%</span></td>
+<td>mask.icloud.com</td>
+<td>06:00</td>
+</tr>
+<tr>
+<td>192.168.0.132</td>
+<td>23697</td>
+<td>1577</td>
+<td><span class='percent'>6.7%</span></td>
+<td>event.bugsnag.kindle.amazon.dev</td>
+<td>19:00</td>
+</tr>
+<tr>
+<td>192.168.0.127</td>
+<td>17744</td>
+<td>2978</td>
+<td><span class='percent'>16.8%</span></td>
+<td>ssl.gstatic.com</td>
+<td>23:00</td>
+</tr>
+<tr>
+<td>192.168.0.195</td>
+<td>11749</td>
+<td>2129</td>
+<td><span class='percent'>18.1%</span></td>
+<td>web.diagnostic.networking.aws.dev</td>
+<td>16:00</td>
+</tr>
+<tr>
+<td>192.168.0.209</td>
+<td>11513</td>
+<td>8720</td>
+<td><span class='percent'>75.7%</span></td>
+<td>global.telemetry.insights.video.a2z.com</td>
+<td>01:00</td>
+</tr>
+<tr>
+<td>192.168.0.136</td>
+<td>10497</td>
+<td>1081</td>
+<td><span class='percent'>10.3%</span></td>
+<td>event.bugsnag.kindle.amazon.dev</td>
+<td>20:00</td>
+</tr>
+<tr>
+<td>192.168.0.214</td>
+<td>9287</td>
+<td>3610</td>
+<td><span class='percent'>38.9%</span></td>
+<td>api.amazonalexa.com</td>
+<td>16:00</td>
+</tr>
+<tr>
+<td>192.168.0.125</td>
+<td>8126</td>
+<td>1140</td>
+<td><span class='percent'>14.0%</span></td>
+<td>time.nist.gov</td>
+<td>16:00</td>
+</tr>
+<tr>
+<td>192.168.0.189</td>
+<td>8083</td>
+<td>336</td>
+<td><span class='percent'>4.2%</span></td>
+<td>connectivitycheck.gstatic.com</td>
+<td>16:00</td>
+</tr>
+<tr>
+<td>192.168.0.226</td>
+<td>4527</td>
+<td>577</td>
+<td><span class='percent'>12.7%</span></td>
+<td>mobile.launchdarkly.com</td>
+<td>01:00</td>
+</tr>
+<tr>
+<td>192.168.0.207</td>
+<td>4432</td>
+<td>1748</td>
+<td><span class='percent'>39.4%</span></td>
+<td>watson.events.data.microsoft.com</td>
+<td>00:00</td>
+</tr>
+<tr>
+<td>192.168.0.159</td>
+<td>2770</td>
+<td>31</td>
+<td><span class='percent'>1.1%</span></td>
+<td>2.debian.pool.ntp.org</td>
+<td>23:00</td>
+</tr>
+<tr>
+<td>192.168.0.10</td>
+<td>2338</td>
+<td>113</td>
+<td><span class='percent'>4.8%</span></td>
+<td>www.youtube.com</td>
+<td>16:00</td>
+</tr>
+<tr>
+<td>192.168.0.6</td>
+<td>2105</td>
+<td>20</td>
+<td><span class='percent'>1.0%</span></td>
+<td>init.ess.apple.com</td>
+<td>14:00</td>
+</tr>
+<tr>
+<td>192.168.0.40</td>
+<td>1825</td>
+<td>84</td>
+<td><span class='percent'>4.6%</span></td>
+<td>www.google.com</td>
+<td>16:00</td>
+</tr>
+<tr>
+<td>192.168.0.124</td>
+<td>1639</td>
+<td>144</td>
+<td><span class='percent'>8.8%</span></td>
+<td>pool.ntp.org</td>
+<td>17:00</td>
+</tr>
+<tr>
+<td>192.168.0.206</td>
+<td>1590</td>
+<td>810</td>
+<td><span class='percent'>50.9%</span></td>
+<td>watson.events.data.microsoft.com</td>
+<td>21:00</td>
+</tr>
+<tr>
+<td>192.168.0.122</td>
+<td>1135</td>
+<td>127</td>
+<td><span class='percent'>11.2%</span></td>
+<td>n-deventry.tplinkcloud.com</td>
+<td>08:00</td>
+</tr>
+<tr>
+<td>192.168.0.212</td>
+<td>814</td>
+<td>62</td>
+<td><span class='percent'>7.6%</span></td>
+<td>boot.pluto.tv</td>
+<td>16:00</td>
+</tr>
+<tr>
+<td>192.168.0.101</td>
+<td>560</td>
+<td>1</td>
+<td><span class='percent'>0.2%</span></td>
+<td>registration.arloxcld.com</td>
+<td>14:00</td>
+</tr>
+<tr>
+<td>192.168.0.8</td>
+<td>535</td>
+<td>44</td>
+<td><span class='percent'>8.2%</span></td>
+<td>mask.icloud.com</td>
+<td>04:00</td>
+</tr>
+<tr>
+<td>192.168.0.51</td>
+<td>366</td>
+<td>11</td>
+<td><span class='percent'>3.0%</span></td>
+<td>todo-ta-g7g.amazon.com</td>
+<td>01:00</td>
+</tr>
+<tr>
+<td>192.168.0.123</td>
+<td>34</td>
+<td>12</td>
+<td><span class='percent'>35.3%</span></td>
+<td>global.telemetry.insights.video.a2z.com</td>
+<td>15:00</td>
+</tr>
+</tbody></table>
+</div>
+</body>
+</html>
