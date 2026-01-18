@@ -21,48 +21,10 @@ content="
   gtag('config', 'G-YXC3GLYKFL');
 </script>
   
-<style>
-   /* Floating circular back button */
-  .back-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #2980b9;
-    color: white;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    transition: background-color 0.3s ease;
-    z-index: 1000;
-    cursor: pointer;
-    border: none;
-    outline: none;
-  }
-
-  .back-button:hover {
-    background-color: #555;
-  }
-
-  .back-button svg {
-    width: 20px;      /* slightly larger for prominence */
-    height: 20px;
-    fill: none;
-    stroke: white;
-    stroke-width: 2.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
-</style>
-  
 <link rel="stylesheet" href="../code-styles.css">
 
     <meta charset="UTF-8">
-    <title>Pi-hole Analysis Demo Report</title>
+    <title>Pi-hole Analysis Demo Dash</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -694,23 +656,6 @@ content="
     </p>
   </div>
 </footer>
-  <!-- Floating Back Button -->
-<a href="#" onclick="goBackOrDefault(event)" class="back-button" aria-label="Go Back">
-  <svg viewBox="0 0 24 24">
-    <path d="M15 18l-6-6 6-6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</a>
 
-<!-- <script>
-  function goBackOrDefault(event, defaultUrl = '/CYSEC/') {
-    event.preventDefault();
-    if (document.referrer && document.referrer !== window.location.href) {
-      window.history.back();
-    } else {
-      window.location.href = defaultUrl;
-    }
-  }
-</script>
-  -->
   </body>
 </html>
