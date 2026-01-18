@@ -94,7 +94,7 @@ content="
   <li><strong>VLAN 10:</strong> IoT devices (smart home, cameras, sensors) - isolated from trusted network to prevent potential lateral movement in the event device is compromised</li>
   <li><strong>IDS Monitoring:</strong> Suricata passive IDS deployed with SPAN port mirroring for complete LAN traffic visibility without inline performance impact, and implemented real-time security 
     alerting via custom bash script that monitors Suricata IDS logs and triggers desktop notifications on Pi's 7-inch display for immediate threat visibility</li>
-  <li><strong>DNS Security:</strong> Pi-hole + Unbound for ad-blocking and telemetry-reduction via fully recursive DNS resolution</li>
+  <li><strong>DNS Security:</strong> Pi-hole + Unbound for ad-blocking and telemetry-reduction via fully recursive DNS resolution, as well as the implementation of DNSSEC</li>
   <li><strong>Honeypot Network:</strong> Isolated Cowrie SSH/Telnet honeypot via separate router on different subnet than production network, for threat intelligence and attack pattern analysis</li>
   <li><strong>Centralized Logging:</strong> All security events aggregated to external storage for correlation and forensic analysis</li>
 </ul>
