@@ -229,6 +229,18 @@ content="
                 let aVal = a.cells[columnIndex].textContent.trim();
                 let bVal = b.cells[columnIndex].textContent.trim();
                 
+                // Check if sorting IP addresses (looks like xxx.xxx.xxx.xxx)
+                if (/^\d+\.\d+\.\d+\.\d+/.test(aVal) && /^\d+\.\d+\.\d+\.\d+/.test(bVal)) {
+                    const aIP = aVal.match(/\d+/g).map(Number);
+                    const bIP = bVal.match(/\d+/g).map(Number);
+                    for (let i = 0; i < 4; i++) {
+                        if (aIP[i] !== bIP[i]) {
+                            return newDir === 'asc' ? aIP[i] - bIP[i] : bIP[i] - aIP[i];
+                        }
+                    }
+                    return 0;
+                }
+                
                 const aNum = parseFloat(aVal.replace(/[^0-9.-]/g, ''));
                 const bNum = parseFloat(bVal.replace(/[^0-9.-]/g, ''));
                 
@@ -254,7 +266,8 @@ content="
         }
         
         window.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('table').forEach((table, tableIdx) => {
+            const tables = document.querySelectorAll('table');
+            tables.forEach((table, tableIdx) => {
                 table.id = table.id || 'table-' + tableIdx;
                 const headers = table.querySelectorAll('thead th');
                 headers.forEach((th, colIdx) => {
@@ -279,59 +292,291 @@ content="
 </head>
 <body>
     <h1>Pi-hole DNS Query Analysis - Demo Report</h1>
-    <p class="timestamp">Generated: Sat 17 Jan 13:06:15 CST 2026</p>
+    <p class="timestamp">Generated: Sat 17 Jan 18:41:56 CST 2026</p>
     <div class="demo-notice">
         🔒 DEMO MODE: All IPs and domains have been sanitized for portfolio use. 
-        Data patterns are real, but identifying information has been anonymized/sanitized.
+        These data patterns are real, but potentially identifying information has been anonymized.
     </div>
     <div class="info-box">
         <strong>Analysis Period:</strong> Last 91 days<br>
         <strong>Database Coverage:</strong> 91 days available
     </div>
-<p><strong>Total Queries Analyzed:</strong> <span class='count'>8119338</span></p>
+<p><strong>Total Queries Analyzed:</strong> <span class='count'>8132102</span></p>
+<button class='accordion'>Client Activity Summary (Last 91 Days) - Sanitized</button>
+<div class='accordion-content'>
+<p style='color: #666; font-size: 0.9em; margin: 10px 0;'>IPs anonymized to 10.0.0.x range. Domains categorized generically.</p>
+<div class='client-table'>
+<table><thead><tr><th>Client IP</th><th>Total Queries</th><th>Blocked</th><th>Block %</th><th>Health Score</th><th>Top Domain</th><th>Peak Hour</th></tr></thead><tbody>
+<tr>
+<td>10.0.0.100</td>
+<td>1496176</td>
+<td>713711</td>
+<td><span class='percent'>47.7%</span></td>
+<td><span class='health-score health-critical'>🔴 30</span></td>
+<td>streaming-service.local</td>
+<td>21:00</td>
+</tr>
+<tr>
+<td>10.0.0.105</td>
+<td>336624</td>
+<td>295790</td>
+<td><span class='percent'>87.9%</span></td>
+<td><span class='health-score health-critical'>🔴 30</span></td>
+<td>tracking-service.local</td>
+<td>01:00</td>
+</tr>
+<tr>
+<td>10.0.0.102</td>
+<td>492612</td>
+<td>419522</td>
+<td><span class='percent'>85.2%</span></td>
+<td><span class='health-score health-critical'>🔴 30</span></td>
+<td>tracking-service.local</td>
+<td>03:00</td>
+</tr>
+<tr>
+<td>10.0.0.103</td>
+<td>472637</td>
+<td>98956</td>
+<td><span class='percent'>20.9%</span></td>
+<td><span class='health-score health-critical'>🔴 30</span></td>
+<td>tech-vendor-a.local</td>
+<td>12:00</td>
+</tr>
+<tr>
+<td>10.0.0.106</td>
+<td>326414</td>
+<td>62213</td>
+<td><span class='percent'>19.1%</span></td>
+<td><span class='health-score health-critical'>🔴 31</span></td>
+<td>generic-service.local</td>
+<td>08:00</td>
+</tr>
+<tr>
+<td>10.0.0.104</td>
+<td>428731</td>
+<td>79702</td>
+<td><span class='percent'>18.6%</span></td>
+<td><span class='health-score health-critical'>🔴 32</span></td>
+<td>tech-vendor-a.local</td>
+<td>20:00</td>
+</tr>
+<tr>
+<td>10.0.0.141</td>
+<td>4229</td>
+<td>2421</td>
+<td><span class='percent'>57.2%</span></td>
+<td><span class='health-score health-critical'>🔴 45</span></td>
+<td>tech-vendor-b.local</td>
+<td>18:00</td>
+</tr>
+<tr>
+<td>10.0.0.150</td>
+<td>34</td>
+<td>12</td>
+<td><span class='percent'>35.3%</span></td>
+<td><span class='health-score health-critical'>🔴 45</span></td>
+<td>tracking-service.local</td>
+<td>15:00</td>
+</tr>
+<tr>
+<td>10.0.0.123</td>
+<td>79515</td>
+<td>16666</td>
+<td><span class='percent'>21.0%</span></td>
+<td><span class='health-score health-critical'>🔴 45</span></td>
+<td>search-engine.local</td>
+<td>11:00</td>
+</tr>
+<tr>
+<td>10.0.0.151</td>
+<td>2482</td>
+<td>501</td>
+<td><span class='percent'>20.2%</span></td>
+<td><span class='health-score health-critical'>🔴 45</span></td>
+<td>tech-vendor-a.local</td>
+<td>20:00</td>
+</tr>
+<tr>
+<td>10.0.0.121</td>
+<td>94164</td>
+<td>82555</td>
+<td><span class='percent'>87.7%</span></td>
+<td><span class='health-score health-critical'>🔴 45</span></td>
+<td>tracking-service.local</td>
+<td>22:00</td>
+</tr>
+<tr>
+<td>10.0.0.111</td>
+<td>200529</td>
+<td>177393</td>
+<td><span class='percent'>88.5%</span></td>
+<td><span class='health-score health-critical'>🔴 45</span></td>
+<td>tracking-service.local</td>
+<td>13:00</td>
+</tr>
+<tr>
+<td>10.0.0.126</td>
+<td>66496</td>
+<td>21923</td>
+<td><span class='percent'>33.0%</span></td>
+<td><span class='health-score health-critical'>🔴 45</span></td>
+<td>search-engine.local</td>
+<td>16:00</td>
+</tr>
+<tr>
+<td>10.0.0.113</td>
+<td>174532</td>
+<td>80691</td>
+<td><span class='percent'>46.2%</span></td>
+<td><span class='health-score health-critical'>🔴 45</span></td>
+<td>streaming-service.local</td>
+<td>16:00</td>
+</tr>
+<tr>
+<td>10.0.0.140</td>
+<td>4272</td>
+<td>1791</td>
+<td><span class='percent'>41.9%</span></td>
+<td><span class='health-score health-critical'>🔴 45</span></td>
+<td>cloud-provider.local</td>
+<td>11:00</td>
+</tr>
+<tr>
+<td>10.0.0.139</td>
+<td>4740</td>
+<td>1285</td>
+<td><span class='percent'>27.1%</span></td>
+<td><span class='health-score health-critical'>🔴 45</span></td>
+<td>cloud-provider.local</td>
+<td>20:00</td>
+</tr>
+<tr>
+<td>10.0.0.119</td>
+<td>109603</td>
+<td>25514</td>
+<td><span class='percent'>23.3%</span></td>
+<td><span class='health-score health-critical'>🔴 45</span></td>
+<td>generic-service.local</td>
+<td>16:00</td>
+</tr>
+<tr>
+<td>10.0.0.138</td>
+<td>5287</td>
+<td>1035</td>
+<td><span class='percent'>19.6%</span></td>
+<td><span class='health-score health-critical'>🔴 45</span></td>
+<td>generic-service.local</td>
+<td>03:00</td>
+</tr>
+<tr>
+<td>10.0.0.129</td>
+<td>20569</td>
+<td>14788</td>
+<td><span class='percent'>71.9%</span></td>
+<td><span class='health-score health-critical'>🔴 45</span></td>
+<td>tech-vendor-b.local</td>
+<td>21:00</td>
+</tr>
+<tr>
+<td>10.0.0.122</td>
+<td>87873</td>
+<td>57024</td>
+<td><span class='percent'>64.9%</span></td>
+<td><span class='health-score health-critical'>🔴 45</span></td>
+<td>tech-vendor-b.local</td>
+<td>20:00</td>
+</tr>
+<tr>
+<td>10.0.0.120</td>
+<td>94597</td>
+<td>52013</td>
+<td><span class='percent'>55.0%</span></td>
+<td><span class='health-score health-critical'>🔴 45</span></td>
+<td>tech-vendor-b.local</td>
+<td>22:00</td>
+</tr>
+<tr>
+<td>10.0.0.116</td>
+<td>131740</td>
+<td>115896</td>
+<td><span class='percent'>88.0%</span></td>
+<td><span class='health-score health-critical'>🔴 45</span></td>
+<td>tracking-service.local</td>
+<td>01:00</td>
+</tr>
+<tr>
+<td>10.0.0.118</td>
+<td>112780</td>
+<td>61764</td>
+<td><span class='percent'>54.8%</span></td>
+<td><span class='health-score health-critical'>🔴 45</span></td>
+<td>generic-service.local</td>
+<td>16:00</td>
+</tr>
+<tr>
+<td>10.0.0.136</td>
+<td>7056</td>
+<td>1733</td>
+<td><span class='percent'>24.6%</span></td>
+<td><span class='health-score health-critical'>🔴 45</span></td>
+<td>generic-service.local</td>
+<td>17:00</td>
+</tr>
+<tr>
+<td>10.0.0.152</td>
+<td>220</td>
+<td>46</td>
+<td><span class='percent'>20.9%</span></td>
+<td><span class='health-score health-critical'>🔴 45</span></td>
+<td>generic-service.local</td>
+<td>23:00</td>
+</tr>
+</tbody></table>
+</div></div>
 <button class='accordion'>Queries by Hour of Day (Last 7 Days)</button>
 <div class='accordion-content'>
 <table><thead><tr><th>Hour</th><th>Query Count</th><th>Visual</th></tr></thead><tbody>
-<tr><td>00:00</td><td>33264</td><td><div class='bar' style='width: 149px;'></div></td></tr>
-<tr><td>01:00</td><td>30889</td><td><div class='bar' style='width: 138px;'></div></td></tr>
-<tr><td>02:00</td><td>32536</td><td><div class='bar' style='width: 145px;'></div></td></tr>
-<tr><td>03:00</td><td>24340</td><td><div class='bar' style='width: 109px;'></div></td></tr>
-<tr><td>04:00</td><td>15995</td><td><div class='bar' style='width: 71px;'></div></td></tr>
-<tr><td>05:00</td><td>15785</td><td><div class='bar' style='width: 70px;'></div></td></tr>
-<tr><td>06:00</td><td>18676</td><td><div class='bar' style='width: 83px;'></div></td></tr>
-<tr><td>07:00</td><td>17664</td><td><div class='bar' style='width: 79px;'></div></td></tr>
-<tr><td>08:00</td><td>25297</td><td><div class='bar' style='width: 113px;'></div></td></tr>
-<tr><td>09:00</td><td>27998</td><td><div class='bar' style='width: 125px;'></div></td></tr>
-<tr><td>10:00</td><td>25788</td><td><div class='bar' style='width: 115px;'></div></td></tr>
-<tr><td>11:00</td><td>27599</td><td><div class='bar' style='width: 123px;'></div></td></tr>
-<tr><td>12:00</td><td>25585</td><td><div class='bar' style='width: 114px;'></div></td></tr>
-<tr><td>13:00</td><td>22282</td><td><div class='bar' style='width: 99px;'></div></td></tr>
-<tr><td>14:00</td><td>39762</td><td><div class='bar' style='width: 178px;'></div></td></tr>
-<tr><td>15:00</td><td>49513</td><td><div class='bar' style='width: 221px;'></div></td></tr>
-<tr><td>16:00</td><td>89228</td><td><div class='bar' style='width: 400px;'></div></td></tr>
-<tr><td>17:00</td><td>45288</td><td><div class='bar' style='width: 203px;'></div></td></tr>
-<tr><td>18:00</td><td>37204</td><td><div class='bar' style='width: 166px;'></div></td></tr>
-<tr><td>19:00</td><td>28564</td><td><div class='bar' style='width: 128px;'></div></td></tr>
-<tr><td>20:00</td><td>28578</td><td><div class='bar' style='width: 128px;'></div></td></tr>
-<tr><td>21:00</td><td>34922</td><td><div class='bar' style='width: 156px;'></div></td></tr>
-<tr><td>22:00</td><td>32759</td><td><div class='bar' style='width: 146px;'></div></td></tr>
-<tr><td>23:00</td><td>31409</td><td><div class='bar' style='width: 140px;'></div></td></tr>
+<tr><td>00:00</td><td>33264</td><td><div class='bar' style='width: 146px;'></div></td></tr>
+<tr><td>01:00</td><td>30889</td><td><div class='bar' style='width: 135px;'></div></td></tr>
+<tr><td>02:00</td><td>32536</td><td><div class='bar' style='width: 143px;'></div></td></tr>
+<tr><td>03:00</td><td>24340</td><td><div class='bar' style='width: 107px;'></div></td></tr>
+<tr><td>04:00</td><td>15995</td><td><div class='bar' style='width: 70px;'></div></td></tr>
+<tr><td>05:00</td><td>15785</td><td><div class='bar' style='width: 69px;'></div></td></tr>
+<tr><td>06:00</td><td>18676</td><td><div class='bar' style='width: 82px;'></div></td></tr>
+<tr><td>07:00</td><td>17664</td><td><div class='bar' style='width: 77px;'></div></td></tr>
+<tr><td>08:00</td><td>25297</td><td><div class='bar' style='width: 111px;'></div></td></tr>
+<tr><td>09:00</td><td>27998</td><td><div class='bar' style='width: 123px;'></div></td></tr>
+<tr><td>10:00</td><td>25788</td><td><div class='bar' style='width: 113px;'></div></td></tr>
+<tr><td>11:00</td><td>27599</td><td><div class='bar' style='width: 121px;'></div></td></tr>
+<tr><td>12:00</td><td>25585</td><td><div class='bar' style='width: 112px;'></div></td></tr>
+<tr><td>13:00</td><td>26972</td><td><div class='bar' style='width: 118px;'></div></td></tr>
+<tr><td>14:00</td><td>42847</td><td><div class='bar' style='width: 188px;'></div></td></tr>
+<tr><td>15:00</td><td>52519</td><td><div class='bar' style='width: 231px;'></div></td></tr>
+<tr><td>16:00</td><td>90875</td><td><div class='bar' style='width: 400px;'></div></td></tr>
+<tr><td>17:00</td><td>47129</td><td><div class='bar' style='width: 207px;'></div></td></tr>
+<tr><td>18:00</td><td>38715</td><td><div class='bar' style='width: 170px;'></div></td></tr>
+<tr><td>19:00</td><td>28564</td><td><div class='bar' style='width: 125px;'></div></td></tr>
+<tr><td>20:00</td><td>28578</td><td><div class='bar' style='width: 125px;'></div></td></tr>
+<tr><td>21:00</td><td>34922</td><td><div class='bar' style='width: 153px;'></div></td></tr>
+<tr><td>22:00</td><td>32759</td><td><div class='bar' style='width: 144px;'></div></td></tr>
+<tr><td>23:00</td><td>31409</td><td><div class='bar' style='width: 138px;'></div></td></tr>
 </tbody></table></div>
 <button class='accordion'>Queries by Day of Week (Last 30 Days)</button>
 <div class='accordion-content'>
 <table><thead><tr><th>Day</th><th>Query Count</th><th>Visual</th></tr></thead><tbody>
-<tr><td>Sunday</td><td>350747</td><td><div class='bar' style='width: 271px;'></div></td></tr>
-<tr><td>Monday</td><td>347350</td><td><div class='bar' style='width: 268px;'></div></td></tr>
-<tr><td>Tuesday</td><td>393020</td><td><div class='bar' style='width: 303px;'></div></td></tr>
-<tr><td>Wednesday</td><td>384351</td><td><div class='bar' style='width: 296px;'></div></td></tr>
-<tr><td>Thursday</td><td>517683</td><td><div class='bar' style='width: 399px;'></div></td></tr>
-<tr><td>Friday</td><td>506397</td><td><div class='bar' style='width: 391px;'></div></td></tr>
-<tr><td>Saturday</td><td>439595</td><td><div class='bar' style='width: 339px;'></div></td></tr>
+<tr><td>Sunday</td><td>350747</td><td><div class='bar' style='width: 277px;'></div></td></tr>
+<tr><td>Monday</td><td>347350</td><td><div class='bar' style='width: 274px;'></div></td></tr>
+<tr><td>Tuesday</td><td>393020</td><td><div class='bar' style='width: 310px;'></div></td></tr>
+<tr><td>Wednesday</td><td>384351</td><td><div class='bar' style='width: 303px;'></div></td></tr>
+<tr><td>Thursday</td><td>493143</td><td><div class='bar' style='width: 389px;'></div></td></tr>
+<tr><td>Friday</td><td>506397</td><td><div class='bar' style='width: 400px;'></div></td></tr>
+<tr><td>Saturday</td><td>471650</td><td><div class='bar' style='width: 372px;'></div></td></tr>
 </tbody></table></div>
-<button class='accordion'>Daily Query Volume (Last 91 Days)</button>
+<button class='accordion'>Daily Query Volume (Last 60 Days)</button>
 <div class='accordion-content'>
 <table><thead><tr><th>Date</th><th>Query Count</th><th>Visual</th></tr></thead><tbody>
-<tr><td>2026-01-17</td><td>54854</td><td><div class='bar' style='width: 105px;'></div></td></tr>
+<tr><td>2026-01-17</td><td>86900</td><td><div class='bar' style='width: 167px;'></div></td></tr>
 <tr><td>2026-01-16</td><td>91181</td><td><div class='bar' style='width: 175px;'></div></td></tr>
 <tr><td>2026-01-15</td><td>207395</td><td><div class='bar' style='width: 400px;'></div></td></tr>
 <tr><td>2026-01-14</td><td>102984</td><td><div class='bar' style='width: 198px;'></div></td></tr>
@@ -391,495 +636,8 @@ content="
 <tr><td>2025-11-21</td><td>70249</td><td><div class='bar' style='width: 135px;'></div></td></tr>
 <tr><td>2025-11-20</td><td>76417</td><td><div class='bar' style='width: 147px;'></div></td></tr>
 <tr><td>2025-11-19</td><td>80925</td><td><div class='bar' style='width: 156px;'></div></td></tr>
-<tr><td>2025-11-18</td><td>74035</td><td><div class='bar' style='width: 142px;'></div></td></tr>
-<tr><td>2025-11-17</td><td>114754</td><td><div class='bar' style='width: 221px;'></div></td></tr>
-<tr><td>2025-11-16</td><td>122311</td><td><div class='bar' style='width: 235px;'></div></td></tr>
-<tr><td>2025-11-15</td><td>86167</td><td><div class='bar' style='width: 166px;'></div></td></tr>
-<tr><td>2025-11-14</td><td>79752</td><td><div class='bar' style='width: 153px;'></div></td></tr>
-<tr><td>2025-11-13</td><td>72884</td><td><div class='bar' style='width: 140px;'></div></td></tr>
-<tr><td>2025-11-12</td><td>70252</td><td><div class='bar' style='width: 135px;'></div></td></tr>
-<tr><td>2025-11-11</td><td>78572</td><td><div class='bar' style='width: 151px;'></div></td></tr>
-<tr><td>2025-11-10</td><td>80723</td><td><div class='bar' style='width: 155px;'></div></td></tr>
-<tr><td>2025-11-09</td><td>73150</td><td><div class='bar' style='width: 141px;'></div></td></tr>
-<tr><td>2025-11-08</td><td>86651</td><td><div class='bar' style='width: 167px;'></div></td></tr>
-<tr><td>2025-11-07</td><td>88736</td><td><div class='bar' style='width: 171px;'></div></td></tr>
-<tr><td>2025-11-06</td><td>81379</td><td><div class='bar' style='width: 156px;'></div></td></tr>
-<tr><td>2025-11-05</td><td>68304</td><td><div class='bar' style='width: 131px;'></div></td></tr>
-<tr><td>2025-11-04</td><td>77633</td><td><div class='bar' style='width: 149px;'></div></td></tr>
-<tr><td>2025-11-03</td><td>119664</td><td><div class='bar' style='width: 230px;'></div></td></tr>
-<tr><td>2025-11-02</td><td>84434</td><td><div class='bar' style='width: 162px;'></div></td></tr>
-<tr><td>2025-11-01</td><td>98883</td><td><div class='bar' style='width: 190px;'></div></td></tr>
-<tr><td>2025-10-31</td><td>85284</td><td><div class='bar' style='width: 164px;'></div></td></tr>
-<tr><td>2025-10-30</td><td>85024</td><td><div class='bar' style='width: 163px;'></div></td></tr>
-<tr><td>2025-10-29</td><td>72398</td><td><div class='bar' style='width: 139px;'></div></td></tr>
-<tr><td>2025-10-28</td><td>96085</td><td><div class='bar' style='width: 185px;'></div></td></tr>
-<tr><td>2025-10-27</td><td>92312</td><td><div class='bar' style='width: 178px;'></div></td></tr>
-<tr><td>2025-10-26</td><td>100667</td><td><div class='bar' style='width: 194px;'></div></td></tr>
-<tr><td>2025-10-25</td><td>78498</td><td><div class='bar' style='width: 151px;'></div></td></tr>
-<tr><td>2025-10-24</td><td>82390</td><td><div class='bar' style='width: 158px;'></div></td></tr>
-<tr><td>2025-10-23</td><td>75549</td><td><div class='bar' style='width: 145px;'></div></td></tr>
-<tr><td>2025-10-22</td><td>56328</td><td><div class='bar' style='width: 108px;'></div></td></tr>
-<tr><td>2025-10-21</td><td>81236</td><td><div class='bar' style='width: 156px;'></div></td></tr>
-<tr><td>2025-10-20</td><td>96088</td><td><div class='bar' style='width: 185px;'></div></td></tr>
-<tr><td>2025-10-19</td><td>88373</td><td><div class='bar' style='width: 170px;'></div></td></tr>
-<tr><td>2025-10-18</td><td>35368</td><td><div class='bar' style='width: 68px;'></div></td></tr>
+<tr><td>2025-11-18</td><td>19635</td><td><div class='bar' style='width: 37px;'></div></td></tr>
 </tbody></table></div>
-<button class='accordion'>Client Activity Summary (Last 91 Days) - Sanitized</button>
-<div class='accordion-content'>
-<p style='color: #666; font-size: 0.9em; margin: 10px 0;'>IPs anonymized to 10.0.0.x range. Domains categorized generically.</p>
-<div class='client-table'>
-<table><thead><tr><th>Client IP</th><th>Total Queries</th><th>Blocked</th><th>Block %</th><th>Health Score</th><th>Top Domain</th><th>Peak Hour</th></tr></thead><tbody>
-<tr>
-<td>10.0.0.100</td>
-<td>1499055</td>
-<td>714652</td>
-<td><span class='percent'>47.7%</span></td>
-<td><span class='health-score health-critical'>🔴 30</span></td>
-<td>streaming-service.local</td>
-<td>21:00</td>
-</tr>
-<tr>
-<td>10.0.0.101</td>
-<td>538017</td>
-<td>64064</td>
-<td><span class='percent'>11.9%</span></td>
-<td><span class='health-score health-critical'>🔴 46</span></td>
-<td>search-engine.local</td>
-<td>15:00</td>
-</tr>
-<tr>
-<td>10.0.0.102</td>
-<td>492612</td>
-<td>419522</td>
-<td><span class='percent'>85.2%</span></td>
-<td><span class='health-score health-critical'>🔴 30</span></td>
-<td>tracking-service.local</td>
-<td>03:00</td>
-</tr>
-<tr>
-<td>10.0.0.103</td>
-<td>472640</td>
-<td>98956</td>
-<td><span class='percent'>20.9%</span></td>
-<td><span class='health-score health-critical'>🔴 30</span></td>
-<td>tech-vendor-a.local</td>
-<td>12:00</td>
-</tr>
-<tr>
-<td>10.0.0.104</td>
-<td>429065</td>
-<td>79777</td>
-<td><span class='percent'>18.6%</span></td>
-<td><span class='health-score health-critical'>🔴 32</span></td>
-<td>tech-vendor-a.local</td>
-<td>20:00</td>
-</tr>
-<tr>
-<td>10.0.0.105</td>
-<td>337533</td>
-<td>296748</td>
-<td><span class='percent'>87.9%</span></td>
-<td><span class='health-score health-critical'>🔴 30</span></td>
-<td>tracking-service.local</td>
-<td>01:00</td>
-</tr>
-<tr>
-<td>10.0.0.106</td>
-<td>329036</td>
-<td>62511</td>
-<td><span class='percent'>19.0%</span></td>
-<td><span class='health-score health-critical'>🔴 32</span></td>
-<td>generic-service.local</td>
-<td>08:00</td>
-</tr>
-<tr>
-<td>10.0.0.107</td>
-<td>316853</td>
-<td>57845</td>
-<td><span class='percent'>18.3%</span></td>
-<td><span class='health-score health-critical'>🔴 48</span></td>
-<td>tech-vendor-a.local</td>
-<td>09:00</td>
-</tr>
-<tr>
-<td>10.0.0.108</td>
-<td>235182</td>
-<td>36148</td>
-<td><span class='percent'>15.4%</span></td>
-<td><span class='health-score health-concerning'>🟠 54</span></td>
-<td>generic-service.local</td>
-<td>14:00</td>
-</tr>
-<tr>
-<td>10.0.0.109</td>
-<td>234883</td>
-<td>16876</td>
-<td><span class='percent'>7.2%</span></td>
-<td><span class='health-score health-good'>🟡 70</span></td>
-<td>tech-vendor-a.local</td>
-<td>14:00</td>
-</tr>
-<tr>
-<td>10.0.0.110</td>
-<td>210645</td>
-<td>40676</td>
-<td><span class='percent'>19.3%</span></td>
-<td><span class='health-score health-critical'>🔴 46</span></td>
-<td>tech-vendor-a.local</td>
-<td>17:00</td>
-</tr>
-<tr>
-<td>10.0.0.111</td>
-<td>200529</td>
-<td>177393</td>
-<td><span class='percent'>88.5%</span></td>
-<td><span class='health-score health-critical'>🔴 45</span></td>
-<td>tracking-service.local</td>
-<td>13:00</td>
-</tr>
-<tr>
-<td>10.0.0.112</td>
-<td>189706</td>
-<td>25487</td>
-<td><span class='percent'>13.4%</span></td>
-<td><span class='health-score health-concerning'>🟠 58</span></td>
-<td>search-engine.local</td>
-<td>17:00</td>
-</tr>
-<tr>
-<td>10.0.0.113</td>
-<td>174532</td>
-<td>80691</td>
-<td><span class='percent'>46.2%</span></td>
-<td><span class='health-score health-critical'>🔴 45</span></td>
-<td>streaming-service.local</td>
-<td>16:00</td>
-</tr>
-<tr>
-<td>10.0.0.114</td>
-<td>162588</td>
-<td>15852</td>
-<td><span class='percent'>9.7%</span></td>
-<td><span class='health-score health-concerning'>🟠 65</span></td>
-<td>generic-service.local</td>
-<td>19:00</td>
-</tr>
-<tr>
-<td>10.0.0.115</td>
-<td>145092</td>
-<td>24048</td>
-<td><span class='percent'>16.6%</span></td>
-<td><span class='health-score health-concerning'>🟠 51</span></td>
-<td>search-engine.local</td>
-<td>14:00</td>
-</tr>
-<tr>
-<td>10.0.0.116</td>
-<td>131740</td>
-<td>115896</td>
-<td><span class='percent'>88.0%</span></td>
-<td><span class='health-score health-critical'>🔴 45</span></td>
-<td>tracking-service.local</td>
-<td>01:00</td>
-</tr>
-<tr>
-<td>10.0.0.117</td>
-<td>117181</td>
-<td>8382</td>
-<td><span class='percent'>7.2%</span></td>
-<td><span class='health-score health-good'>🟡 70</span></td>
-<td>ad-network.local</td>
-<td>19:00</td>
-</tr>
-<tr>
-<td>10.0.0.118</td>
-<td>112975</td>
-<td>61945</td>
-<td><span class='percent'>54.8%</span></td>
-<td><span class='health-score health-critical'>🔴 45</span></td>
-<td>generic-service.local</td>
-<td>16:00</td>
-</tr>
-<tr>
-<td>10.0.0.119</td>
-<td>109307</td>
-<td>25444</td>
-<td><span class='percent'>23.3%</span></td>
-<td><span class='health-score health-critical'>🔴 45</span></td>
-<td>generic-service.local</td>
-<td>16:00</td>
-</tr>
-<tr>
-<td>10.0.0.120</td>
-<td>94597</td>
-<td>52013</td>
-<td><span class='percent'>55.0%</span></td>
-<td><span class='health-score health-critical'>🔴 45</span></td>
-<td>tech-vendor-b.local</td>
-<td>22:00</td>
-</tr>
-<tr>
-<td>10.0.0.121</td>
-<td>88746</td>
-<td>77527</td>
-<td><span class='percent'>87.4%</span></td>
-<td><span class='health-score health-critical'>🔴 45</span></td>
-<td>tracking-service.local</td>
-<td>22:00</td>
-</tr>
-<tr>
-<td>10.0.0.122</td>
-<td>87957</td>
-<td>57024</td>
-<td><span class='percent'>64.8%</span></td>
-<td><span class='health-score health-critical'>🔴 45</span></td>
-<td>tech-vendor-b.local</td>
-<td>20:00</td>
-</tr>
-<tr>
-<td>10.0.0.123</td>
-<td>77182</td>
-<td>16379</td>
-<td><span class='percent'>21.2%</span></td>
-<td><span class='health-score health-critical'>🔴 45</span></td>
-<td>search-engine.local</td>
-<td>11:00</td>
-</tr>
-<tr>
-<td>10.0.0.124</td>
-<td>72304</td>
-<td>24</td>
-<td><span class='percent'>0.0%</span></td>
-<td><span class='health-score health-good'>🟡 81</span></td>
-<td>generic-service.local</td>
-<td>19:00</td>
-</tr>
-<tr>
-<td>10.0.0.125</td>
-<td>72145</td>
-<td>323</td>
-<td><span class='percent'>0.4%</span></td>
-<td><span class='health-score health-good'>🟡 75</span></td>
-<td>generic-service.local</td>
-<td>16:00</td>
-</tr>
-<tr>
-<td>10.0.0.126</td>
-<td>59312</td>
-<td>18442</td>
-<td><span class='percent'>31.1%</span></td>
-<td><span class='health-score health-critical'>🔴 45</span></td>
-<td>search-engine.local</td>
-<td>16:00</td>
-</tr>
-<tr>
-<td>10.0.0.127</td>
-<td>47128</td>
-<td>1931</td>
-<td><span class='percent'>4.1%</span></td>
-<td><span class='health-score health-good'>🟡 75</span></td>
-<td>tech-vendor-a.local</td>
-<td>11:00</td>
-</tr>
-<tr>
-<td>10.0.0.128</td>
-<td>34826</td>
-<td>2379</td>
-<td><span class='percent'>6.8%</span></td>
-<td><span class='health-score health-good'>🟡 71</span></td>
-<td>generic-service.local</td>
-<td>12:00</td>
-</tr>
-<tr>
-<td>10.0.0.129</td>
-<td>19928</td>
-<td>14436</td>
-<td><span class='percent'>72.4%</span></td>
-<td><span class='health-score health-critical'>🔴 45</span></td>
-<td>tech-vendor-b.local</td>
-<td>21:00</td>
-</tr>
-<tr>
-<td>10.0.0.130</td>
-<td>13352</td>
-<td>1281</td>
-<td><span class='percent'>9.6%</span></td>
-<td><span class='health-score health-concerning'>🟠 65</span></td>
-<td>cloud-provider.local</td>
-<td>20:00</td>
-</tr>
-<tr>
-<td>10.0.0.131</td>
-<td>10699</td>
-<td>1433</td>
-<td><span class='percent'>13.4%</span></td>
-<td><span class='health-score health-concerning'>🟠 58</span></td>
-<td>tech-vendor-a.local</td>
-<td>00:00</td>
-</tr>
-<tr>
-<td>10.0.0.132</td>
-<td>10041</td>
-<td>4</td>
-<td><span class='percent'>0.0%</span></td>
-<td><span class='health-score health-good'>🟡 75</span></td>
-<td>tech-vendor-a.local</td>
-<td>10:00</td>
-</tr>
-<tr>
-<td>10.0.0.133</td>
-<td>8304</td>
-<td>1416</td>
-<td><span class='percent'>17.1%</span></td>
-<td><span class='health-score health-concerning'>🟠 50</span></td>
-<td>generic-service.local</td>
-<td>16:00</td>
-</tr>
-<tr>
-<td>10.0.0.134</td>
-<td>7780</td>
-<td>1072</td>
-<td><span class='percent'>13.8%</span></td>
-<td><span class='health-score health-concerning'>🟠 57</span></td>
-<td>generic-service.local</td>
-<td>14:00</td>
-</tr>
-<tr>
-<td>10.0.0.135</td>
-<td>7666</td>
-<td>1407</td>
-<td><span class='percent'>18.4%</span></td>
-<td><span class='health-score health-critical'>🔴 48</span></td>
-<td>generic-service.local</td>
-<td>15:00</td>
-</tr>
-<tr>
-<td>10.0.0.136</td>
-<td>7056</td>
-<td>1733</td>
-<td><span class='percent'>24.6%</span></td>
-<td><span class='health-score health-critical'>🔴 45</span></td>
-<td>generic-service.local</td>
-<td>17:00</td>
-</tr>
-<tr>
-<td>10.0.0.137</td>
-<td>5773</td>
-<td>81</td>
-<td><span class='percent'>1.4%</span></td>
-<td><span class='health-score health-good'>🟡 75</span></td>
-<td>search-engine.local</td>
-<td>01:00</td>
-</tr>
-<tr>
-<td>10.0.0.138</td>
-<td>5575</td>
-<td>1102</td>
-<td><span class='percent'>19.8%</span></td>
-<td><span class='health-score health-critical'>🔴 45</span></td>
-<td>generic-service.local</td>
-<td>03:00</td>
-</tr>
-<tr>
-<td>10.0.0.139</td>
-<td>4740</td>
-<td>1285</td>
-<td><span class='percent'>27.1%</span></td>
-<td><span class='health-score health-critical'>🔴 45</span></td>
-<td>cloud-provider.local</td>
-<td>20:00</td>
-</tr>
-<tr>
-<td>10.0.0.140</td>
-<td>4272</td>
-<td>1791</td>
-<td><span class='percent'>41.9%</span></td>
-<td><span class='health-score health-critical'>🔴 45</span></td>
-<td>cloud-provider.local</td>
-<td>11:00</td>
-</tr>
-<tr>
-<td>10.0.0.141</td>
-<td>4229</td>
-<td>2421</td>
-<td><span class='percent'>57.2%</span></td>
-<td><span class='health-score health-critical'>🔴 45</span></td>
-<td>tech-vendor-b.local</td>
-<td>18:00</td>
-</tr>
-<tr>
-<td>10.0.0.142</td>
-<td>4099</td>
-<td>673</td>
-<td><span class='percent'>16.4%</span></td>
-<td><span class='health-score health-concerning'>🟠 52</span></td>
-<td>generic-service.local</td>
-<td>17:00</td>
-</tr>
-<tr>
-<td>10.0.0.143</td>
-<td>3927</td>
-<td>2</td>
-<td><span class='percent'>0.1%</span></td>
-<td><span class='health-score health-good'>🟡 75</span></td>
-<td>generic-service.local</td>
-<td>18:00</td>
-</tr>
-<tr>
-<td>10.0.0.144</td>
-<td>3779</td>
-<td>2</td>
-<td><span class='percent'>0.1%</span></td>
-<td><span class='health-score health-good'>🟡 75</span></td>
-<td>tech-vendor-a.local</td>
-<td>08:00</td>
-</tr>
-<tr>
-<td>10.0.0.145</td>
-<td>3410</td>
-<td>144</td>
-<td><span class='percent'>4.2%</span></td>
-<td><span class='health-score health-good'>🟡 75</span></td>
-<td>generic-service.local</td>
-<td>17:00</td>
-</tr>
-<tr>
-<td>10.0.0.146</td>
-<td>3233</td>
-<td>529</td>
-<td><span class='percent'>16.4%</span></td>
-<td><span class='health-score health-concerning'>🟠 52</span></td>
-<td>generic-service.local</td>
-<td>01:00</td>
-</tr>
-<tr>
-<td>10.0.0.148</td>
-<td>3058</td>
-<td>31</td>
-<td><span class='percent'>1.0%</span></td>
-<td><span class='health-score health-good'>🟡 75</span></td>
-<td>linux-repo.local</td>
-<td>23:00</td>
-</tr>
-<tr>
-<td>10.0.0.147</td>
-<td>3027</td>
-<td>8</td>
-<td><span class='percent'>0.3%</span></td>
-<td><span class='health-score health-good'>🟡 75</span></td>
-<td>generic-service.local</td>
-<td>16:00</td>
-</tr>
-<tr>
-<td>10.0.0.149</td>
-<td>2487</td>
-<td>346</td>
-<td><span class='percent'>13.9%</span></td>
-<td><span class='health-score health-concerning'>🟠 57</span></td>
-<td>generic-service.local</td>
-<td>21:00</td>
-</tr>
-</tbody></table>
 </div></div>
 
    <footer>
