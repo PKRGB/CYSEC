@@ -87,7 +87,7 @@ content="
   on third-party DNS providers.
 </p>
 
-<p>My updated network architecture includes:</p>
+<p><strong>My updated network architecture includes:</strong></p>
 <ul>
   <li><strong>VLAN 20:</strong> Primary/trusted devices (workstations, laptops, mobile devices)</li>
   <li><strong>VLAN 10:</strong> IoT devices (smart home, cameras, sensors) - isolated from trusted network to prevent potential lateral movement in the event device is compromised</li>
@@ -116,7 +116,8 @@ content="
       <img src="assets/dns.png" alt="DNS Query Flow with Pihole and Unbound." style="width: 100%; max-width: 800px; height: auto; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" /> 
     </a>
     </div>
-    
+
+  <p><strong>Process:</strong></p>
 <ul>
   <li>Installed and configured Pi-hole with Unbound as recursive DNS resolver</li>
   <li>Configured router to force all DNS traffic through Pi-hole at the firewall level (no client bypass)</li>
@@ -136,12 +137,7 @@ content="
 <p>After deploying Pi-hole as my recursive DNS server, I built an automated bash script to extend visibility beyond the standard admin interface. 
   The tool analyzes 90+ days of DNS query logs (8M+ queries) and generates interactive HTML reports with client health scoring and usage pattern 
   analysis.</p>
-  <!-- After deploying Pi-hole as my recursive DNS server, I built an automated bash script to extend visibility beyond the standard admin interface. 
-  The tool analyzes 90+ days of DNS query logs (8M+ queries) and generates interactive HTML reports with client health scoring and usage pattern 
-  analysis. The health scoring algorithm combines multiple security indicators—including block rates, NXDOMAIN failures, query volume anomalies, 
-  and domain diversity—to flag potentially compromised or misconfigured devices at a glance. This script, and dashboard, are continuously refined 
-  based on real-world network insights and iteratively optimized for performance, usability, aesthetics, and updated in order to incorporate new 
-  security metrics. -->
+    
     <p><strong>Technical Implementation:</p></strong>
   <ul>
     <li><strong>Iterative Improvement:</strong> Continuously refined based on real-world network insights to improve performance, usability, and aesthetics while 
@@ -344,6 +340,7 @@ content="
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
