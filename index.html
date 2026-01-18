@@ -83,7 +83,7 @@ content="
   In my updated network architecture, the ISP modem provides connectivity to both production and honeypot networks via separate 
   ports, with an isolated router supporting the honeypot. In the production network, all routing, DHCP, and DNS control is 
   handled by a custom router with strict firewall rules to filter inbound and outbound traffic. DNS queries are forced through 
-  Pi-hole with Unbound for recursive resolution at the firewall level to ensure consistent ad-blocking, eliminating reliance on 
+  Pi-hole with Unbound for recursive resolution at the firewall level to ensure consistent ad-blocking and eliminate reliance on 
   third-party DNS providers, which reduces fingerprinting. DNSSEC is incorporated to provide cryptographic authentication of DNS data, 
   which upholds the Confidentiality and Integrity pillars of the CIA Triad, and protects against spoofing, poisoning, and MiTM attacks. 
 </p>
