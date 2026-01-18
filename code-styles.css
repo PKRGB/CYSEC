@@ -15,7 +15,15 @@ body {
   scroll-behavior: smooth;
 }
 
-h1, h2, h3 {
+h1 {
+  color: #2c3e50;
+  font-weight: bold;
+  margin-top: .2em; /* was 1em */
+  margin-bottom: 0.0em; /* was .2em */
+  line-height: 1.2;
+}
+
+h2, h3 {
   color: #2c3e50;
   font-weight: bold;
   margin-top: 1em;
