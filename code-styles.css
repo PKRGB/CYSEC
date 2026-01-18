@@ -18,7 +18,7 @@ body {
 h1 {
   color: #2c3e50;
   font-weight: bold;
-  margin-top: .2em; /* was 1em */
+  margin-top: 0em; /* was 1em */
   margin-bottom: 0.0em; /* was .2em */
   line-height: 1.2;
 }
