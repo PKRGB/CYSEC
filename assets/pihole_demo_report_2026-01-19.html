@@ -1,8 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy"
+content="
+  default-src 'self';
+  script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
+  connect-src 'self' https://www.google-analytics.com;
+  frame-src 'self';
+  img-src 'self' data:;
+  style-src 'self' 'unsafe-inline';
+  worker-src 'self' blob:;
+">
+  
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YXC3GLYKFL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YXC3GLYKFL');
+</script>
+  
+<link rel="stylesheet" href="../code-styles.css">
+	
     <meta charset="UTF-8">
-    <title>Pi-hole Analysis Demo Report (91 Days)</title>
+    <title>Pi-hole Analysis Demo Dash</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -278,11 +303,12 @@
     </script>
 </head>
 <body>
-    <h1>Pi-hole DNS Query Analysis - Demo Report</h1>
+    <h1>Pi-hole DNS Query Analysis - Demo Dashboard</h1>
     <p class="timestamp">Generated: Mon 19 Jan 16:03:22 CST 2026</p>
     <div class="demo-notice">
-        🔒 DEMO MODE: All IPs and domains have been sanitized for portfolio use. 
-        Data patterns are real, but identifying information has been anonymized.
+         🔒 DEMO MODE: All IPs, domains, and Device Names have been sanitized for 
+		portfolio use. These data patterns are authentic, real-world metrics but 
+		with any potentially identifying information anonymized.
     </div>
     <div class="info-box">
         <strong>Analysis Period:</strong> Last 91 days<br>
@@ -649,6 +675,23 @@
 <tr><td>2025-11-22</td><td>78823</td><td><div class='bar' style='width: 152px;'></div></td></tr>
 <tr><td>2025-11-21</td><td>70249</td><td><div class='bar' style='width: 135px;'></div></td></tr>
 <tr><td>2025-11-20</td><td>33055</td><td><div class='bar' style='width: 63px;'></div></td></tr>
-</tbody></table></div>
-</body>
+</tbody></table></div></div>
+	   <footer>
+  <div>
+    <p>&copy; 2026 Perry Kingston | Cybersecurity Professional</p>
+    <p>
+      <strong>Site Security:</strong> This portfolio implements 
+      <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP" target="_blank" rel="noopener noreferrer">Content Security Policy (CSP)</a> headers, 
+      HTTPS-only connections, and follows 
+      <a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener noreferrer">OWASP</a> security best practices.
+    </p>
+    <p>
+      This site uses Google Analytics for traffic analysis. No personal information is collected or stored.<br>
+      By using this site, you acknowledge standard web analytics practices.
+      For more information, see <a href="privacy.html" target="_blank" rel="noopener noreferrer" class="privacy-link">Privacy Policy</a>
+    </p>
+  </div>
+</footer>
+	
+	</body>
 </html>
