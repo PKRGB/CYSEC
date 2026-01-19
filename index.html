@@ -143,8 +143,9 @@ content="
 <p>After deploying Pi-hole with Unbound as my recursive DNS server, I built an automated bash script to extend visibility of historical queries and other stats 
   beyond the metrics provided by the standard Pihole GUI admin interface, in order to provide anomaly detection and deeper insights. This tool analyzes 90+ days of DNS 
   query logs (8M+ queries) and generates interactive HTML reports with queries by hour of day, day of the week, query total, as well as client health scoring 
-  and usage pattern analysis. The data can be sorted by IP, Block Rate % or Health Score but defaults ranking from lowest Health Score to highest, spotlighting
-  devices which need the most attention.</p>
+  and usage pattern analysis. The data can be sorted by IP, Block Rate %, Device Name or Health Score but defaults ranking from lowest Health Score to highest, spotlighting
+  devices which need the most attention. The system incorporates arp-scan for network discovery and attempts to identify device names via hostname resolution and MAC address 
+  vendor lookup, when available.</p>
 
      <div style="text-align: center; margin-top:20px;">
       <!-- <a href="assets/analysis.PNG" target="_blank" rel="noopener noreferrer"> -->
@@ -359,6 +360,7 @@ content="
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
