@@ -81,11 +81,9 @@ content="
        
 <p>
   In my updated network architecture, the ISP modem provides connectivity to both production and honeypot networks via separate 
-  ports, with an isolated router supporting the honeypot. In the production network, all routing, DHCP, and DNS control is 
-  handled by a custom router with strict firewall rules to filter inbound and outbound traffic. DNS queries are forced through 
-  Pi-hole with Unbound for recursive resolution at the firewall level to ensure consistent ad-blocking and eliminate reliance on 
-  third-party DNS providers, which reduces fingerprinting. DNSSEC is incorporated to provide cryptographic authentication of DNS data, 
-  which upholds the Confidentiality and Integrity pillars of the CIA Triad, and protects against spoofing, poisoning, and MiTM attacks. 
+  ports, with an isolated router supporting the honeypot. In the production network, all routing, DHCP, and DNS control is handled by a 
+  custom router with strict firewall rules governing inbound and outbound traffic. DNS traffic is forcibly redirected to an internal DNS stack 
+  at the firewall level to ensure consistent enforcement of filtering and privacy controls across the network.
 </p>
 
 <p><strong><u>My updated network architecture includes:</u></strong></p>
@@ -108,11 +106,11 @@ content="
     <h2>Pi-hole + Unbound: DNS Security & Privacy</h2>
 <p>
   To eliminate ad-serving, block telemetry, and achieve DNS privacy, I deployed Pi-hole with Unbound for fully recursive DNS 
-  resolution. This configuration ensures all DNS queries are resolved directly from root nameservers without relying on third-party DNS 
-  providers like Google or Cloudflare, eliminating a common privacy and security risk. By not relying on a singular upstream DNS resolver and 
-  instead sending queries directly to relevant authoritative servers, we circumvent DNS/connectivity issues in the event of a third-party 
-  server's unexpected downtime, and also mitigate fingerprinting which occurs when a networks entirety of DNS queries pass through a singular source; 
-  and one that is allowed to store and process all of that data any way they please. 
+  resolution. This configuration ensures all DNS queries are resolved directly from root and authoritative nameservers rather than forwarded to public resolvers,
+  eliminating reliance on third-party DNS resolvers like Google or Cloudflare. This configuration eliminates a common availability, privacy and security risk by not relying on a singular 
+  upstream DNS resolver and instead sending queries directly to relevant root and authoritative servers, circumventing potential DNS/connectivity issues in the event of a third-party 
+  server's unexpected downtime, and also reduce fingerprinting risks associated with centralized query logging. DNSSEC validation is enabled to provide cryptographic assurance of DNS authenticity; 
+  protecting against spoofing, cache poisoning, and Man-in-the-Middle attacks, which upholds the Confidentiality and Integrity pillars of the CIA triad.
 </p>
 
   <div style="text-align: center; margin-top:20px;">
