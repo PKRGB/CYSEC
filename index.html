@@ -107,7 +107,7 @@ content="
 <p>
   To eliminate ad-serving, block telemetry, and achieve DNS privacy, I deployed Pi-hole with Unbound for fully recursive DNS 
   resolution. This configuration ensures all DNS queries are resolved directly from root and authoritative nameservers rather than forwarded to public resolvers,
-  eliminating reliance on third-party DNS resolvers like Google or Cloudflare. This configuration eliminates a common availability, privacy and security risk by not relying on a singular 
+  eliminating reliance on third-party DNS resolvers like Google or Cloudflare. Approaching DNS resolution in this manner eliminates a common availability, privacy and security risk by not relying on a singular 
   upstream DNS resolver, circumventing potential DNS/connectivity issues in the event of a third-party server's unexpected downtime, and also reduces fingerprinting risks associated with 
   centralized query logging. DNSSEC validation is enabled to provide cryptographic assurance of DNS authenticity; protecting against spoofing, cache poisoning, and Man-in-the-Middle attacks, 
   which upholds the Confidentiality and Integrity pillars of the CIA triad.
