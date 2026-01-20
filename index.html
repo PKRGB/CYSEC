@@ -107,9 +107,12 @@ content="
         
     <h2>Pi-hole + Unbound: DNS Security & Privacy</h2>
 <p>
-  To eliminate ad-serving, block telemetry, and achieve complete DNS privacy, I deployed Pi-hole with Unbound for fully recursive DNS 
+  To eliminate ad-serving, block telemetry, and achieve DNS privacy, I deployed Pi-hole with Unbound for fully recursive DNS 
   resolution. This configuration ensures all DNS queries are resolved directly from root nameservers without relying on third-party DNS 
-  providers like Google or Cloudflare, eliminating a common privacy and security risk.
+  providers like Google or Cloudflare, eliminating a common privacy and security risk. By not relying on a singular upstream DNS resolver and 
+  instead sending queries directly to relevant authoritative servers, we circumvent DNS/connectivity issues in the event of a third-party 
+  server's unexpected downtime, and also mitigate fingerprinting which occurs when a networks entirety of DNS queries pass through a singular source; 
+  and one that is allowed to store and process all of that data any way they please. 
 </p>
 
   <div style="text-align: center; margin-top:20px;">
