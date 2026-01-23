@@ -82,11 +82,6 @@ content="
            style="width: 100%; max-width: 800px; height: auto; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" /> 
     </div>
     
-    <!-- Read More Button (mobile only) -->
-   <button class="read-more-btn" onclick="toggleAccordion(this)">
-    Read More <span class="arrow">▼</span>
-    </button>
-    
 <p>
   In my updated network architecture, the ISP modem provides connectivity to both production and honeypot networks via separate 
   ports, with an isolated router supporting the honeypot. In the production network, all routing, DHCP, and DNS control is handled by a 
@@ -108,7 +103,13 @@ content="
 <p><strong>Security Features:</strong> VLAN segmentation, passive IDS monitoring, SSH hardening (key-based auth, fail2ban), strict firewall rules, honeypot deployment, zero-trust architecture</p>
 
 <p><strong>Tools & Technologies:</strong> Suricata IDS, Pi-hole, Unbound DNS, Cowrie Honeypot, pfSense/custom router, VLAN (802.1Q), Wireshark, nmap, tcpdump, SPAN/port mirroring, Linux (Debian/Raspberry Pi OS)</p>
-    </div> 
+     
+        <!-- Read More Button (mobile only) -->
+   <button class="read-more-btn" onclick="toggleAccordion(this)">
+    Read More <span class="arrow">▼</span>
+    </button>
+    
+      </div> 
        
      </article>
     </section>
@@ -423,6 +424,7 @@ function toggleAccordion(btn) {
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
