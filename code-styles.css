@@ -345,6 +345,7 @@ code {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.4s ease;
+  order: 1;
 }
 
 .project-item .accordion-content.active {
