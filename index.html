@@ -65,22 +65,21 @@ content="
      <h2><u>Projects</u></h2>
 <section id="projects">
   <article class="project-item">
-    <h2>Home Network Overhaul & Segmentation</h2>
-    
-    <p class="project-summary">
-      Below is a sanitized overview of my home network topology, with a focus on security monitoring and threat detection. The 
-      architecture implements defense-in-depth principles through network segmentation, passive IDS monitoring, honeypot deployment, 
-      and centralized logging.
-    </p>
-    
-    <div style="text-align: center; margin-top:20px;">
-      <img src="assets/Netopology.png" alt="Sanitized Network Architecture." 
-           style="width: 100%; max-width: 800px; height: auto; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" /> 
-    </div>
-    
-    <button class="read-more-btn" onclick="toggleAccordion(this)">
-      Read More <span class="arrow">▼</span>
-    </button>
+   <h2>Home Network Overhaul & Segmentation</h2>
+<article class="project-item">
+  
+  <p class="project-summary">
+    Below is a sanitized overview of my home network topology, with a focus on security monitoring and threat detection. The 
+    architecture implements defense-in-depth principles through network segmentation, passive IDS monitoring, honeypot deployment, 
+    and centralized logging.
+  </p>
+  
+  <div style="text-align: center; margin-top:20px;">
+    <img src="assets/Netopology.png" alt="Sanitized Network Architecture." 
+         style="width: 100%; max-width: 800px; height: auto; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" /> 
+  </div>
+  
+  <div class="project-accordion-wrapper">
     
     <div class="accordion-content">
       <p>
@@ -103,12 +102,18 @@ content="
       <p><strong>Tools & Technologies:</strong> Suricata IDS, Pi-hole, Unbound DNS, Cowrie Honeypot, pfSense/custom router, VLAN (802.1Q), Wireshark, nmap, tcpdump, SPAN/port mirroring, Linux (Debian/Raspberry Pi OS)</p>
     </div>
     
-  </article>
+    <button class="read-more-btn" onclick="toggleAccordion(this)">
+      Read More <span class="arrow">▼</span>
+    </button>
+    
+  </div>
+  
+</article>
 </section>
 
-<script>
+    <script>
 function toggleAccordion(btn) {
-  const content = btn.nextElementSibling;
+  const content = btn.previousElementSibling;
   const arrow = btn.querySelector('.arrow');
   
   if (content.classList.contains('active')) {
@@ -121,8 +126,8 @@ function toggleAccordion(btn) {
     btn.setAttribute('aria-expanded', 'true');
   }
 }
-</script>
-        
+    </script>
+    
     <h2>Pi-hole + Unbound: DNS Security & Privacy</h2>
 <article class="project-item">
   
@@ -410,6 +415,7 @@ function toggleAccordion(btn) {
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
