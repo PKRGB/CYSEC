@@ -375,6 +375,63 @@ code {
   visibility: visible;
 }
 
+/* Project accordion styles */
+.project-accordion-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.read-more-btn {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 20px auto;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  order: 2;
+}
+
+.read-more-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.read-more-btn .arrow {
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+}
+
+.project-accordion-wrapper .accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+  order: 1;
+}
+
+.project-accordion-wrapper .accordion-content.active {
+  max-height: 5000px;
+  margin-top: 20px;
+}
+
+@media (min-width: 769px) {
+  .read-more-btn {
+    display: none;
+  }
+  
+  .project-accordion-wrapper .accordion-content {
+    max-height: none;
+    overflow: visible;
+  }
+}
+
 /* Mobile responsive */
 @media (min-width: 768px) {
   body {
