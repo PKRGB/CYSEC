@@ -66,7 +66,6 @@ content="
 <section id="projects">
   <article class="project-item">
    <h2>Home Network Overhaul & Segmentation</h2>
-<article class="project-item">
   
   <p class="project-summary">
     Below is a sanitized overview of my home network topology, with a focus on security monitoring and threat detection. The 
@@ -164,37 +163,60 @@ content="
    
   <BR>
 
-    <section id = "analysis">
-   <h2>Custom DNS Query Analytics Dashboard</h2>
-<p>After deploying Pi-hole with Unbound as my recursive DNS server, I built an automated bash script to extend visibility of historical queries and other stats 
-  beyond the metrics provided by the standard Pihole GUI admin interface, in order to provide anomaly detection and deeper insights. This tool analyzes 90+ days of DNS 
-  query logs (8M+ queries) and generates interactive HTML reports with queries by hour of day, day of the week, query total, as well as client health scoring 
-  and usage pattern analysis. The data can be sorted by IP, Block Rate %, Device Name or Health Score but defaults ranking from lowest Health Score to highest, spotlighting
-  devices which need the most attention. The system incorporates arp-scan for network discovery and automatically attempts to identify device names via hostname resolution and MAC address 
-  vendor lookup, when available.</p>
-
-     <div style="text-align: center; margin-top:20px;">
-      <!-- <a href="assets/analysis.PNG" target="_blank" rel="noopener noreferrer"> -->
-      <img src="assets/analysis.PNG" alt="DNS Query Analysis Dashboard Sample." style="width: 100%; max-width: 800px; height: auto; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" /> 
-    </a>
+   <!-- DNS Analytics Dashboard Section -->
+<section id="analysis">
+  <article class="project-item">
+    <h2>Custom DNS Query Analytics Dashboard</h2>
+    
+    <p class="project-summary">
+      After deploying Pi-hole with Unbound as my recursive DNS server, I built an automated bash script to extend visibility of historical queries and other stats 
+      beyond the metrics provided by the standard Pihole GUI admin interface, in order to provide anomaly detection and deeper insights. This tool analyzes 90+ days of DNS 
+      query logs (8M+ queries) and generates interactive HTML reports with queries by hour of day, day of the week, query total, as well as client health scoring 
+      and usage pattern analysis.
+    </p>
+    
+    <div style="text-align: center; margin-top:20px;">
+      <img src="assets/analysis.PNG" alt="DNS Query Analysis Dashboard Sample." 
+           style="width: 100%; max-width: 800px; height: auto; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" /> 
     </div>
     
-    <p><strong><u>Script Design & Functional Capabilities:</u></p></strong>
-  <ul>
-    <li><strong>Iterative Improvement:</strong> Continuously refined based on real-world network insights to improve performance, usability, and aesthetics while 
-      incorporating new security metrics</li>
-      <li><strong>Device Identification & Attribution:</strong> Leveraged arp-scan within a Bash pipeline to correlate static IP addresses and MAC address 
-      data to enrich the dashboard by automatically identifying device manufacturer metadata, in order to facilitate device identification to streamline investigations</li>
-    <li><strong>Health Scoring Algorithm:</strong> Composite security metric evaluating block rates, NXDOMAIN failures, query volume anomalies, and domain diversity 
-      to flag potentially compromised or misconfigured devices</li>
-    <li><strong>Responsive Interface:</strong> Accordion-based UI with sortable columns, mobile optimization, and UTF-8 encoding for cross-platform compatibility</li>
-    <li><strong>Automation & Security:</strong> Non-anonymized version runs via cron for weekly DNS pattern analysis, to identify anomalies and trends</li>
-  </ul>
-
-<p><strong>Technologies:</strong> Bash, SQLite3, HTML/CSS/JavaScript, SQL optimization</p>
-      <BR>
-    <a href="https://pkrgb.github.io/CYSEC/assets/demo.html" class="cta-button" target="_blank" rel="noopener noreferrer">Go to Interactive Dashboard</a>
-  </article></section>
+    <!-- Dashboard button - always visible, stacked above Read More -->
+    <div style="text-align: center;">
+      <a href="https://pkrgb.github.io/CYSEC/assets/demo.html" class="cta-button" target="_blank" rel="noopener noreferrer" style="display: inline-block; margin: 20px auto 0;">Go to Interactive Dashboard</a>
+    </div>
+    
+    <div class="project-accordion-wrapper">
+      
+      <div class="accordion-content">
+        <p>
+          The data can be sorted by IP, Block Rate %, Device Name or Health Score but defaults ranking from lowest Health Score to highest, spotlighting
+          devices which need the most attention. The system incorporates arp-scan for network discovery and automatically attempts to identify device names via hostname resolution and MAC address 
+          vendor lookup, when available.
+        </p>
+        
+        <p><strong><u>Script Design & Functional Capabilities:</u></strong></p>
+        <ul>
+          <li><strong>Iterative Improvement:</strong> Continuously refined based on real-world network insights to improve performance, usability, and aesthetics while 
+            incorporating new security metrics</li>
+          <li><strong>Device Identification & Attribution:</strong> Leveraged arp-scan within a Bash pipeline to correlate static IP addresses and MAC address 
+            data to enrich the dashboard by automatically identifying device manufacturer metadata, in order to facilitate device identification to streamline investigations</li>
+          <li><strong>Health Scoring Algorithm:</strong> Composite security metric evaluating block rates, NXDOMAIN failures, query volume anomalies, and domain diversity 
+            to flag potentially compromised or misconfigured devices</li>
+          <li><strong>Responsive Interface:</strong> Accordion-based UI with sortable columns, mobile optimization, and UTF-8 encoding for cross-platform compatibility</li>
+          <li><strong>Automation & Security:</strong> Non-anonymized version runs via cron for weekly DNS pattern analysis, to identify anomalies and trends</li>
+        </ul>
+        
+        <p><strong>Technologies:</strong> Bash, SQLite3, HTML/CSS/JavaScript, SQL optimization</p>
+      </div>
+      
+      <button class="read-more-btn">
+        Read More <span class="arrow">▼</span>
+      </button>
+      
+    </div>
+    
+  </article>
+</section>
     
 <BR>
     
@@ -387,6 +409,7 @@ content="
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
