@@ -63,22 +63,28 @@ content="
     </section>
         
      <h2><u>Projects</u></h2>
-     <section id="projects"><article id="projects">
+     <section id="projects"><article id="project-item">
      <h2>Home Network Overhaul & Segmentation</h2>
-<p>
+       
+<p class="project-summary">
   Below is a sanitized overview of my home network topology, with a focus on security monitoring and threat detection. The 
   architecture implements defense-in-depth principles through network segmentation, passive IDS monitoring, honeypot deployment, 
   and centralized logging.
 </p>
-        </ul>
        
-        <div style="text-align: center; margin-top:20px;">
-      <!-- <a href="assets/Netopology.png" target="_blank" rel="noopener noreferrer"> -->
-      <img src="assets/Netopology.png" alt="Sanitized Network Architecture." style="width: 100%; max-width: 800px; height: auto; 
-        border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" /> 
-  </a>
-</div>
-       
+ <!-- Hero Image (always visible) -->
+    <div style="text-align: center; margin-top:20px;">
+      <img src="assets/Netopology.png" alt="Sanitized Network Architecture." 
+           style="width: 100%; max-width: 800px; height: auto; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" /> 
+    </div>
+    
+    <!-- Read More Button (mobile only) -->
+    <button class="read-more-btn" onclick="toggleAccordion(this)">
+      Read More <span class="arrow">▼</span>
+    </button>
+    
+    <!-- Accordion Content (hidden on mobile by default, always visible on desktop) -->
+    <div class="accordion-content">
 <p>
   In my updated network architecture, the ISP modem provides connectivity to both production and honeypot networks via separate 
   ports, with an isolated router supporting the honeypot. In the production network, all routing, DHCP, and DNS control is handled by a 
@@ -100,7 +106,8 @@ content="
 <p><strong>Security Features:</strong> VLAN segmentation, passive IDS monitoring, SSH hardening (key-based auth, fail2ban), strict firewall rules, honeypot deployment, zero-trust architecture</p>
 
 <p><strong>Tools & Technologies:</strong> Suricata IDS, Pi-hole, Unbound DNS, Cowrie Honeypot, pfSense/custom router, VLAN (802.1Q), Wireshark, nmap, tcpdump, SPAN/port mirroring, Linux (Debian/Raspberry Pi OS)</p>
-      </article>
+    </div> 
+     </article>
     </section>
 
     <script>
@@ -377,6 +384,7 @@ function toggleAccordion(btn) {
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
