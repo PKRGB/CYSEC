@@ -63,7 +63,7 @@ content="
     </section>
         
      <h2><u>Projects</u></h2>
-     <section id="projects"><article id="project-item">
+     <section id="projects"><article class="project-item">
      <h2>Home Network Overhaul & Segmentation</h2>
        
 <p class="project-summary">
@@ -114,7 +114,8 @@ content="
 
     <script>
 function toggleAccordion(btn) {
-  const content = btn.nextElementSibling;
+  const wrapper = btn.parentElement;
+  const content = wrapper.querySelector('.accordion-content');
   const arrow = btn.querySelector('.arrow');
   
   if (content.classList.contains('active')) {
