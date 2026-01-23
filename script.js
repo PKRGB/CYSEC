@@ -9,24 +9,24 @@ if (accordionHeader) {
     arrow.classList.toggle('rotate');
   });
 
-    // Add collapse button functionality
+   // Add collapse button functionality
   const collapseBtn = document.querySelector('.collapse-btn');
   if (collapseBtn) {
     collapseBtn.addEventListener('click', function() {
-      const content = document.querySelector('.accordion-content');
-      const arrow = document.querySelector('.arrow');
+      const wrapper = this.closest('.accordion-wrapper');
+      const content = wrapper.querySelector('.accordion-content');
+      const arrow = wrapper.querySelector('.arrow');
       
       content.classList.remove('active');
       arrow.classList.remove('rotate');
     
       // Scroll back to reports section
-    document.getElementById('reports').scrollIntoView({ 
-      behavior: 'smooth',
-      block: 'start'
+      document.getElementById('reports').scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
     });
-  });
   }
-}
 
   // Certifications accordion
 const certAccordionHeader = document.querySelector('#Certifications .accordion-header');
