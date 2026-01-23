@@ -1,5 +1,5 @@
 // Accordion functionality //
-const accordionHeader = document.querySelector('.accordion-wrapper .accordion-header');
+const accordionHeader = document.querySelector('.accordion-header');
 if (accordionHeader) {
   accordionHeader.addEventListener('click', function() {
     const content = this.nextElementSibling;
