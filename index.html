@@ -102,35 +102,16 @@ content="
       <p><strong>Tools & Technologies:</strong> Suricata IDS, Pi-hole, Unbound DNS, Cowrie Honeypot, pfSense/custom router, VLAN (802.1Q), Wireshark, nmap, tcpdump, SPAN/port mirroring, Linux (Debian/Raspberry Pi OS)</p>
     </div>
     
-    <button class="read-more-btn" onclick="toggleAccordion(this)">
-      Read More <span class="arrow">▼</span>
-    </button>
+   <button class="read-more-btn">
+  Read More <span class="arrow">▼</span>
+</button>
     
   </div>
   
 </article>
 </section>
 
-    <script>
-    function toggleAccordion(btn) {
-  const content = btn.previousElementSibling;
-  const arrow = btn.querySelector('.arrow');
   
-  if (content.classList.contains('active')) {
-    content.classList.remove('active');
-    arrow.textContent = '▼';
-    btn.setAttribute('aria-expanded', 'false');
-    
-    // Scroll back to the button
-    btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  } else {
-    content.classList.add('active');
-    arrow.textContent = '▲';
-    btn.setAttribute('aria-expanded', 'true');
-  }
-}
-    </script>
-    
     <h2>Pi-hole + Unbound: DNS Security & Privacy</h2>
 <article class="project-item">
   
@@ -171,34 +152,16 @@ content="
     </div>
     
     <!-- Read More Button (mobile only) -->
-    <button class="read-more-btn" onclick="toggleAccordion(this)">
-      Read More <span class="arrow">▼</span>
-    </button>
+    <button class="read-more-btn">
+  Read More <span class="arrow">▼</span>
+</button>
     
   </div>
   
 </article>
 </section>
 
-    <script>
-function toggleAccordion(btn) {
-  const content = btn.previousElementSibling;
-  const arrow = btn.querySelector('.arrow');
-  
-  if (content.classList.contains('active')) {
-    content.classList.remove('active');
-    arrow.textContent = '▼';
-    btn.setAttribute('aria-expanded', 'false');
-    
-    // Scroll back to the button
-    btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  } else {
-    content.classList.add('active');
-    arrow.textContent = '▲';
-    btn.setAttribute('aria-expanded', 'true');
-  }
-}
-</script>
+   
   <BR>
 
     <section id = "analysis">
@@ -424,6 +387,7 @@ function toggleAccordion(btn) {
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
