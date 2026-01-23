@@ -263,7 +263,7 @@ code {
   color: #2c3e50;
 }
 
-.accordion-wrapper .accordion-content {
+.accordion-wrapper .accordion-content.active {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease;
