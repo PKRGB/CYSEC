@@ -79,12 +79,13 @@ content="
     </div>
     
     <!-- Read More Button (mobile only) -->
-    <button class="read-more-btn" onclick="toggleAccordion(this)">
-      Read More <span class="arrow">▼</span>
+   <button class="read-more-btn" onclick="toggleAccordion(this)">
+    Read More <span class="arrow">▼</span>
     </button>
     
     <!-- Accordion Content (hidden on mobile by default, always visible on desktop) -->
-    <div class="accordion-content">
+    <div class="project-accordion-wrapper">
+      <div class="accordion-content">
 <p>
   In my updated network architecture, the ISP modem provides connectivity to both production and honeypot networks via separate 
   ports, with an isolated router supporting the honeypot. In the production network, all routing, DHCP, and DNS control is handled by a 
@@ -107,6 +108,7 @@ content="
 
 <p><strong>Tools & Technologies:</strong> Suricata IDS, Pi-hole, Unbound DNS, Cowrie Honeypot, pfSense/custom router, VLAN (802.1Q), Wireshark, nmap, tcpdump, SPAN/port mirroring, Linux (Debian/Raspberry Pi OS)</p>
     </div> 
+        
      </article>
     </section>
 
@@ -384,6 +386,7 @@ function toggleAccordion(btn) {
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
