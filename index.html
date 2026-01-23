@@ -131,21 +131,33 @@ function toggleAccordion(btn) {
 </script>
         
     <h2>Pi-hole + Unbound: DNS Security & Privacy</h2>
-<p>
+    <article class="project-item">
+<p class="project-summary">
   To eliminate ad-serving, block telemetry, and achieve DNS privacy, I deployed Pi-hole with Unbound for fully recursive DNS 
   resolution. This configuration ensures all DNS queries are resolved directly from root and authoritative nameservers rather than forwarded to public resolvers,
-  eliminating reliance on third-party DNS resolvers like Google or Cloudflare. Approaching DNS resolution in this manner eliminates a common availability, privacy and security risk by not relying on a singular 
+  eliminating reliance on third-party DNS resolvers like Google or Cloudflare.
+</p>
+       
+ <!-- Hero Image (always visible) -->
+    <div style="text-align: center; margin-top:20px;">
+      <img src="assets/dns.ping" alt="DNS Query Flow with Pihole and Unbound."
+           style="width: 100%; max-width: 800px; height: auto; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" /> 
+    </div>
+    
+    <!-- Read More Button (mobile only) -->
+   <button class="read-more-btn" onclick="toggleAccordion(this)">
+    Read More <span class="arrow">▼</span>
+    </button>
+    
+    <!-- Accordion Content (hidden on mobile by default, always visible on desktop) -->
+    <div class="project-accordion-wrapper">
+      <div class="accordion-content">
+
+    <p>Approaching DNS resolution in this manner eliminates a common availability, privacy and security risk by not relying on a singular 
   upstream DNS resolver, circumventing potential DNS/connectivity issues in the event of a third-party server's unexpected downtime, and also reducing fingerprinting risks associated with 
   centralized query logging. DNSSEC validation is enabled to provide cryptographic assurance of DNS authenticity; which mitigates DNS spoofing, cache poisoning, and Man-in-the-Middle attacks,
-  upholding the Confidentiality and Integrity pillars of the CIA triad.
-</p>
-
-  <div style="text-align: center; margin-top:20px;">
-      <!-- <a href="assets/dns.png" target="_blank" rel="noopener noreferrer"> --> 
-      <img src="assets/dns.png" alt="DNS Query Flow with Pihole and Unbound." style="width: 100%; max-width: 800px; height: auto; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" /> 
-    </a>
-    </div>
-
+  upholding the Confidentiality and Integrity pillars of the CIA triad.</p>
+        
   <p><strong><u>Implementation Process:</u></strong></p>
 <ul>
   <li>Installed and configured Pi-hole with Unbound as recursive DNS resolver</li>
@@ -161,7 +173,28 @@ function toggleAccordion(btn) {
 
 <p><strong>Key Achievement:</strong> Achieved complete DNS privacy and ad-blocking across entire network with 100% query coverage ensuring no 
   device can bypass filtering, even with hardcoded DNS settings.</p>
+</div> 
+        
+     </article>
+    </section>
 
+    <script>
+function toggleAccordion(btn) {
+  const wrapper = btn.parentElement;
+  const content = wrapper.querySelector('.accordion-content');
+  const arrow = btn.querySelector('.arrow');
+  
+  if (content.classList.contains('active')) {
+    content.classList.remove('active');
+    arrow.textContent = '▼';
+    btn.setAttribute('aria-expanded', 'false');
+  } else {
+    content.classList.add('active');
+    arrow.textContent = '▲';
+    btn.setAttribute('aria-expanded', 'true');
+  }
+}
+</script>
   <BR>
 
     <section id = "analysis">
@@ -387,6 +420,7 @@ function toggleAccordion(btn) {
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
