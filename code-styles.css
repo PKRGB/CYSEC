@@ -385,7 +385,7 @@ code {
   display: block;
   width: 100%;
   max-width: 300px;
-  margin: 20px auto;
+  margin: 20px auto 5px; /* was 20 instead of 5 */ 
   padding: 12px 24px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
