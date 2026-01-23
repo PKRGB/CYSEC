@@ -102,6 +102,23 @@ content="
 <p><strong>Tools & Technologies:</strong> Suricata IDS, Pi-hole, Unbound DNS, Cowrie Honeypot, pfSense/custom router, VLAN (802.1Q), Wireshark, nmap, tcpdump, SPAN/port mirroring, Linux (Debian/Raspberry Pi OS)</p>
       </article>
     </section>
+
+    <script>
+function toggleAccordion(btn) {
+  const content = btn.nextElementSibling;
+  const arrow = btn.querySelector('.arrow');
+  
+  if (content.classList.contains('active')) {
+    content.classList.remove('active');
+    arrow.textContent = '▼';
+    btn.setAttribute('aria-expanded', 'false');
+  } else {
+    content.classList.add('active');
+    arrow.textContent = '▲';
+    btn.setAttribute('aria-expanded', 'true');
+  }
+}
+</script>
         
     <h2>Pi-hole + Unbound: DNS Security & Privacy</h2>
 <p>
@@ -360,6 +377,7 @@ content="
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
