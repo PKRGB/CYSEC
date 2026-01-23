@@ -13,7 +13,7 @@ if (accordionHeader) {
   const collapseBtn = document.querySelector('.collapse-btn');
   if (collapseBtn) {
     collapseBtn.addEventListener('click', function() {
-      const content = document.querySelector('.accordion-content');
+      const content = document.querySelector('.accordion-wrapper .accordion-content');
       const arrow = document.querySelector('.arrow');
       
       content.classList.remove('active');
