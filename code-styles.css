@@ -205,6 +205,28 @@ footer a {
 }
 
 .cta-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 8px;
+  display: block;
+  width: fit-content;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  border: none;
+  font-weight: 600;
+}
+
+.cta-button:hover {
+  background: linear-gradient(135deg, #5568d3 0%, #633a85 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  text-decoration: none;
+}
+/*
+.cta-button {
   background-color: #2980b9;
   color: white;
   padding: 10px 20px;
@@ -216,9 +238,11 @@ footer a {
   transition: background-color 0.3s ease;
 }
 
+
 .cta-button:hover {
   background-color: #1c5980;
 }
+/*
 
 /* Code blocks */
 pre {
