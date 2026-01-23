@@ -112,7 +112,7 @@ content="
 </section>
 
     <script>
-function toggleAccordion(btn) {
+    function toggleAccordion(btn) {
   const content = btn.previousElementSibling;
   const arrow = btn.querySelector('.arrow');
   
@@ -121,11 +121,8 @@ function toggleAccordion(btn) {
     arrow.textContent = '▼';
     btn.setAttribute('aria-expanded', 'false');
     
-    // Scroll back to the project title
-    const article = btn.closest('.project-item');
-    if (article) {
-      article.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    // Scroll back to the button
+    btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
   } else {
     content.classList.add('active');
     arrow.textContent = '▲';
@@ -185,14 +182,16 @@ function toggleAccordion(btn) {
 
     <script>
 function toggleAccordion(btn) {
-  const wrapper = btn.parentElement;
-  const content = wrapper.querySelector('.accordion-content');
+  const content = btn.previousElementSibling;
   const arrow = btn.querySelector('.arrow');
   
   if (content.classList.contains('active')) {
     content.classList.remove('active');
     arrow.textContent = '▼';
     btn.setAttribute('aria-expanded', 'false');
+    
+    // Scroll back to the button
+    btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
   } else {
     content.classList.add('active');
     arrow.textContent = '▲';
