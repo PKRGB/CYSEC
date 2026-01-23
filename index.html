@@ -120,6 +120,12 @@ function toggleAccordion(btn) {
     content.classList.remove('active');
     arrow.textContent = '▼';
     btn.setAttribute('aria-expanded', 'false');
+    
+    // Scroll back to the project title
+    const article = btn.closest('.project-item');
+    if (article) {
+      article.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   } else {
     content.classList.add('active');
     arrow.textContent = '▲';
@@ -143,35 +149,39 @@ function toggleAccordion(btn) {
          style="width: 100%; max-width: 800px; height: auto; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" /> 
   </div>
   
-  <!-- Read More Button (mobile only) -->
-  <button class="read-more-btn" onclick="toggleAccordion(this)">
-    Read More <span class="arrow">▼</span>
-  </button>
-  
-  <div class="accordion-content">
-    <p>Approaching DNS resolution in this manner eliminates a common availability, privacy and security risk by not relying on a singular 
-    upstream DNS resolver, circumventing potential DNS/connectivity issues in the event of a third-party server's unexpected downtime, and also reducing fingerprinting risks associated with 
-    centralized query logging. DNSSEC validation is enabled to provide cryptographic assurance of DNS authenticity; which mitigates DNS spoofing, cache poisoning, and Man-in-the-Middle attacks,
-    upholding the Confidentiality and Integrity pillars of the CIA triad.</p>
+  <div class="project-accordion-wrapper">
     
-    <p><strong><u>Implementation Process:</u></strong></p>
-    <ul>
-      <li>Installed and configured Pi-hole with Unbound as recursive DNS resolver</li>
-      <li>Configured router to force all DNS traffic through Pi-hole at the firewall level (no client bypass)</li>
-      <li>Set up custom blocklists and whitelist exceptions for legitimate services</li>
-      <li>Analyzed DNS query logs to identify suspicious domains and IOC patterns</li>
-      <li>Configured DNSSEC validation for query integrity and authenticity</li>
-      <li>Monitored DNS performance metrics and cache hit rates for optimization</li>
-      <li>Integrated DNS logs with centralized logging for security correlation</li>
-    </ul>
+    <div class="accordion-content">
+      <p>Approaching DNS resolution in this manner eliminates a common availability, privacy and security risk by not relying on a singular 
+      upstream DNS resolver, circumventing potential DNS/connectivity issues in the event of a third-party server's unexpected downtime, and also reducing fingerprinting risks associated with 
+      centralized query logging. DNSSEC validation is enabled to provide cryptographic assurance of DNS authenticity; which mitigates DNS spoofing, cache poisoning, and Man-in-the-Middle attacks,
+      upholding the Confidentiality and Integrity pillars of the CIA triad.</p>
+      
+      <p><strong><u>Implementation Process:</u></strong></p>
+      <ul>
+        <li>Installed and configured Pi-hole with Unbound as recursive DNS resolver</li>
+        <li>Configured router to force all DNS traffic through Pi-hole at the firewall level (no client bypass)</li>
+        <li>Set up custom blocklists and whitelist exceptions for legitimate services</li>
+        <li>Analyzed DNS query logs to identify suspicious domains and IOC patterns</li>
+        <li>Configured DNSSEC validation for query integrity and authenticity</li>
+        <li>Monitored DNS performance metrics and cache hit rates for optimization</li>
+        <li>Integrated DNS logs with centralized logging for security correlation</li>
+      </ul>
+      
+      <p><strong>Tools & Technologies:</strong> Pi-hole, Unbound DNS, Raspberry Pi OS, SSH, DNSSEC, DNS query logging, sqlite3, regex filtering</p>
+      <p><strong>Key Achievement:</strong> Achieved complete DNS privacy and ad-blocking across entire network with 100% query coverage ensuring no 
+      device can bypass filtering, even with hardcoded DNS settings.</p>
+    </div>
     
-    <p><strong>Tools & Technologies:</strong> Pi-hole, Unbound DNS, Raspberry Pi OS, SSH, DNSSEC, DNS query logging, sqlite3, regex filtering</p>
-    <p><strong>Key Achievement:</strong> Achieved complete DNS privacy and ad-blocking across entire network with 100% query coverage ensuring no 
-    device can bypass filtering, even with hardcoded DNS settings.</p>
+    <!-- Read More Button (mobile only) -->
+    <button class="read-more-btn" onclick="toggleAccordion(this)">
+      Read More <span class="arrow">▼</span>
+    </button>
+    
   </div>
   
 </article>
-    </section>
+</section>
 
     <script>
 function toggleAccordion(btn) {
@@ -415,6 +425,7 @@ function toggleAccordion(btn) {
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
