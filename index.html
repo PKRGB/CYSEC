@@ -66,6 +66,10 @@ content="
      <section id="projects"><article class="project-item">
      <h2>Home Network Overhaul & Segmentation</h2>
        
+   <!-- Accordion Content (hidden on mobile by default, always visible on desktop) -->
+    <div class="project-accordion-wrapper">
+      <div class="accordion-content"> 
+        
 <p class="project-summary">
   Below is a sanitized overview of my home network topology, with a focus on security monitoring and threat detection. The 
   architecture implements defense-in-depth principles through network segmentation, passive IDS monitoring, honeypot deployment, 
@@ -83,9 +87,6 @@ content="
     Read More <span class="arrow">▼</span>
     </button>
     
-    <!-- Accordion Content (hidden on mobile by default, always visible on desktop) -->
-    <div class="project-accordion-wrapper">
-      <div class="accordion-content">
 <p>
   In my updated network architecture, the ISP modem provides connectivity to both production and honeypot networks via separate 
   ports, with an isolated router supporting the honeypot. In the production network, all routing, DHCP, and DNS control is handled by a 
@@ -108,7 +109,7 @@ content="
 
 <p><strong>Tools & Technologies:</strong> Suricata IDS, Pi-hole, Unbound DNS, Cowrie Honeypot, pfSense/custom router, VLAN (802.1Q), Wireshark, nmap, tcpdump, SPAN/port mirroring, Linux (Debian/Raspberry Pi OS)</p>
     </div> 
-        
+       
      </article>
     </section>
 
@@ -132,6 +133,11 @@ function toggleAccordion(btn) {
         
     <h2>Pi-hole + Unbound: DNS Security & Privacy</h2>
     <article class="project-item">
+      
+  <!-- Accordion Content (hidden on mobile by default, always visible on desktop) -->
+    <div class="project-accordion-wrapper">
+      <div class="accordion-content">
+        
 <p class="project-summary">
   To eliminate ad-serving, block telemetry, and achieve DNS privacy, I deployed Pi-hole with Unbound for fully recursive DNS 
   resolution. This configuration ensures all DNS queries are resolved directly from root and authoritative nameservers rather than forwarded to public resolvers,
@@ -140,7 +146,7 @@ function toggleAccordion(btn) {
        
  <!-- Hero Image (always visible) -->
     <div style="text-align: center; margin-top:20px;">
-      <img src="assets/dns.ping" alt="DNS Query Flow with Pihole and Unbound."
+      <img src="assets/dns.png" alt="DNS Query Flow with Pihole and Unbound."
            style="width: 100%; max-width: 800px; height: auto; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" /> 
     </div>
     
@@ -149,9 +155,6 @@ function toggleAccordion(btn) {
     Read More <span class="arrow">▼</span>
     </button>
     
-    <!-- Accordion Content (hidden on mobile by default, always visible on desktop) -->
-    <div class="project-accordion-wrapper">
-      <div class="accordion-content">
 
     <p>Approaching DNS resolution in this manner eliminates a common availability, privacy and security risk by not relying on a singular 
   upstream DNS resolver, circumventing potential DNS/connectivity issues in the event of a third-party server's unexpected downtime, and also reducing fingerprinting risks associated with 
@@ -420,6 +423,7 @@ function toggleAccordion(btn) {
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
