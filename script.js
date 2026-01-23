@@ -13,9 +13,8 @@ if (accordionHeader) {
   const collapseBtn = document.querySelector('.collapse-btn');
   if (collapseBtn) {
     collapseBtn.addEventListener('click', function() {
-      const wrapper = this.closest('.accordion-wrapper');
-      const content = wrapper.querySelector('.accordion-content');
-      const arrow = wrapper.querySelector('.arrow');
+      const content = document.querySelector('.accordion-content');
+      const arrow = document.querySelector('.arrow');
       
       content.classList.remove('active');
       arrow.classList.remove('rotate');
@@ -27,7 +26,6 @@ if (accordionHeader) {
       });
     });
   }
-
   // Certifications accordion
 const certAccordionHeader = document.querySelector('#Certifications .accordion-header');
 if (certAccordionHeader) {
