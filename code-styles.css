@@ -308,6 +308,11 @@ code {
 }
 
 /* Project accordion styles (mobile only) */
+.project-accordion-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .read-more-btn {
   display: block;
   width: 100%;
