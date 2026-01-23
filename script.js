@@ -58,6 +58,30 @@ if (certAccordionHeader) {
   }
 }
 
+// Project accordions
+const projectButtons = document.querySelectorAll('.read-more-btn');
+projectButtons.forEach(btn => {
+  btn.addEventListener('click', function() {
+    const content = this.previousElementSibling;
+    const arrow = this.querySelector('.arrow');
+    
+    if (content.classList.contains('active')) {
+      content.classList.remove('active');
+      arrow.textContent = '▼';
+      this.setAttribute('aria-expanded', 'false');
+      
+      const article = this.closest('.project-item');
+      if (article) {
+        article.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else {
+      content.classList.add('active');
+      arrow.textContent = '▲';
+      this.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+
 // Hamburger Navigation js // 
     const hamburger = document.querySelector('.hamburger');
     const navbar = document.querySelector('.navbar');
