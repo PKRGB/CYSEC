@@ -94,14 +94,14 @@ content="
         <li><strong>Honeypot Subnet:</strong> Completely isolated network segment for attack monitoring (port isolated via managed switch for security) via Cowrie SSH/Telnet honeypot</strong></li>
       </ul><p><u><strong>Security Monitoring & Detection:</strong></u></p>
        <ul><li><strong>IDS Monitoring:</strong> Suricata passive IDS deployed with SPAN port mirroring for complete LAN traffic visibility without inline performance impact</li>
-        <li>Cowrie Honeypot: SSH/Telnet honeypot deployment capturing real-world attack patterns, credential brute attempts, and malware samples for threat intelligence</li>
+        <li><strong>Cowrie Honeypot:</strong> SSH/Telnet honeypot deployment capturing real-world attack patterns, credential brute force attempts, and malware samples for threat intelligence</li>
        <li><strong>Real-time Alerting:</strong>Created and deployed custom bash script that parses Suricata IDS logs, updating a dashboard automatically at specific intervals and triggers desktop notifications on Pi's 7-inch display for immediate threat visibility</li>
-       </ul><strong>DNS Security Stack:</strong>
+      </ul><p><u><strong>DNS Security Stack:</strong></u></p>
         <ul><li><strong>Pi-hole:</strong>Network-wide ad-blocking and telemetry reduction with query logging</li>
         <li><strong>Unbound:</strong>Fully recursive DNS resolver (no third-party DNS dependencies) with DNSSEC validation</li>
         <li><strong>Forced DNS Redirection:</strong>Firewall-level NAT rules redirect all outbound DNS queries to internal resolver, preventing DNS leakage</li>
       </ul>
-      <p><strong>Additional Hardening:</strong></p>
+      <p><u><strong>Additional Hardening:</strong></p></u>
       <ul>
       <li>SSH key-based authentication with fail2ban brute-force protection</li>
       <li>Centralized logging to external storage for correlation and forensic analysis</li>
@@ -109,8 +109,8 @@ content="
       <li>Stealth IDS configuration (monitoring interface has no IP assignment)</li>
       </ul>
       
-      <p><strong>Security Features:</strong> VLAN segmentation, passive IDS monitoring, SSH hardening (key-based auth, fail2ban), strict firewall rules, honeypot deployment, zero-trust architecture</p>
-      <p><strong>Tools & Technologies:</strong> Suricata IDS, Pi-hole, Unbound DNS, Cowrie Honeypot, pfSense/custom router, VLAN (802.1Q), Wireshark, nmap, tcpdump, SPAN/port mirroring, Linux (Debian/Raspberry Pi OS)</p>
+      <u><p><strong>Security Features:</strong></p></u> VLAN segmentation, passive IDS monitoring, SSH hardening (key-based auth, fail2ban), strict firewall rules, honeypot deployment, zero-trust architecture</p>
+      <u><p><strong>Tools & Technologies:</strong></p></u> Suricata IDS, Pi-hole, Unbound DNS, Cowrie Honeypot, pfSense/custom router, VLAN (802.1Q), Wireshark, nmap, tcpdump, SPAN/port mirroring, Linux (Debian/Raspberry Pi OS)</p>
     </div>
     
    <button class="read-more-btn">
@@ -421,6 +421,7 @@ content="
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
