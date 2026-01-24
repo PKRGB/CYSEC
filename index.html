@@ -82,19 +82,18 @@ content="
     
     <div class="accordion-content">
       <p>
-        In my updated network architecture, the ISP modem provides connectivity to both production and honeypot networks via separate 
-        ports, with an isolated router supporting the honeypot. In the production network, all routing, DHCP, and DNS control is handled by a 
-        custom router with strict firewall rules governing inbound and outbound traffic. DNS traffic is forcibly redirected to an internal DNS stack 
-        at the firewall level to ensure consistent enforcement of filtering and privacy controls across the network.
+        In my updated network architecture, we utilize a managed switch, with port isolation, to an isolated router supporting the honeypot for ongoing threat analysis and educaiton.
+        In the production network, all routing, DHCP, and DNS control is handled by a custom router with strict firewall rules governing inbound and outbound traffic. DNS traffic 
+        is forcibly redirected to an internal DNS stack at the firewall level to ensure consistent enforcement of filtering and privacy controls across the network.
       </p>
       <p><strong><u>My updated network architecture includes:</u></strong></p>
       <ul>
         <li><strong>VLAN 20:</strong> Primary/trusted devices (workstations, laptops, mobile devices)</li>
-        <li><strong>VLAN 10:</strong> IoT devices (smart home, cameras, sensors) - isolated from trusted network to prevent potential lateral movement in the event device is compromised</li>
+        <li><strong>VLAN 10:</strong> IoT devices (smart home, cameras, sensors) - isolated from trusted network to prevent potential lateral movement in the event a device is compromised</li>
         <li><strong>IDS Monitoring:</strong> Suricata passive IDS deployed with SPAN port mirroring for complete LAN traffic visibility without inline performance impact, and implemented real-time security 
-          alerting via custom bash script that monitors Suricata IDS logs and triggers desktop notifications on Pi's 7-inch display for immediate threat visibility</li>
+          alerting via custom bash script that monitors Suricata IDS logs, updating a dashboard automatically at specific intervals and triggers desktop notifications on Pi's 7-inch display for immediate threat visibility</li>
         <li><strong>DNS Security:</strong> Pi-hole + Unbound for ad-blocking and telemetry-reduction via fully recursive DNS resolution, as well as the implementation of DNSSEC</li>
-        <li><strong>Honeypot Network:</strong> Isolated Cowrie SSH/Telnet honeypot via separate router on different subnet than production network, for threat intelligence and attack pattern analysis</li>
+        <li><strong>Honeypot Network:</strong> Isolated Cowrie SSH/Telnet honeypot via separate router on different subnet than production network, port isolated virtually with managed switch, for threat intelligence and attack pattern analysis</li>
         <li><strong>Centralized Logging:</strong> All security events aggregated to external storage for correlation and forensic analysis</li>
       </ul>
       <p><strong>Security Features:</strong> VLAN segmentation, passive IDS monitoring, SSH hardening (key-based auth, fail2ban), strict firewall rules, honeypot deployment, zero-trust architecture</p>
@@ -409,6 +408,7 @@ content="
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
