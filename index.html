@@ -88,14 +88,26 @@ content="
       </p>
       <p><strong><u>My updated network architecture includes:</u></strong></p>
       <ul>
+        <strong>Network Segmentation:</strong>
         <li><strong>VLAN 20:</strong> Primary/trusted devices (workstations, laptops, mobile devices)</li>
         <li><strong>VLAN 10:</strong> IoT devices (smart home, cameras, sensors) - isolated from trusted network to prevent potential lateral movement in the event a device is compromised</li>
-        <li><strong>IDS Monitoring:</strong> Suricata passive IDS deployed with SPAN port mirroring for complete LAN traffic visibility without inline performance impact, and implemented real-time security 
-          alerting via custom bash script that monitors Suricata IDS logs, updating a dashboard automatically at specific intervals and triggers desktop notifications on Pi's 7-inch display for immediate threat visibility</li>
-        <li><strong>DNS Security:</strong> Pi-hole + Unbound for ad-blocking and telemetry-reduction via fully recursive DNS resolution, as well as the implementation of DNSSEC</li>
-        <li><strong>Honeypot Network:</strong> Isolated Cowrie SSH/Telnet honeypot via separate router on different subnet than production network, port isolated virtually with managed switch, for threat intelligence and attack pattern analysis</li>
-        <li><strong>Centralized Logging:</strong> All security events aggregated to external storage for correlation and forensic analysis</li>
+        <li><strong>Honeypot Subnet: Completely isolated network segment for attack monitoring (port isolated via managed switch for security) via Cowrie SSH/Telnet honeypot</strong></li>
+        <li><strong>Security Monitoring & Detection:</strong></li>
+        <li><strong>IDS Monitoring:</strong> Suricata passive IDS deployed with SPAN port mirroring for complete LAN traffic visibility without inline performance impact
+        <li><strong>Real-time Alerting:</strong>Created and deployed custom bash script that parses Suricata IDS logs, updating a dashboard automatically at specific intervals and triggers desktop notifications on Pi's 7-inch display for immediate threat visibility</li>
+        <li><strong>DNS Security Stack:</strong></li>
+        <li><strong>Pi-hole:</strong>Network-wide ad-blocking and telemetry reduction with query logging</li>
+        <li><strong>Unbound:</strong>Fully recursive DNS resolver (no third-party DNS dependencies) with DNSSEC validation</li>
+        <li><strong>Forced DNS Redirection:</strong>Firewall-level NAT rules redirect all outbound DNS queries to internal resolver, preventing DNS leakage</li>
       </ul>
+      <p><strong>Additional Hardening:</strong></p>
+      <ul>
+      <li>SSH key-based authentication with fail2ban brute-force protection</li>
+      <li>Centralized logging to external storage for correlation and forensic analysis</li>
+      <li>Zero-trust principles with explicit allow rules (deny-by-default stance)</li>
+      <li>Stealth IDS configuration (monitoring interface has no IP assignment)</li>
+      </ul>
+      
       <p><strong>Security Features:</strong> VLAN segmentation, passive IDS monitoring, SSH hardening (key-based auth, fail2ban), strict firewall rules, honeypot deployment, zero-trust architecture</p>
       <p><strong>Tools & Technologies:</strong> Suricata IDS, Pi-hole, Unbound DNS, Cowrie Honeypot, pfSense/custom router, VLAN (802.1Q), Wireshark, nmap, tcpdump, SPAN/port mirroring, Linux (Debian/Raspberry Pi OS)</p>
     </div>
@@ -408,6 +420,7 @@ content="
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
