@@ -87,12 +87,12 @@ content="
         is forcibly redirected to an internal DNS stack at the firewall level to ensure consistent enforcement of filtering and privacy controls across the network. Current topology includes:
       </p>
      <!-- <p><strong><u>My updated network architecture includes:</u></strong></p> -->
-      <ul>
-        <p><strong>Network Segmentation:</strong></p>
-        <li><strong>VLAN 20:</strong> Primary/trusted devices (workstations, laptops, mobile devices)</li>
+      
+        <u><p><strong>Network Segmentation:</strong></p></u>
+        <ul><li><strong>VLAN 20:</strong> Primary/trusted devices (workstations, laptops, mobile devices)</li>
         <li><strong>VLAN 10:</strong> IoT devices (smart home, cameras, sensors) - isolated from trusted network to prevent potential lateral movement in the event a device is compromised</li>
         <li><strong>Honeypot Subnet:</strong> Completely isolated network segment for attack monitoring (port isolated via managed switch for security) via Cowrie SSH/Telnet honeypot</strong></li>
-      </ul><strong>Security Monitoring & Detection:</strong>
+      </ul><p><u><strong>Security Monitoring & Detection:</strong></u></p>
        <ul><li><strong>IDS Monitoring:</strong> Suricata passive IDS deployed with SPAN port mirroring for complete LAN traffic visibility without inline performance impact</li>
         <li>Cowrie Honeypot: SSH/Telnet honeypot deployment capturing real-world attack patterns, credential brute attempts, and malware samples for threat intelligence</li>
        <li><strong>Real-time Alerting:</strong>Created and deployed custom bash script that parses Suricata IDS logs, updating a dashboard automatically at specific intervals and triggers desktop notifications on Pi's 7-inch display for immediate threat visibility</li>
@@ -421,6 +421,7 @@ content="
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
