@@ -241,7 +241,7 @@ content="
   
   <div style="text-align: center; margin-top:20px;">
     <img src="assets/pki.png" alt="Internal Certificate Management." 
-         style="width: 100%; max-width: 800px; height: auto; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" /> 
+         style="width: 100%; max-width: 600px; height: auto; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" /> 
   </div>
   
   <div class="project-accordion-wrapper">
@@ -256,14 +256,13 @@ content="
         <ul><li><strong>Custom TLD Selection:</strong> Deployed using .home.arpa (IANA-reserved for private use) instead of .local to avoid mDNS conflicts with Apple/iOS devices and maintain RFC compliance</li>
         <li><strong>Offline Root CA:</strong> Root CA private key stored offline on encrypted removable media, only brought online for intermediate CA signing operations</li>
         <li><strong>Certificate Lifecycle Management:</strong> Implemented 2-year certificate validity with documented renewal procedures and CRL distribution</li>
-        <p><u><strong>Security Monitoring & Detection:</strong></u></p>
        <li><strong>Multi-Device Deployment:</strong> Issued certificates via CSR workflow to workstations, Raspberry Pi services, NAS devices, and internal web applications</li>
         
        </ul><p><u><strong>Academic Foundation:</strong></u></p>
         <ul><li>Formal coursework in Public Key Infrastructure covering X.509 standards, certificate chain validation, trust models, and cryptographic best practices, culminating in 
           a technical paper on automated PKI deployment in sandbox environments (see Academic Case Study Reports).</li>
         
-        </ul><li><strong>CA & CSR Walkthrough:</strong></strong> Developed a sanitized walkthrough documenting the entire PKI deployment process for others to replicate in their own environments. 
+        </ul><p><u><strong>CA & CSR Walkthrough:</strong></u></p> Developed a sanitized walkthrough documenting the entire PKI deployment process for others to replicate in their own environments. 
         Guide includes step-by-step CA setup, CSR generation across different platforms, certificate installation, and trust store configuration for various operating systems.</li>
       
       <u><p><strong>Security Features:</strong></p></u> Offline root CA, two-tier PKI hierarchy, CSR-based certificate issuance, encrypted key storage, IANA-compliant TLD, certificate lifecycle management</p>
@@ -468,6 +467,7 @@ content="
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
