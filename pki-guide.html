@@ -614,7 +614,7 @@ sudo update-ca-certificates
 
 <hr>
 
-<h2>Part 3: Generate Certificate for Device1</h2>
+<h2 id="step-3">Part 3: Generate Certificate for Device1</h2>
 
 <h3>Step 9: Create Certificate Signing Request (CSR) Configuration</h3>
 
@@ -706,7 +706,7 @@ openssl x509 -in certs/${DEVICE1_HOSTNAME}.crt -text -noout | grep -A5 "Subject 
 
 <h2>Part 4: Generate Certificate for Device2</h2>
 
-<p><em>(Follow the same process as before, starting at<a href="#step-3">Part 3</a>, but replace all instances of DEVICE1 with DEVICE2)</em></p>
+<p><em>(Follow the same process as before, starting at<a href="#step-3"> <strong><u>Part 3</a></strong></u>, but replace all instances of DEVICE1 with DEVICE2)</em></p>
 
 <h3>Step 13: Create CSR Configuration for Device2</h3>
 <h3>Step 14: Generate Private Key for Device2</h3>
