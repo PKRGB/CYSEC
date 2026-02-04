@@ -493,3 +493,19 @@ code {
     display: block;
   }
 }
+
+/* Mobile-only button - ONLY for PKI section */
+#PKI .mobile-only-button {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  #PKI .mobile-only-button {
+    display: block;
+  }
+  
+  #PKI .mobile-only-button .cta-button {
+    width: 90%;
+    max-width: 300px;
+  }
+}
