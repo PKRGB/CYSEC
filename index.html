@@ -243,7 +243,12 @@ content="
     <img src="assets/pki.png" alt="Internal Certificate Management." 
          style="width: 100%; max-width: 600px; height: auto; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" /> 
   </div>
-  
+
+     <!-- Mobile-only PKI Guide button - hidden on desktop -->
+    <div style="text-align: center;" class="mobile-only-button">
+      <a href="pki-guide.html" class="cta-button" style="display: inline-block; margin: 20px auto 0;">View PKI Setup Guide</a>
+    </div>
+    
   <div class="project-accordion-wrapper">
     
     <div class="accordion-content">
@@ -270,6 +275,12 @@ content="
       <u><p><strong>Security Features:</strong></p></u> Offline root CA, two-tier PKI hierarchy, CSR-based certificate issuance, encrypted key storage, IANA-compliant TLD, certificate lifecycle management</p>
       <u><p><strong>Tools & Technologies:</strong></p></u> OpenSSL, Linux (Debian), encrypted LUKS volumes, Apache/Nginx (HTTPS configuration), various certificate management tools</p>
     </div>
+
+      <!-- Desktop version of button - inside accordion content -->
+        <div style="text-align: center; margin-top: 20px;">
+          <a href="pki-guide.html" class="cta-button">View Complete Guide</a>
+        </div>
+      </div>
     
    <button class="read-more-btn">
   Read More <span class="arrow">▼</span>
@@ -469,6 +480,7 @@ content="
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
