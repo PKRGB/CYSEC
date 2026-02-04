@@ -494,12 +494,13 @@ code {
   }
 }
 
-/* Mobile-only button - ONLY for PKI section */
+/* PKI Section - Mobile-only button */
 #PKI .mobile-only-button {
   display: none;
 }
 
 @media (max-width: 768px) {
+  /* Show mobile button */
   #PKI .mobile-only-button {
     display: block;
   }
@@ -508,9 +509,9 @@ code {
     width: 90%;
     max-width: 300px;
   }
-    /* Hide desktop button inside accordion on mobile */
-  #PKI .accordion-content .cta-button {
+  
+  /* Hide desktop guide buttons on mobile */
+  #PKI .desktop-only-guide {
     display: none !important;
   }
-}
 }
