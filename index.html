@@ -230,7 +230,7 @@ content="
   </article>
 </section>
 
- <h2><u>Internal PKI Deployment & Certificate Management</u></h2>
+<h2><u>Internal PKI Deployment & Certificate Management</u></h2>
 <section id="PKI">
   <article class="project-item">
   
@@ -244,10 +244,10 @@ content="
          style="width: 100%; max-width: 600px; height: auto; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" /> 
   </div>
 
-     <!-- Mobile-only PKI Guide button - hidden on desktop -->
-    <div style="text-align: center;" class="mobile-only-button">
-      <a href="pki-guide.html" class="cta-button" style="display: inline-block; margin: 20px auto 0;">View PKI Setup Guide</a>
-    </div>
+  <!-- Mobile-only PKI Guide button - hidden on desktop -->
+  <div style="text-align: center;" class="mobile-only-button">
+    <a href="pki-guide.html" class="cta-button" style="display: inline-block; margin: 20px auto 0;">View PKI Setup Guide</a>
+  </div>
     
   <div class="project-accordion-wrapper">
     
@@ -257,38 +257,45 @@ content="
         All certificate requests utilize proper CSR workflows, and private keys for the root CA are stored offline on encrypted, air-gapped media to prevent compromise.
       </p>
       
-        <u><p><strong>Key Design Decisions:</strong></p></u>
-        <ul><li><strong>Custom TLD Selection:</strong> Deployed using .home.arpa (IANA-reserved for private use) instead of .local to avoid mDNS conflicts with Apple/iOS devices and maintain RFC compliance</li>
+      <u><p><strong>Key Design Decisions:</strong></p></u>
+      <ul>
+        <li><strong>Custom TLD Selection:</strong> Deployed using .home.arpa (IANA-reserved for private use) instead of .local to avoid mDNS conflicts with Apple/iOS devices and maintain RFC compliance</li>
         <li><strong>Offline Root CA:</strong> Root CA private key stored offline on encrypted removable media, only brought online for intermediate CA signing operations</li>
         <li><strong>Certificate Lifecycle Management:</strong> Implemented 2-year certificate validity with documented renewal procedures and CRL distribution</li>
-       <li><strong>Multi-Device Deployment:</strong> Issued certificates via CSR workflow to workstations, Raspberry Pi services, NAS devices, and internal web applications</li>
-        
-       </ul><p><u><strong>Academic Foundation:</strong></u></p>
+        <li><strong>Multi-Device Deployment:</strong> Issued certificates via CSR workflow to workstations, Raspberry Pi services, NAS devices, and internal web applications</li>
+      </ul>
+      
+      <p><u><strong>Academic Foundation:</strong></u></p>
+      <p>
         Formal coursework in Public Key Infrastructure covering X.509 standards, certificate chain validation, trust models, and cryptographic best practices, culminating in 
-          a technical paper on automated PKI deployment in sandbox environments (see Academic Case Study Reports).
+        a technical paper on automated PKI deployment in sandbox environments (see Academic Case Study Reports).
+      </p>
         
-        </ul><p><u><strong>CA & CSR Walkthrough:</strong></u></p> Developed a sanitized walkthrough documenting the entire PKI deployment process for others to replicate in their own environments. 
-        Guide includes step-by-step CA setup, CSR generation across different platforms, certificate installation, and trust store configuration for various operating systems.</li>
-      <a href="https://pkrgb.github.io/CYSEC/pki-guide.html" class="cta-button" target="_blank" rel="noopener noreferrer">
-  View Complete Guide
-</a>
-      <u><p><strong>Security Features:</strong></p></u> Offline root CA, two-tier PKI hierarchy, CSR-based certificate issuance, encrypted key storage, IANA-compliant TLD, certificate lifecycle management</p>
-      <u><p><strong>Tools & Technologies:</strong></p></u> OpenSSL, Linux (Debian), encrypted LUKS volumes, Apache/Nginx (HTTPS configuration), various certificate management tools</p>
-    </div>
-
-      <!-- Desktop version of button - inside accordion content -->
-        <div style="text-align: center; margin-top: 20px;">
-          <a href="pki-guide.html" class="cta-button">View Complete Guide</a>
-        </div>
+      <p><u><strong>CA & CSR Walkthrough:</strong></u></p>
+      <p>
+        Developed a sanitized walkthrough documenting the entire PKI deployment process for others to replicate in their own environments. 
+        Guide includes step-by-step CA setup, CSR generation across different platforms, certificate installation, and trust store configuration for various operating systems.
+      </p>
+      
+      <!-- Desktop button inside accordion - hidden on mobile -->
+      <div style="text-align: center; margin-top: 20px;" class="desktop-only-guide">
+        <a href="pki-guide.html" class="cta-button">View Complete Guide</a>
       </div>
+      
+      <p><u><strong>Security Features:</strong></u></p>
+      <p>Offline root CA, two-tier PKI hierarchy, CSR-based certificate issuance, encrypted key storage, IANA-compliant TLD, certificate lifecycle management</p>
+      
+      <p><u><strong>Tools & Technologies:</strong></u></p>
+      <p>OpenSSL, Linux (Debian), encrypted LUKS volumes, Apache/Nginx (HTTPS configuration), various certificate management tools</p>
+    </div>
     
-   <button class="read-more-btn">
-  Read More <span class="arrow">▼</span>
-</button>
+    <button class="read-more-btn">
+      Read More <span class="arrow">▼</span>
+    </button>
     
   </div>
   
-</article>
+  </article>
 </section>
     
     <section id="Pi"><article id="Pi"> <u><h2>Raspberry Pi Linux Projects & Technical Walkthroughs</h2></u>
@@ -480,6 +487,7 @@ content="
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
