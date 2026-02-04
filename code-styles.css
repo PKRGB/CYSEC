@@ -508,4 +508,9 @@ code {
     width: 90%;
     max-width: 300px;
   }
+    /* Hide desktop button inside accordion on mobile */
+  #PKI .accordion-content .cta-button {
+    display: none !important;
+  }
+}
 }
