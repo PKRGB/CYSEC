@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +34,7 @@ content="
     margin: 40px auto;
     max-width: 1000px;
     background-color: #f7f9fc;
-    color: #000000;
+    color: #333;
     line-height: 1.6;
     padding: 0 20px;
     min-height: 100vh;
@@ -61,10 +62,9 @@ content="
     color: #34495e;
   }
 
-  /* Version badge styling */
   .version-info {
     text-align: center;
-    margin: 10px 0 0px 0;
+    margin: 10px 0 30px 0;
     font-size: 0.9em;
     color: #7f8c8d;
   }
@@ -97,7 +97,6 @@ content="
   pre code {
     display: block;
     line-height: 1.5;
-    color: #000000 !important 
   }
 
   :not(pre) > code {
@@ -164,7 +163,6 @@ content="
     text-decoration: underline;
   }
 
-  /* Sticky Back Button top left */
   .back-to-portfolio {
     position: fixed;
     top: 10px;
@@ -196,7 +194,6 @@ content="
     flex-shrink: 0;
   }
 
-  /* Floating circular back button */
   .back-button {
     position: fixed;
     bottom: 20px;
@@ -234,7 +231,6 @@ content="
     margin-bottom: 2em;
   }
 
-  /* Note boxes */
   .note-box {
     background-color: #fff3cd;
     border-left: 4px solid #ffc107;
@@ -247,7 +243,6 @@ content="
     color: #856404;
   }
 
-  /* Important/Critical boxes */
   .critical-box {
     background-color: #f8d7da;
     border-left: 4px solid #dc3545;
@@ -260,7 +255,6 @@ content="
     color: #721c24;
   }
 
-  /* Success/tip boxes */
   .success-box {
     background-color: #d4edda;
     border-left: 4px solid #28a745;
@@ -303,6 +297,38 @@ content="
     table {
       font-size: 0.9em;
     }
+
+    /* Mobile table stacking */
+    table, thead, tbody, th, td, tr {
+      display: block;
+    }
+    
+    thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+    
+    tr {
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    
+    td {
+      border: none;
+      position: relative;
+      padding-left: 50%;
+      text-align: left;
+    }
+    
+    td:before {
+      content: attr(data-label);
+      position: absolute;
+      left: 12px;
+      font-weight: 600;
+      color: #2980b9;
+    }
   }
 </style>
 </head>
@@ -315,7 +341,6 @@ content="
   Back to Portfolio
 </a>
 
-<!-- Floating Back Button -->
 <a href="#" onclick="goBackOrDefault(event)" class="back-button" aria-label="Go Back">
   <svg viewBox="0 0 24 24">
     <path d="M15 18l-6-6 6-6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
@@ -333,12 +358,10 @@ content="
   }
 </script>
 
-<!-- Main Content -->
-<h1>Complete Guide: 
-  Setting Up CA and HTTPS for Your Network Devices</h1>
+<h1>Complete Guide: Setting Up CA and HTTPS for Your Network Devices</h1>
 
 <div class="version-info">
-  <span class="version-badge">Version 1.2</span>
+  <span class="version-badge">Version 1.3</span>
   <span class="version-badge">February 2026</span>
   <br>
   <em>Created by RGBPK for educational and informative purposes.</em>
@@ -375,17 +398,61 @@ content="
     </tr>
   </thead>
   <tbody>
-    <tr><td>${DEVICE1_HOSTNAME}</td><td>_________</td><td>pihole</td></tr>
-    <tr><td>${DEVICE1_IP}</td><td>_________</td><td>192.168.1.100</td></tr>
-    <tr><td>${DEVICE2_HOSTNAME}</td><td>_________</td><td>suricata</td></tr>
-    <tr><td>${DEVICE2_IP}</td><td>_________</td><td>192.168.1.101</td></tr>
-    <tr><td>${COUNTRY}</td><td>_________</td><td>US</td></tr>
-    <tr><td>${STATE}</td><td>_________</td><td>TX</td></tr>
-    <tr><td>${CITY}</td><td>_________</td><td>Houston</td></tr>
-    <tr><td>${ORG_NAME}</td><td>_________</td><td>HomeLab</td></tr>
-    <tr><td>${ORG_UNIT}</td><td>_________</td><td>IT</td></tr>
-    <tr><td>${EMAIL}</td><td>_________</td><td>admin@example.com</td></tr>
-    <tr><td>CA Passphrase</td><td>_________</td><td>(SAVE SECURELY!)</td></tr>
+    <tr>
+      <td data-label="Variable">${DEVICE1_HOSTNAME}</td>
+      <td data-label="Your Value">_________</td>
+      <td data-label="Example">pihole</td>
+    </tr>
+    <tr>
+      <td data-label="Variable">${DEVICE1_IP}</td>
+      <td data-label="Your Value">_________</td>
+      <td data-label="Example">192.168.1.100</td>
+    </tr>
+    <tr>
+      <td data-label="Variable">${DEVICE2_HOSTNAME}</td>
+      <td data-label="Your Value">_________</td>
+      <td data-label="Example">suricata</td>
+    </tr>
+    <tr>
+      <td data-label="Variable">${DEVICE2_IP}</td>
+      <td data-label="Your Value">_________</td>
+      <td data-label="Example">192.168.1.101</td>
+    </tr>
+    <tr>
+      <td data-label="Variable">${COUNTRY}</td>
+      <td data-label="Your Value">_________</td>
+      <td data-label="Example">US</td>
+    </tr>
+    <tr>
+      <td data-label="Variable">${STATE}</td>
+      <td data-label="Your Value">_________</td>
+      <td data-label="Example">TX</td>
+    </tr>
+    <tr>
+      <td data-label="Variable">${CITY}</td>
+      <td data-label="Your Value">_________</td>
+      <td data-label="Example">Houston</td>
+    </tr>
+    <tr>
+      <td data-label="Variable">${ORG_NAME}</td>
+      <td data-label="Your Value">_________</td>
+      <td data-label="Example">HomeLab</td>
+    </tr>
+    <tr>
+      <td data-label="Variable">${ORG_UNIT}</td>
+      <td data-label="Your Value">_________</td>
+      <td data-label="Example">IT</td>
+    </tr>
+    <tr>
+      <td data-label="Variable">${EMAIL}</td>
+      <td data-label="Your Value">_________</td>
+      <td data-label="Example"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="aacbcec7c3c4eacfd2cbc7dac6cf84c9c5c7">[email&#160;protected]</a></td>
+    </tr>
+    <tr>
+      <td data-label="Variable">CA Passphrase</td>
+      <td data-label="Your Value">_________</td>
+      <td data-label="Example">(SAVE SECURELY!)</td>
+    </tr>
   </tbody>
 </table>
 
@@ -423,7 +490,7 @@ touch index.txt
 echo 1000 &gt; serial
 echo 1000 &gt; crlnumber</code></pre>
 
-<h3 id="Step-3">Step 3: Create CA Configuration File</h3>
+<h3 id="step-3">Step 3: Create CA Configuration File</h3>
 
 <pre><code class="language-bash">cat &gt; ~/CA/openssl.cnf &lt;&lt; 'EOF'
 [ ca ]
@@ -614,7 +681,7 @@ sudo update-ca-certificates
 
 <hr>
 
-<h2 id="step-3">Part 3: Generate Certificate for Device1</h2>
+<h2 id="part-3">Part 3: Generate Certificate for Device1</h2>
 
 <h3>Step 9: Create Certificate Signing Request (CSR) Configuration</h3>
 
@@ -715,7 +782,6 @@ openssl x509 -in certs/${DEVICE1_HOSTNAME}.crt -text -noout | grep -A5 "Subject 
 
 <p><em>Detailed steps omitted for brevity - follow Part 3 steps but use Device2 values.</em></p>
 
-  
 <hr>
 
 <h2>Part 5: Install Certificates on Your Devices</h2>
@@ -747,7 +813,7 @@ openssl x509 -in certs/${DEVICE1_HOSTNAME}.crt -text -noout | grep -A5 "Subject 
   
   <p><strong>Common mistake:</strong> Many guides only include the server certificate and key in <code>tls.pem</code>, omitting the CA certificate. This causes certificate validation errors even though the certificates are technically valid.</p>
   
-  <p>This guide includes the CA certificate in the PEM bundle to ensure the full certificate chain is presented to clients, eliminating trust errors.</p>
+  <p>This guide includes the CA certificate in the PEM bundle (Step 18a) to ensure the full certificate chain is presented to clients, eliminating trust errors.</p>
 </div>
 
 <h4>Step 17a: Copy Certificates to Pi-hole</h4>
@@ -790,7 +856,134 @@ sudo grep -c "BEGIN CERTIFICATE" /etc/pihole/tls.pem
 sudo grep -c "BEGIN.*PRIVATE KEY" /etc/pihole/tls.pem
 # Should return: 1</code></pre>
 
-<p><em>Continue with remaining Pi-hole configuration steps...</em></p>
+<h4>Step 19a: Configure Pi-hole FTL for HTTPS</h4>
+
+<pre><code class="language-bash"># Set the domain name
+sudo pihole-FTL --config webserver.domain '${DEVICE1_HOSTNAME}.lan'
+
+# Restart FTL to enable HTTPS
+sudo service pihole-FTL restart
+
+# Verify FTL is listening on port 443
+sudo lsof -i :443
+# Should show pihole-FTL listening on port 443
+
+# Verify the server is sending the full certificate chain
+openssl s_client -connect ${DEVICE1_HOSTNAME}.lan:443 -servername ${DEVICE1_HOSTNAME}.lan -showcerts &lt;/dev/null 2&gt;/dev/null | grep -c "BEGIN CERTIFICATE"
+# Should return: 2
+
+# If using UFW firewall, allow HTTPS
+sudo ufw allow 443/tcp
+sudo ufw reload</code></pre>
+
+<h4>Step 20a: Configure Local DNS Records (if Pi-hole is your DNS server)</h4>
+
+<pre><code class="language-bash"># Enable dnsmasq.d directory
+sudo pihole-FTL --config misc.etc_dnsmasq_d true
+
+# Create custom DNS file
+sudo nano /etc/dnsmasq.d/02-custom-dns.conf</code></pre>
+
+<p>Add these lines:</p>
+<pre><code>address=/${DEVICE1_HOSTNAME}.lan/${DEVICE1_IP}
+address=/${DEVICE2_HOSTNAME}.lan/${DEVICE2_IP}</code></pre>
+
+<p>Save and exit (Ctrl+O, Enter, Ctrl+X), then:</p>
+
+<pre><code class="language-bash"># Restart FTL to load DNS records
+sudo service pihole-FTL restart
+
+# Test DNS resolution
+dig ${DEVICE1_HOSTNAME}.lan @127.0.0.1
+dig ${DEVICE2_HOSTNAME}.lan @127.0.0.1
+# Both should return the correct IP addresses</code></pre>
+
+<h4>Step 21a: Install CA Certificate to System Trust Store</h4>
+
+<p>This ensures the Pi itself trusts the certificate (for local access and system tools):</p>
+
+<pre><code class="language-bash"># Copy CA certificate to system trust store
+sudo cp /etc/pihole/tls_ca.crt /usr/local/share/ca-certificates/homelab-root-ca.crt
+
+# Update system certificates
+sudo update-ca-certificates
+# Should see: "1 added, 0 removed"
+
+# Verify system trusts the certificate
+openssl s_client -connect ${DEVICE1_HOSTNAME}.lan:443 -servername ${DEVICE1_HOSTNAME}.lan &lt;/dev/null 2&gt;&1 | grep "Verify return code"
+# Should return: Verify return code: 0 (ok)</code></pre>
+
+<h4>Step 22a: Install CA Certificate to Chromium (for local Pi GUI access)</h4>
+
+<p>If you need to access the Pi-hole admin interface from the Pi's own browser:</p>
+
+<pre><code class="language-bash"># Install NSS tools if not present
+sudo apt install libnss3-tools
+
+# Add CA certificate to Chromium's certificate database
+cp /tmp/ca.crt ~/ca.crt
+certutil -d sql:$HOME/.pki/nssdb -A -t "C,," -n "Homelab Root CA" -i ~/ca.crt
+rm ~/ca.crt
+
+# Verify it was added
+certutil -d sql:$HOME/.pki/nssdb -L
+# Should show: Homelab Root CA                                              C,,
+
+# Launch Chromium with disabled keyring (avoids password prompts)
+DISPLAY=:0 chromium-browser --password-store=basic https://${DEVICE1_HOSTNAME}.lan/admin &
+
+# Clean up temporary files
+rm /tmp/ca.crt /tmp/${DEVICE1_HOSTNAME}.crt /tmp/${DEVICE1_HOSTNAME}.key</code></pre>
+
+<h4>Step 23a: Verification Checklist</h4>
+
+<p>From any device on your network with the CA certificate installed:</p>
+
+<ul>
+  <li>[ ] Navigate to https://${DEVICE1_HOSTNAME}.lan/admin</li>
+  <li>[ ] Browser shows secure connection (green padlock)</li>
+  <li>[ ] Certificate shows: Issued to: ${DEVICE1_HOSTNAME}.lan, Issued by: Your Root CA</li>
+  <li>[ ] No certificate warnings or errors</li>
+</ul>
+
+<p>From the Pi itself:</p>
+
+<pre><code class="language-bash"># Verify certificate chain
+openssl s_client -connect ${DEVICE1_HOSTNAME}.lan:443 -servername ${DEVICE1_HOSTNAME}.lan &lt;/dev/null 2&gt;&1 | grep "Verify return code"
+# Should return: Verify return code: 0 (ok)
+
+# Verify FTL is serving HTTPS
+curl -I https://${DEVICE1_HOSTNAME}.lan/admin
+# Should return: HTTP/2 200</code></pre>
+
+<p>Exit device:</p>
+<pre><code class="language-bash">exit</code></pre>
+
+<div class="note-box">
+  <h4>Troubleshooting Notes - Pi-hole</h4>
+  
+  <p><strong>If browser shows "Not Secure" on the Pi itself:</strong></p>
+  <ul>
+    <li>Ensure CA cert is in system trust store (Step 21a)</li>
+    <li>Ensure CA cert is in Chromium's NSS database (Step 22a)</li>
+    <li>Restart Chromium completely: <code>pkill chromium</code></li>
+  </ul>
+  
+  <p><strong>If other devices show "Not Secure":</strong></p>
+  <ul>
+    <li>Install the CA certificate (ca.crt) on each device</li>
+    <li>iOS: Settings → General → VPN & Device Management → Install Profile</li>
+    <li>macOS: Keychain Access → Import → Always Trust</li>
+    <li>Windows: Install to Trusted Root Certification Authorities</li>
+  </ul>
+  
+  <p><strong>If certificate chain fails:</strong></p>
+  <ul>
+    <li>Verify tls.pem contains 2 certificates and 1 key</li>
+    <li>Ensure order is: server cert, CA cert, then private key</li>
+    <li>Rebuild using Step 18a if needed</li>
+  </ul>
+</div>
 
 <hr>
 
@@ -800,7 +993,322 @@ sudo grep -c "BEGIN.*PRIVATE KEY" /etc/pihole/tls.pem
   <p><strong>Note for Nginx:</strong> Unlike Pi-hole FTL, Nginx uses separate certificate files and automatically handles the certificate chain. You only need to provide the server certificate and key - the CA certificate is optional (can be provided via <code>ssl_trusted_certificate</code> for OCSP stapling, but not required for basic HTTPS).</p>
 </div>
 
-<p><em>Nginx installation steps follow...</em></p>
+<h4>Step 17b: Copy Certificates</h4>
+
+<pre><code class="language-bash"># From your workstation
+scp ~/CA/certs/${DEVICE2_HOSTNAME}.crt ${USER}@${DEVICE2_IP}:/tmp/
+scp ~/CA/requests/${DEVICE2_HOSTNAME}.key ${USER}@${DEVICE2_IP}:/tmp/</code></pre>
+
+<h4>Step 18b: SSH and Install Certificates</h4>
+
+<pre><code class="language-bash">ssh ${USER}@${DEVICE2_IP}
+
+# Create SSL directory
+sudo mkdir -p /etc/nginx/ssl
+
+# Move certificates
+sudo cp /tmp/${DEVICE2_HOSTNAME}.crt /etc/nginx/ssl/
+sudo cp /tmp/${DEVICE2_HOSTNAME}.key /etc/nginx/ssl/
+
+# Set permissions
+sudo chmod 644 /etc/nginx/ssl/${DEVICE2_HOSTNAME}.crt
+sudo chmod 600 /etc/nginx/ssl/${DEVICE2_HOSTNAME}.key
+sudo chown root:root /etc/nginx/ssl/*</code></pre>
+
+<h4>Step 19b: Configure Nginx for HTTPS</h4>
+
+<pre><code class="language-bash"># Backup existing config
+sudo cp /etc/nginx/sites-enabled/default /etc/nginx/sites-enabled/default.backup
+
+# Edit nginx config
+sudo nano /etc/nginx/sites-enabled/default</code></pre>
+
+<p>Update to include:</p>
+
+<pre><code class="language-nginx"># Redirect HTTP to HTTPS
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    server_name ${DEVICE2_HOSTNAME}.lan ${DEVICE2_IP};
+    return 301 https://$server_name$request_uri;
+}
+
+# HTTPS Server
+server {
+    listen 443 ssl http2 default_server;
+    listen [::]:443 ssl http2 default_server;
+    server_name ${DEVICE2_HOSTNAME}.lan ${DEVICE2_IP};
+
+    # SSL Configuration
+    ssl_certificate /etc/nginx/ssl/${DEVICE2_HOSTNAME}.crt;
+    ssl_certificate_key /etc/nginx/ssl/${DEVICE2_HOSTNAME}.key;
+    
+    # SSL Settings
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_prefer_server_ciphers on;
+    ssl_session_cache shared:SSL:10m;
+    ssl_session_timeout 10m;
+
+    # Security Headers
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-XSS-Protection "1; mode=block" always;
+
+    # Your existing location blocks go here
+    root /var/www/html;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}</code></pre>
+
+<h4>Step 20b: Test and Restart Nginx</h4>
+
+<pre><code class="language-bash"># Test configuration
+sudo nginx -t
+
+# If OK, restart
+sudo systemctl restart nginx
+
+# Verify listening on 443
+sudo lsof -i :443
+
+# If using UFW firewall, allow HTTPS
+sudo ufw allow 443/tcp
+sudo ufw reload
+
+exit</code></pre>
+
+<hr>
+
+<h3>Scenario C: Apache Web Server</h3>
+
+<div class="note-box">
+  <p><strong>Note for Apache:</strong> Like Nginx, Apache uses separate certificate files and automatically handles the certificate chain. The CA certificate is optional (can be provided via SSLCertificateChainFile for intermediate certificates, but not required for basic HTTPS with a root CA).</p>
+</div>
+
+<h4>Step 17c: Copy Certificates</h4>
+
+<pre><code class="language-bash">scp ~/CA/certs/${DEVICE2_HOSTNAME}.crt ${USER}@${DEVICE2_IP}:/tmp/
+scp ~/CA/requests/${DEVICE2_HOSTNAME}.key ${USER}@${DEVICE2_IP}:/tmp/</code></pre>
+
+<h4>Step 18c: SSH and Install</h4>
+
+<pre><code class="language-bash">ssh ${USER}@${DEVICE2_IP}
+
+# Create SSL directory
+sudo mkdir -p /etc/apache2/ssl
+
+# Move certificates
+sudo cp /tmp/${DEVICE2_HOSTNAME}.crt /etc/apache2/ssl/
+sudo cp /tmp/${DEVICE2_HOSTNAME}.key /etc/apache2/ssl/
+
+# Set permissions
+sudo chmod 644 /etc/apache2/ssl/${DEVICE2_HOSTNAME}.crt
+sudo chmod 600 /etc/apache2/ssl/${DEVICE2_HOSTNAME}.key</code></pre>
+
+<h4>Step 19c: Enable SSL Module and Configure</h4>
+
+<pre><code class="language-bash"># Enable SSL module
+sudo a2enmod ssl
+
+# Edit SSL site config
+sudo nano /etc/apache2/sites-available/default-ssl.conf</code></pre>
+
+<p>Update:</p>
+
+<pre><code class="language-apache">&lt;VirtualHost *:443&gt;
+    ServerName ${DEVICE2_HOSTNAME}.lan
+    ServerAlias ${DEVICE2_HOSTNAME}
+
+    SSLEngine on
+    SSLCertificateFile /etc/apache2/ssl/${DEVICE2_HOSTNAME}.crt
+    SSLCertificateKeyFile /etc/apache2/ssl/${DEVICE2_HOSTNAME}.key
+
+    # Your existing config...
+&lt;/VirtualHost&gt;</code></pre>
+
+<h4>Step 20c: Enable Site and Restart</h4>
+
+<pre><code class="language-bash"># Enable SSL site
+sudo a2ensite default-ssl
+
+# Test config
+sudo apache2ctl configtest
+
+# Restart
+sudo systemctl restart apache2
+
+# If using UFW firewall, allow HTTPS
+sudo ufw allow 443/tcp
+sudo ufw reload
+
+exit</code></pre>
+
+<hr>
+
+<h2>Part 5.5: Verify Certificate Installation (Before DNS Configuration)</h2>
+
+<p>Before configuring DNS, verify certificates are properly installed:</p>
+
+<p><strong>Test with IP address:</strong></p>
+
+<pre><code class="language-bash"># This should fail with certificate error (expected - proves cert is active)
+curl -k https://${DEVICE1_IP}/
+
+# Check what certificate is being served
+openssl s_client -connect ${DEVICE1_IP}:443 &lt;/dev/null 2&gt;/dev/null | openssl x509 -noout -subject -issuer
+# Should show: subject=CN=${DEVICE1_HOSTNAME}.lan, issuer=CN=Root CA</code></pre>
+
+<p><strong>Why this matters:</strong> Confirms HTTPS is active before troubleshooting DNS issues separately.</p>
+
+<hr>
+
+<h2>Part 6: Configure DNS Resolution</h2>
+
+<h3>Add Hostname Resolution</h3>
+
+<p><strong>On your workstation's hosts file:</strong></p>
+
+<p><strong>macOS/Linux:</strong></p>
+<pre><code class="language-bash">sudo nano /etc/hosts</code></pre>
+
+<p>Add:</p>
+<pre><code>${DEVICE1_IP} ${DEVICE1_HOSTNAME}.lan
+${DEVICE2_IP} ${DEVICE2_HOSTNAME}.lan</code></pre>
+
+<p><strong>Windows:</strong> Edit <code>C:\Windows\System32\drivers\etc\hosts</code> (as Administrator) and add the same lines.</p>
+
+<hr>
+
+<h2>Part 7: Test HTTPS Access</h2>
+
+<h3>Test from Your Workstation</h3>
+
+<p>In your browser:</p>
+<ul>
+  <li>https://${DEVICE1_HOSTNAME}.lan/</li>
+  <li>https://${DEVICE2_HOSTNAME}.lan/</li>
+</ul>
+
+<p>Should show:</p>
+<ul>
+  <li>✅ Green padlock (trusted certificate)</li>
+  <li>✅ No certificate warnings</li>
+  <li>✅ Content loads properly</li>
+</ul>
+
+<div class="note-box">
+  <strong>Important:</strong> Test from a different device than where you installed the certificates to verify the trust chain works.
+</div>
+
+<p><strong>Test with curl:</strong></p>
+
+<pre><code class="language-bash">curl -v https://${DEVICE1_HOSTNAME}.lan/
+curl -v https://${DEVICE2_HOSTNAME}.lan/</code></pre>
+
+<h3>Verify Certificate Chain</h3>
+
+<pre><code class="language-bash">openssl s_client -connect ${DEVICE1_IP}:443 -showcerts
+# Should show: Verify return code: 0 (ok)</code></pre>
+
+<hr>
+
+<h2>Part 8: Install CA on Mobile Devices (Optional)</h2>
+
+<h3>iPhone/iPad</h3>
+
+<ol>
+  <li>Email or upload <code>~/CA/certs/ca.crt</code> to your device</li>
+  <li>Download and tap to install</li>
+  <li>Settings → General → VPN & Device Management → Install profile</li>
+  <li><strong>CRITICAL:</strong> Settings → General → About → Certificate Trust Settings</li>
+  <li>Enable trust for "Root CA"</li>
+</ol>
+
+<h3>Android</h3>
+
+<ol>
+  <li>Download <code>ca.crt</code></li>
+  <li>Settings → Security → Install certificate → CA certificate</li>
+  <li>Select the file</li>
+</ol>
+
+<hr>
+
+<h2>Part 9: Install CA on Devices with Local Browsers</h2>
+
+<p>If your device runs a local browser (e.g., Chromium for dashboards):</p>
+
+<pre><code class="language-bash"># Copy CA to device
+scp ~/CA/certs/ca.crt ${USER}@${DEVICE_IP}:/tmp/
+
+# SSH in
+ssh ${USER}@${DEVICE_IP}
+
+# Install in system store
+sudo cp /tmp/ca.crt /usr/local/share/ca-certificates/home-ca.crt
+sudo update-ca-certificates
+
+# Install for Chromium/Chrome
+sudo apt install libnss3-tools
+certutil -d sql:$HOME/.pki/nssdb -A -t "C,," -n "Home Root CA" -i /usr/local/share/ca-certificates/home-ca.crt
+
+# Reboot
+sudo reboot</code></pre>
+
+<hr>
+
+<h2>Part 10: Certificate Maintenance</h2>
+
+<h3>Renewal (Before 375-Day Expiration)</h3>
+
+<p>Update the [ alt_names ] section in openssl.cnf, then:</p>
+
+<pre><code class="language-bash">cd ~/CA
+
+# Generate new CSR (reuse existing key)
+openssl req -new -key requests/${DEVICE_HOSTNAME}.key \
+    -out requests/${DEVICE_HOSTNAME}.csr \
+    -config requests/${DEVICE_HOSTNAME}.cnf \
+    -reqexts req_ext
+
+# Sign the new certificate
+openssl ca -config openssl.cnf \
+    -extensions server_cert -days 375 -notext -md sha256 \
+    -in requests/${DEVICE_HOSTNAME}.csr \
+    -out certs/${DEVICE_HOSTNAME}-renewed.crt
+
+# Move the renewed cert to replace the old one
+mv certs/${DEVICE_HOSTNAME}-renewed.crt certs/${DEVICE_HOSTNAME}.crt</code></pre>
+
+<p><strong>Deploy to device (example for Pi-hole):</strong></p>
+
+<pre><code class="language-bash"># Copy new certificate to device
+scp ~/CA/certs/${DEVICE_HOSTNAME}.crt ${USER}@${DEVICE_IP}:/tmp/
+
+# SSH into device
+ssh ${USER}@${DEVICE_IP}
+
+# Update certificate
+sudo cp /tmp/${DEVICE_HOSTNAME}.crt /etc/pihole/
+
+# Rebuild PEM file with new certificate
+sudo bash -c "cat /etc/pihole/${DEVICE_HOSTNAME}.crt /etc/pihole/tls_ca.crt /etc/pihole/${DEVICE_HOSTNAME}.key &gt; /etc/pihole/tls.pem"
+
+# Set permissions
+sudo chown pihole:pihole /etc/pihole/tls.pem
+sudo chmod 600 /etc/pihole/tls.pem
+
+# Restart service
+sudo service pihole-FTL restart
+
+# Exit
+exit</code></pre>
+
+<p>For Nginx/Apache: Follow similar process, copying the new .crt file to the appropriate location and restarting the web server.</p>
 
 <hr>
 
@@ -827,8 +1335,26 @@ sudo grep -c "BEGIN.*PRIVATE KEY" /etc/pihole/tls.pem
   <li>Restart browser completely</li>
 </ul>
 
+<h3>Connection Refused</h3>
+<ul>
+  <li>Verify service is listening: <code>sudo lsof -i :443</code></li>
+  <li>Check firewall rules: <code>sudo ufw status</code></li>
+  <li>Verify certificates are in correct location</li>
+  <li>Check service logs for errors</li>
+</ul>
+
+<h3>DNS Not Resolving</h3>
+<ul>
+  <li>Check hosts file entries</li>
+  <li>Verify DNS server configuration</li>
+  <li>Flush DNS cache (restart device)</li>
+  <li>Test with <code>dig</code> or <code>nslookup</code></li>
+</ul>
+
 <h3>Certificate Expired</h3>
+
 <p>Certificates are valid for 375 days. If expired:</p>
+
 <ol>
   <li>Check expiration date:
     <pre><code class="language-bash">openssl x509 -in ~/CA/certs/${DEVICE_HOSTNAME}.crt -noout -dates</code></pre>
@@ -882,14 +1408,15 @@ sudo grep -c "BEGIN.*PRIVATE KEY" /etc/pihole/tls.pem
 <hr>
 
 <div class="success-box">
-  <h3>Your network now has proper HTTPS with trusted certificates! 🔒</h3>
+  <h3>🔒 Your network now has proper HTTPS with trusted certificates!</h3>
 </div>
 
 <hr>
 
 <p style="text-align: center; margin-top: 40px;">
   <strong>Version History:</strong><br>
-  v1.2 (February 2026): Added certificate chain clarifications, improved troubleshooting, enhanced security notes<br>
+  v1.3 (February 2026): Updated flow for better UX/UI, added section C for Apache setup<br>
+  v1.2 (January 2026): Added certificate chain clarifications, improved troubleshooting, enhanced security notes<br>
   v1.1: Initial public release
 </p>
 
@@ -905,10 +1432,4 @@ sudo grep -c "BEGIN.*PRIVATE KEY" /etc/pihole/tls.pem
     <p>
       This site uses Google Analytics for traffic analysis. No personal information is collected or stored.<br>
       By using this site, you acknowledge standard web analytics practices.
-      For more information, see <a href="privacy.html" target="_blank" rel="noopener noreferrer" class="privacy-link">Privacy Policy</a>
-    </p>
-  </div>
-</footer>
-
-</body>
-</html>
+      For more information, see <a href="privacy.html" target
