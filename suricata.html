@@ -399,9 +399,17 @@ content="
     </div>
     <div class="showcase-text">
       <h3>At a Glance</h3>
-      <p>The dashboard opens with a live geographic traffic map showing all external connections across 32+ countries, sized by connection volume and color-coded by threat classification. A persistent control panel provides IP, domain, and signature search, protocol filtering across All, Alerts, DNS, HTTP, and TLS, and one-click CSV export of current data.</p>
+      <p>The dashboard opens with a live geographic traffic map showing all external connections across any countries 
+		  that house an external IP my network contacted, sized by connection volume and color-coded by threat classification 
+		  (determined by multiple factors). A persistent control panel provides search functionality by IP, domain, and signature, 
+		  along with protocol filtering across All, Alerts, DNS, HTTP, and TLS, and one-click CSV export of current data. The dashboard
+	  also incorporates accordioned sections to filter all traffic per protocol; DNS, HTTP, TLS, and a section for overall Protocol Distribution. 
+	  The summary for Security Alerts utilizes a jumplink to take user directly to filtered view of all Security Alerts, dictated by configuration within Suricata IDS.
+		  Top Sources and Destinations outlined by past hour of traffic, followed by detailed DNS data integrated from pihole via API calls, then
+		  Historical Trends which outlines Hourly, 24 hour, and 7 day rolling metrics to provide high-level context of patterns for use of comparison.
+	  </p>
       <ul>
-        <li>34,000+ total connections tracked in real time</li>
+        <li>34,000+ total connections over last hour tracked in real time</li>
         <li>Stat boxes surface alerts, packet counts, and system uptime at a glance</li>
         <li>Dashboard regenerates every 3 minutes via cron</li>
         <li>Served over HTTPS with PKI-issued certificates and CSP headers</li>
