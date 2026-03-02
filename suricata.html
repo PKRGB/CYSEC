@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Security-Policy"
+content="
+  default-src 'self';
+  script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
+  connect-src 'self' https://www.google-analytics.com;
+  frame-src 'self';
+  img-src 'self' data:;
+  style-src 'self' 'unsafe-inline';
+  worker-src 'self' blob:;
+">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YXC3GLYKFL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YXC3GLYKFL');
+</script>
+
+<link rel="stylesheet" href="footer.css">
+<link rel="stylesheet" href="code-styles.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Network Security Operations Dashboard - RGBPK</title>
+
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 40px auto;
+    max-width: 1100px;
+    background-color: #f7f9fc;
+    color: #333;
+    line-height: 1.6;
+    padding: 0 20px;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4 { color: #2c3e50; margin-top: 1.5em; margin-bottom: 0.5em; }
+
+  h1 {
+    text-align: center;
+    padding-top: 10px;
+    border-bottom: 3px solid #2980b9;
+    padding-bottom: 10px;
+  }
+
+  h2 { border-bottom: 2px solid #3498db; padding-bottom: 8px; }
+
+  a { color: #2980b9; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  ul { margin: 1em 0; padding-left: 30px; }
+  li { margin: 0.5em 0; }
+
+  .version-info {
+    text-align: center;
+    margin: 10px 0 30px 0;
+    font-size: 0.9em;
+    color: #7f8c8d;
+  }
+
+  .version-badge {
+    display: inline-block;
+    background-color: #2c3e50;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    margin: 0 5px;
+    font-weight: 600;
+  }
+
+  .description {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 2em;
+  }
+
+  .description h2 { margin-top: 0; }
+
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .tech-tag {
+    background-color: #2980b9;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 500;
+  }
+
+  .showcase-section { margin: 50px 0; }
+  .showcase-section h2 { margin-bottom: 20px; }
+
+  .showcase-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: center;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 30px;
+  }
+
+  .showcase-row.flip .showcase-image { order: 2; }
+  .showcase-row.flip .showcase-text  { order: 1; }
+
+  .showcase-image {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .showcase-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: block;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .showcase-image img:hover {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    transform: scale(1.01);
+  }
+
+  .img-pair {
+    display: flex;
+    gap: 0;
+    align-items: flex-start;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    cursor: pointer;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    overflow: hidden;
+  }
+
+  .img-pair:hover {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    transform: scale(1.01);
+  }
+
+  .img-pair img {
+    border-radius: 0;
+    box-shadow: none;
+    display: block;
+    pointer-events: none;
+  }
+
+  .img-pair img:first-child { flex: 1; }
+  .img-pair img:last-child  { width: auto; flex-shrink: 0; }
+
+  .img-caption {
+    text-align: center;
+    font-size: 0.82em;
+    color: #7f8c8d;
+    margin-top: 8px;
+    font-style: italic;
+  }
+
+  .showcase-text h3 { color: #2980b9; margin-top: 0; font-size: 1.15em; }
+  .showcase-text p  { color: #444; margin: 0 0 12px 0; font-size: 0.97em; }
+  .showcase-text ul { color: #444; font-size: 0.95em; margin: 0; padding-left: 20px; }
+  .showcase-text ul li { margin: 6px 0; }
+
+  .geo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    align-items: start;
+  }
+
+  .geo-grid img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    cursor: pointer;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    display: block;
+  }
+
+  .geo-grid img:hover {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    transform: scale(1.01);
+  }
+
+  hr { border: none; border-top: 2px solid #bdc3c7; margin: 2em 0; }
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.85);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-content {
+    position: relative;
+    max-width: 92%;
+    max-height: 92%;
+    border-radius: 8px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+    animation: zoomIn 0.25s ease;
+  }
+
+  .modal-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+  }
+
+  .modal-caption {
+    margin-top: 10px;
+    color: #ddd;
+    text-align: center;
+    font-size: 1em;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: -14px; right: -14px;
+    background: #2980b9;
+    color: white;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    line-height: 1;
+  }
+
+  .close-btn:hover { background: #1c5980; }
+
+  @keyframes zoomIn {
+    from { transform: scale(0.75); opacity: 0; }
+    to   { transform: scale(1);    opacity: 1; }
+  }
+
+  .back-to-portfolio {
+    position: fixed;
+    top: 10px; left: 20px;
+    background-color: #2980b9;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 10000;
+    transition: background-color 0.3s ease;
+    font-size: 1em;
+    user-select: none;
+  }
+
+  .back-to-portfolio:hover { background-color: #1c5980; text-decoration: none; }
+  .back-to-portfolio svg  { width: 18px; height: 18px; fill: white; flex-shrink: 0; }
+
+  .back-button {
+    position: fixed;
+    bottom: 20px; right: 20px;
+    background-color: #2980b9;
+    color: white;
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    transition: background-color 0.3s ease;
+    z-index: 1000;
+    cursor: pointer;
+    border: none;
+    outline: none;
+  }
+
+  .back-button:hover { background-color: #555; }
+  .back-button svg   { width: 24px; height: 24px; fill: white; }
+
+  @media (max-width: 768px) {
+    body { margin: 20px auto; padding: 0 15px; }
+    h1   { font-size: 1.6em; padding-top: 50px; }
+
+    .showcase-row {
+      grid-template-columns: 1fr;
+      padding: 20px;
+      gap: 20px;
+    }
+
+    .showcase-row.flip .showcase-image { order: 1; }
+    .showcase-row.flip .showcase-text  { order: 2; }
+
+    .geo-grid { grid-template-columns: 1fr; }
+
+    .img-pair { flex-direction: column; }
+    .img-pair img:first-child { width: 100%; }
+    .img-pair img:last-child  { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-to-portfolio" aria-label="Back to Portfolio">
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+  </svg>
+  Back to Portfolio
+</a>
+
+<button class="back-button" aria-label="Go Back" id="backBtn">
+  <svg viewBox="0 0 24 24">
+    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+  </svg>
+</button>
+
+<h1>Network Security Operations Dashboard</h1>
+
+<div class="version-info">
+  <span class="version-badge">Version 1.0</span>
+  <span class="version-badge">March 2026</span>
+  <br>
+  <em>Private deployment — homelab network security monitoring infrastructure.</em>
+</div>
+
+<div class="description">
+  <h2>Overview</h2>
+  <p>
+    After deploying Suricata IDS on a dedicated Raspberry Pi with SPAN port mirroring to monitor all network traffic, I built a comprehensive security operations dashboard to surface actionable intelligence from raw IDS data. The system ingests Suricata's eve.json event stream through a multi-tier aggregation pipeline and generates a self-hosted web dashboard providing real-time visibility into network behavior, threat patterns, and device activity across 47+ connected devices.
+  </p>
+  <p>
+    The dashboard unifies data from two independent systems, Suricata IDS and Pi-hole DNS, into a single operational view, enabling threat investigation without context switching. Each IP is clickable, opening a dual-pane modal combining DNS query history alongside network traffic connections, protocols, and ports in a single investigative interface.
+  </p>
+  <div class="tech-tags">
+    <span class="tech-tag">Bash</span>
+    <span class="tech-tag">SQLite3</span>
+    <span class="tech-tag">JSON / jq</span>
+    <span class="tech-tag">HTML / CSS / JavaScript</span>
+    <span class="tech-tag">Nginx</span>
+    <span class="tech-tag">PKI / OpenSSL</span>
+    <span class="tech-tag">Leaflet.js</span>
+    <span class="tech-tag">Suricata IDS</span>
+    <span class="tech-tag">Pi-hole API</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 1: HERO -->
+<div class="showcase-section">
+  <h2>Dashboard Overview</h2>
+  <div class="showcase-row">
+    <div class="showcase-image">
+      <img src="assets/dash-hero.PNG"
+           alt="Network Security Operations Dashboard overview"
+           data-full="assets/dash-hero.PNG"
+           data-caption="Dashboard overview: geographic traffic map, stat summary, protocol filters, and CSV export">
+      <p class="img-caption">Click to enlarge</p>
+    </div>
+    <div class="showcase-text">
+      <h3>At a Glance</h3>
+      <p>The dashboard opens with a live geographic traffic map showing all external connections across 32+ countries, sized by connection volume and color-coded by threat classification. A persistent control panel provides IP, domain, and signature search, protocol filtering across All, Alerts, DNS, HTTP, and TLS, and one-click CSV export of current data.</p>
+      <ul>
+        <li>34,000+ total connections tracked in real time</li>
+        <li>Stat boxes surface alerts, packet counts, and system uptime at a glance</li>
+        <li>Dashboard regenerates every 3 minutes via cron</li>
+        <li>Served over HTTPS with PKI-issued certificates and CSP headers</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 2: DNS INTEGRATION -->
+<div class="showcase-section">
+  <h2>Multi-Source Data Integration</h2>
+  <div class="showcase-row flip">
+    <div class="showcase-image">
+      <img src="assets/dash-dns.PNG"
+           alt="Pi-hole DNS integration panel"
+           data-full="assets/dash-dns.PNG"
+           data-caption="Live Pi-hole DNS data pulled via API into the Suricata dashboard: summary stats, top clients, and top queried domains">
+      <p class="img-caption">Click to enlarge</p>
+    </div>
+    <div class="showcase-text">
+      <h3>Cross-System DNS Telemetry</h3>
+      <p>The dashboard reaches beyond Suricata's own event stream, making live API calls to a separate Pi-hole DNS server to pull DNS summary stats, block rates, top queried domains, and top clients directly into the security operations view.</p>
+      <p>Network traffic and DNS telemetry from two independent systems, unified with no manual correlation required. 122,000+ DNS queries tracked daily with a 34.7% block rate across 258,000+ domains on the blocklist.</p>
+      <ul>
+        <li>Live Pi-hole API v6 calls refreshed every 3 minutes</li>
+        <li>Top clients and top domains surfaced alongside IDS traffic data</li>
+        <li>Enables DNS-level investigation without leaving the dashboard</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 3: GEO -->
+<div class="showcase-section">
+  <h2>Geographic Traffic Intelligence</h2>
+  <div class="showcase-row">
+    <div class="showcase-image">
+      <div class="geo-grid">
+        <img src="assets/geo.PNG"
+             alt="Geographic traffic map"
+             data-full="assets/geo.PNG"
+             data-caption="24-hour operational geo map: circle markers sized by connection volume, color-coded by threat classification">
+        <img src="assets/geo-detail.PNG"
+             alt="Geo traffic detail page"
+             data-full="assets/geo-detail.PNG"
+             data-caption="Geo detail page: per-IP protocol breakdown, connection counts, first and last seen timestamps, and threat classification">
+      </div>
+      <p class="img-caption">Click either image to enlarge</p>
+    </div>
+    <div class="showcase-text">
+      <h3>Dual-Map Architecture</h3>
+      <p>A dual-map architecture separates operational (24hr) and historical views. Circle markers are sized proportionally by connection volume and color-coded by threat level: trusted, neutral, or high-risk, providing immediate visual triage of external traffic patterns.</p>
+      <p>Clicking any country opens a full geo detail page with per-IP breakdowns including city-level location, protocol and port data, connection counts, and first and last seen timestamps. All geolocation is performed locally via a DB-IP database with no external API calls and no rate limiting.</p>
+      <ul>
+        <li>5,237 IPs cached in local geo database</li>
+        <li>Trusted, neutral, and high-risk country classification</li>
+        <li>Filterable by country and threat level</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 4: MODAL -->
+<div class="showcase-section">
+  <h2>IP Investigation Modals</h2>
+  <div class="showcase-row flip">
+    <div class="showcase-image">
+      <img src="assets/modal.PNG"
+           alt="Dual-pane IP investigation modal"
+           data-full="assets/modal.PNG"
+           data-caption="Dual-pane modal: DNS query history (left) alongside Suricata network traffic (right) for a single IP">
+      <p class="img-caption">Click to enlarge</p>
+    </div>
+    <div class="showcase-text">
+      <h3>Unified Per-IP Investigation</h3>
+      <p>Every IP in the dashboard is clickable. Selecting one opens a dual-pane modal pulling from both data sources simultaneously. Pi-hole DNS query history appears on the left and Suricata network traffic on the right, enabling full context on any device or external connection without switching tools.</p>
+      <ul>
+        <li>DNS pane shows queried domains, record types, allow/block status, and timestamps</li>
+        <li>Network pane shows outgoing connections, protocols, ports, and last-seen times</li>
+        <li>Clickable external IPs link to WHOIS, AbuseIPDB, VirusTotal, and geolocation lookups</li>
+        <li>Time-aware display across Last Hour, Last 24h, and Last 7 Days</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 5: HISTORICAL -->
+<div class="showcase-section">
+  <h2>Historical Trends</h2>
+  <div class="showcase-row">
+    <div class="showcase-image">
+      <img src="assets/historical.PNG"
+           alt="Historical trends showing hourly, daily, and weekly traffic"
+           data-full="assets/historical.PNG"
+           data-caption="Three-column historical trends: top sources and destinations across last hour, 24 hours, and 7 days">
+      <p class="img-caption">Click to enlarge</p>
+    </div>
+    <div class="showcase-text">
+      <h3>Multi-Tier Aggregation Pipeline</h3>
+      <p>Three independent aggregation scripts process Suricata's eve.json at different intervals. Hourly runs every 5 minutes, daily every 15 minutes, and weekly every hour. Each produces structured JSON consumed downstream by the dashboard, enabling time-aware traffic analysis without re-parsing raw logs on every load.</p>
+      <ul>
+        <li>Top sources and destinations per timeframe with packet counts</li>
+        <li>Device name mapping applied consistently across all timeframes</li>
+        <li>Identifies behavioral changes over time, separating hourly spikes from sustained patterns</li>
+        <li>Weekly aggregator handles eve.json rotation across multiple log files</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 6: NETWORK DISCOVERY -->
+<div class="showcase-section">
+  <h2>Network Device Discovery</h2>
+  <div class="showcase-row flip">
+    <div class="showcase-image">
+      <div class="img-pair"
+           data-full="assets/device-discover1.PNG"
+           data-caption="Network discovery: new device detection with first seen, last seen, and packet counts">
+        <img src="assets/device-discover1.PNG"
+             alt="Network discovery panel showing new devices">
+        <img src="assets/device-discover2.PNG"
+             alt="Network discovery panel showing name assignment">
+      </div>
+      <p class="img-caption">Click to enlarge</p>
+    </div>
+    <div class="showcase-text">
+      <h3>Continuous Device Inventory</h3>
+      <p>The dashboard continuously monitors Suricata's event stream for IP addresses not present in the known-devices registry. New devices are flagged immediately with first-seen and last-seen timestamps, packet counts, and an inline name-assignment workflow, maintaining a complete and auditable device inventory without manual network scanning.</p>
+      <ul>
+        <li>46 devices tracked across the network</li>
+        <li>New, returning, and time-filtered views across Last 24h, 7d, and 30d</li>
+        <li>Full device history audit trail persisted to JSON</li>
+        <li>Name assignments propagate across all dashboard sections</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="description">
+  <h2>Infrastructure and Security</h2>
+  <ul>
+    <li><strong>PKI-Secured Deployment:</strong> Self-hosted on Nginx with custom CA and CSR-issued certificates, HTTPS enforcement, and Content Security Policy headers, matching the security posture of a production internal tool</li>
+    <li><strong>Defensive Programming:</strong> All aggregator scripts implement graceful failure handling, exit code validation, and automated alerting on pipeline anomalies. Failures surface loudly, never silently</li>
+    <li><strong>Local-Only Geolocation:</strong> DB-IP city database queried via mmdblookup with 5,237 IPs cached and zero redundant lookups once warmed, with no external dependencies</li>
+    <li><strong>USB Log Storage:</strong> All Suricata logs written to USB-mounted storage to prevent SD card wear, with 90-day retention and daily logrotate rotation</li>
+    <li><strong>Static Dashboard:</strong> No user input processing and read-only display only, eliminating injection attack surface entirely</li>
+  </ul>
+</div>
+
+<hr>
+
+<p style="text-align: center; margin-top: 40px;">
+  <strong>Version History:</strong><br>
+  v1.0 (March 2026): Initial portfolio publication
+</p>
+
+<!-- MODAL -->
+<div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-caption">
+  <div class="modal-content">
+    <span class="close-btn" id="modal-close" aria-label="Close modal">&times;</span>
+    <img id="modal-img" src="" alt="" />
+    <div id="modal-caption" class="modal-caption"></div>
+  </div>
+</div>
+
+<footer>
+  <div>
+    <p>&copy; 2026 Perry Kingston | Cybersecurity Professional</p>
+    <p>
+      <strong>Site Security:</strong> This portfolio implements
+      <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP" target="_blank" rel="noopener noreferrer">Content Security Policy (CSP)</a> headers,
+      HTTPS-only connections, and follows
+      <a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener noreferrer">OWASP</a> security best practices.
+    </p>
+    <p>
+      This site uses Google Analytics for traffic analysis. No personal information is collected or stored.<br>
+      By using this site, you acknowledge standard web analytics practices.
+      For more information, see <a href="privacy.html" target="_blank" rel="noopener noreferrer" class="privacy-link">Privacy Policy</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+  function goBackOrDefault(event, defaultUrl = '/CYSEC/') {
+    event.preventDefault();
+    if (document.referrer && document.referrer !== window.location.href) {
+      window.history.back();
+    } else {
+      window.location.href = defaultUrl;
+    }
+  }
+
+  document.getElementById('backBtn').addEventListener('click', function(event) {
+    goBackOrDefault(event);
+  });
+</script>
+
+<script>
+  const modal = document.getElementById('modal');
+  const modalImg = document.getElementById('modal-img');
+  const modalCaption = document.getElementById('modal-caption');
+  const modalClose = document.getElementById('modal-close');
+
+  function openModal(src, caption) {
+    modalImg.src = src;
+    modalImg.alt = caption;
+    modalCaption.textContent = caption;
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.style.display = 'none';
+    modalImg.src = '';
+    modalCaption.textContent = '';
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.showcase-image img[data-full]').forEach(img => {
+    img.addEventListener('click', () => {
+      openModal(img.getAttribute('data-full'), img.getAttribute('data-caption'));
+    });
+  });
+
+  document.querySelectorAll('.img-pair[data-full]').forEach(pair => {
+    pair.addEventListener('click', () => {
+      openModal(pair.getAttribute('data-full'), pair.getAttribute('data-caption'));
+    });
+  });
+
+  document.querySelectorAll('.geo-grid img').forEach(img => {
+    img.addEventListener('click', () => {
+      openModal(img.getAttribute('data-full'), img.getAttribute('data-caption'));
+    });
+  });
+
+  modalClose.addEventListener('click', closeModal);
+
+  modal.addEventListener('click', (event) => {
+    if (event.target === modal) closeModal();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && modal.style.display === 'flex') closeModal();
+  });
+</script>
+
+</body>
+</html>
