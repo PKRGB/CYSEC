@@ -33,6 +33,7 @@ content="
     <button class="hamburger" aria-label="Toggle navigation">&#9776;</button>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
+    <a href="#dashboards">Dashboards</a>
     <a href="#DA">Data Analytics</a>
     <a href="#Education">Education</a>
     <a href="#Pi">Pi Guides</a>
@@ -174,7 +175,6 @@ content="
 </article>
 </section>
 
-   
    <!-- DNS Analytics Dashboard Section -->
 <section id="analysis">
   <article class="project-item">
@@ -230,7 +230,7 @@ content="
   </article>
 </section>
 
-<h2><u>Internal PKI Deployment & Certificate Management</u></h2>
+    <h2><u>Internal PKI Deployment & Certificate Management</u></h2>
 <section id="PKI">
   <article class="project-item">
   
@@ -297,7 +297,111 @@ content="
   
   </article>
 </section>
+
+  <h1><u>Dashboards</u></h1>  
+<!-- Suricata SOC Dashboard Section -->
+<section id="dashboards">
+  <article class="project-item">
+    <h2>Network Security Operations Dashboard</h2>
     
+    <p class="project-summary">
+      After deploying Suricata IDS on a dedicated Raspberry Pi with SPAN port mirroring to monitor all LAN network traffic, I built a comprehensive security operations dashboard to surface actionable intelligence from raw IDS data logs. The system ingests Suricata's eve.json event stream through a multi-tier aggregation pipeline (hourly, daily, weekly) and generates a self-hosted web dashboard providing real-time visibility into network behavior, external IP geolocations, threat patterns, and device activity across 47+ connected devices, which includes live DNS telemetry pulled via automated API calls from a separate Pi-hole server.
+    </p>
+    
+    <div style="text-align: center; margin-top:20px;">
+      <img src="assets/suricata-hero.PNG" alt="Network Security Operations Dashboard." 
+           style="width: 100%; max-width: 800px; height: auto; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" /> 
+    </div>
+
+    <div style="text-align: center;">
+      <a href="suricata.html" class="cta-button" target="_blank" rel="noopener noreferrer" style="display: inline-block; margin: 20px auto 0;">View Full Breakdown</a>
+    </div>
+    
+    <div class="project-accordion-wrapper">
+      
+      <div class="accordion-content">
+        <p>
+          The dashboard unifies data from two independent systems: Suricata IDS and Pi-hole DNS, into a single operational view, enabling threat investigation without context switching. Each IP is clickable, opening a dual-pane modal combining DNS query history alongside network traffic connections, protocols, and ports with timestamps to further investigations.
+        </p>
+        
+        <p><strong><u>Script Design & Functional Capabilities:</u></strong></p>
+        <ul>
+          <li><strong>Multi-Source Data Integration:</strong> Makes live API calls to a separate Pi-hole DNS server to pull DNS summary stats, block rates, top queried domains, and top clients directly into the security operations view with network traffic and DNS telemetry from two independent systems, unified with no manual correlation required</li>
+          <li><strong>Multi-Tier Data Pipeline:</strong> Three independent aggregation scripts process eve.json at different intervals: hourly (every 5 min), daily (every 15 min), and weekly (every hour) with each producing structured JSON consumed downstream by the dashboard generator, enabling time-aware traffic analysis without re-parsing raw logs</li>
+          <li><strong>Geographic Traffic Intelligence:</strong> Dual-map architecture separates operational (24hr) and historical views: circle markers sized by connection volume, color-coded by threat classification, with a dedicated geo detail page showing per-IP protocol breakdown, connection counts, and first/last seen timestamps. All geolocation performed locally via DB-IP database with no external API calls or rate limiting</li>
+          <li><strong>IP Investigation Modals:</strong> Dual-pane drill-down per IP combining Pi-hole DNS query history alongside Suricata network traffic: sources, destinations, protocols, and ports, in a single investigative view</li>
+          <li><strong>Network Device Discovery:</strong> Continuous monitoring of eve.json flows for IPs not in the known-devices registry, with full audit trail and name-assignment workflow for new device onboarding</li>
+          <li><strong>Historical Trends:</strong> Three-column hourly/daily/weekly traffic view with top sources and destinations per timeframe, demonstrating the multi-tier aggregation pipeline at a glance</li>
+          <li><strong>PKI-Secured Deployment:</strong> Self-hosted on Nginx with custom CA/CSR-issued certificates, HTTPS enforcement, and CSP headers, the same security posture as a production internal tool</li>
+          <li><strong>Defensive Programming Throughout:</strong> Graceful failure handling, exit code validation, and automated alerting on pipeline anomalies: aggregators fail loudly, never silently</li>
+        </ul>
+        
+        <p><strong><u>Technologies:</u></strong> Bash, SQLite3, JSON/jq, HTML/CSS/JavaScript, Nginx, PKI/OpenSSL, Leaflet.js, Suricata IDS, Pi-hole API</p>
+      </div>
+      
+      <button class="read-more-btn">
+        Read More <span class="arrow">▼</span>
+      </button>
+      
+    </div>
+    
+  </article>
+</section>
+    
+       <!-- DNS Analytics Dashboard Section -->
+<section id="analysis">
+  <article class="project-item">
+    <h2>Custom DNS Query Analytics Dashboard</h2>
+    
+    <p class="project-summary">
+      After deploying Pi-hole with Unbound as my recursive DNS server, I built an automated bash script to extend visibility of historical queries and other stats 
+      beyond the metrics provided by the standard Pihole GUI admin interface, in order to provide anomaly detection and deeper insights. This tool analyzes 90+ days of DNS 
+      query logs (8M+ queries) and generates interactive HTML reports with queries by hour of day, day of the week, query total, as well as client health scoring 
+      and usage pattern analysis.
+    </p>
+    
+    <div style="text-align: center; margin-top:20px;">
+      <img src="assets/analysis.PNG" alt="DNS Query Analysis Dashboard Sample." 
+           style="width: 100%; max-width: 800px; height: auto; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" /> 
+    </div>
+    
+    <!-- Dashboard button - always visible, stacked above Read More -->
+    <div style="text-align: center;">
+      <a href="https://pkrgb.github.io/CYSEC/assets/demo.html" class="cta-button" target="_blank" rel="noopener noreferrer" style="display: inline-block; margin: 20px auto 0;">Go to Interactive Dashboard</a>
+    </div>
+    
+    <div class="project-accordion-wrapper">
+      
+      <div class="accordion-content">
+        <p>
+          The data can be sorted by IP, Block Rate %, Device Name or Health Score but defaults ranking from lowest Health Score to highest, spotlighting
+          devices which need the most attention. The system incorporates arp-scan for network discovery and automatically attempts to identify device names via hostname resolution and MAC address 
+          vendor lookup, when available.
+        </p>
+        
+        <p><strong><u>Script Design & Functional Capabilities:</u></strong></p>
+        <ul>
+          <li><strong>Iterative Improvement:</strong> Continuously refined based on real-world network insights to improve performance, usability, and aesthetics while 
+            incorporating new security metrics</li>
+          <li><strong>Device Identification & Attribution:</strong> Leveraged arp-scan within a Bash pipeline to correlate static IP addresses and MAC address 
+            data to enrich the dashboard by automatically identifying device manufacturer metadata, in order to facilitate device identification to streamline investigations</li>
+          <li><strong>Health Scoring Algorithm:</strong> Composite security metric evaluating block rates, NXDOMAIN failures, query volume anomalies, and domain diversity 
+            to flag potentially compromised or misconfigured devices</li>
+          <li><strong>Responsive Interface:</strong> Accordion-based UI with sortable columns, mobile optimization, and UTF-8 encoding for cross-platform compatibility</li>
+          <li><strong>Automation & Security:</strong> Non-anonymized version runs via cron for weekly DNS pattern analysis, to identify anomalies and trends</li>
+        </ul>
+        
+        <p><strong><u>Technologies:</strong></p></u> Bash, SQLite3, HTML/CSS/JavaScript, SQL optimization</p>
+      </div>
+      
+      <button class="read-more-btn">
+        Read More <span class="arrow">▼</span>
+      </button>
+      
+    </div>
+    
+  </article>
+</section>
     <section id="Pi"><article id="Pi"> <u><h2>Raspberry Pi Linux Projects & Technical Walkthroughs</h2></u>
 <p>
   A collection of practical, command-line based projects and configuration guides I created to demonstrate 
@@ -487,6 +591,7 @@ content="
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
