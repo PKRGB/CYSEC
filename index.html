@@ -246,7 +246,7 @@ content="
 <!-- Suricata SOC Dashboard Section -->
 <section id="dashboards">
   <article class="project-item">
-    <h2>Network Security Operations Dashboard</h2>
+    <h2>PWA: Network Security Operations Dashboard</h2>
 
     <p class="project-summary">
       After stabilizing and upgrading the static HTML nginx-served page approach to this dashboard, I utilized the aggregation scripts to create a true Progressive Web App (PWA). This allows me to launch it from the homescreen of iPhones, SSE stream bypassing the service worker as intercepting an EventSource connection would break live streaming capabilities, includes offline detection that presents data leading up to disconnect for investigation of cause and Web Push implementation for real-time alerting. Multiple new features added with a better UX/UI overall. 
@@ -258,7 +258,10 @@ content="
      <div style="text-align: center;">
       <a href="pwa.html" class="cta-button" target="_blank" rel="noopener noreferrer" style="display: inline-block; margin: 20px auto 0;">View PWA Details</a>
     </div>
-    
+
+  <article class="project-item">
+    <h2>HTML: Network Security Operations Dashboard</h2>
+
     <p class="project-summary">
       After deploying Suricata IDS on a dedicated Raspberry Pi with SPAN port mirroring to monitor all LAN network traffic, I built a comprehensive security operations dashboard to surface actionable intelligence from raw IDS data logs. The system ingests Suricata's eve.json event stream through a multi-tier aggregation pipeline (hourly, daily, weekly) and generates a self-hosted web dashboard providing real-time visibility into network behavior, external IP geolocations, threat patterns, and device activity across 47+ connected devices, which includes live DNS telemetry pulled via automated API calls from a separate Pi-hole server.
     </p>
