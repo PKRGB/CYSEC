@@ -547,7 +547,7 @@ content="
   <h2>DNS Bypass Detection</h2>
   <div class="showcase-row flip">
     <div class="showcase-image">
-      <img src="assets/pwa_dns.png"
+      <img src="assets/dns_bypass.png"
            alt="DNS bypass anomaly detection with flow evidence"
            data-full="assets/dns_bypass.png"
            data-caption="Policy violation detection: devices attempting to resolve DNS outside the approved resolver, with flow-level evidence">
@@ -721,13 +721,14 @@ content="
     </div>
 
     <div class="feature-tile">
-      <img src="assets/dns.png" alt="Pi-hole DNS summary panel"
-           data-full="assets/dns.png"
+      <img src="assets/pwa_dns.png" alt="Pi-hole DNS summary panel"
+           data-full="assets/pwa_dns.png"
            data-caption="Pi-hole DNS summary pulled live through the API">
       <h4>DNS Summary</h4>
       <ul>
         <li>Live API calls rather than values baked in at generation time</li>
-        <li>Top clients and queried domains sit alongside IDS traffic in one view</li>
+		<li>API credential read at runtime from a permission-restricted file, never present in source or hardcoded</li>
+		<li>Top clients and queried domains sit alongside IDS traffic in one view</li>
       </ul>
     </div>
 
@@ -807,6 +808,16 @@ content="
     <li>
       <strong>Local PKI:</strong> certificates issued from a private certificate authority, TLS 1.2 and 1.3 only,
       with HSTS and Content Security Policy headers enforced at the proxy.
+    </li>
+	<li>
+      <strong>Credential handling:</strong> the Pi-hole API credential never appears in the codebase. The
+      installer writes it at deploy time to a dedicated file owned by the account that runs the collection
+      scripts, with permissions set so no other user on the system can read it, and the application layer reads
+      its own copy from a generated configuration file under the same restriction. Credentials are unique per
+      deployment and authenticate only to a resolver API on the local subnet, so the value of a compromised one
+      does not extend beyond the device holding it. That protection is exactly as strong as the account boundary
+      it rests on, and it offers nothing at all once the hardware is out of your hands. Moving these secrets to
+      encrypted storage through systemd credentials is the tracked next step.
     </li>
     <li>
       <strong>Explicit filesystem boundary:</strong> the application owns a defined set of paths and treats
