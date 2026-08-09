@@ -249,8 +249,8 @@ content="
     <h2>PWA: Network Security Operations Dashboard</h2>
 
     <p class="project-summary">
-      After stabilizing and upgrading the HTML nginx-served page approach to this dashboard below, I created a Progressive Web App (PWA) and utilize the aggregation scripts to feed it pertinent data pulled from Suricata's logs (signature), a recorded network baseline (heuristic), as well as data from other local servers including DNS queries. This allows me to launch it from the homescreen of iPhones, with SSE stream bypassing the service worker to avoid intercepting an EventSource connection  breaking live streaming capabilities, and including offline detection that presents data leading up to disconnect for investigation of cause and Web Push implementation for real-time alerting. There are multiple new features added from the previous iteration, with better UX/UI overall. 
-    </p>
+      After stabilizing and upgrading the HTML nginx-served page approach to this dashboard below, I created a Progressive Web App (PWA) and utilize the aggregation scripts to feed it pertinent data pulled from Suricata's logs (upstream signature), my own engines which evaluate policy and custom threshold rules against the live stream to catch outliers, as well as pulling in data from other local servers to cover DNS queries. This allows me to launch it from the homescreen of iPhones, with SSE stream bypassing the service worker to avoid breaking live streaming capabilities, and including offline detection that presents data leading up to any disconnect for investigation of cause, and Web Push implementation for real-time alerting. 
+Both the PWA and the HTML dashboards read the same Suricata event stream through independent code paths, so when their numbers disagree, I know that one of them has a bug and I need to run an adhoc audit.     </p>
     <div style="text-align: center; margin-top:20px;">
       <img src="assets/login.png" alt="NWA PWA"
            style="width: 100%; max-width: 800px; height: auto; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" /> 
