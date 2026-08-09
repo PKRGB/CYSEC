@@ -556,11 +556,11 @@ content="
     <div class="showcase-text">
       <h3>Catching Devices That Attempt to Route Around Filtering</h3>
       <p>
-        I utilize a custom DNS stack and this dashboard helped me harden my routing via ACL's and static routing, by identifying devices attempting to bypass my local
-		  recursive server with hardcodes to other servers because filtering DNS at the resolver only works if devices actually use it, and plenty of consumer hardware is
-        built to avoid exactly that. Smart TVs, streaming sticks, and voice assistants routinely ship with
+        I utilize a custom DNS stack and this dashboard surfaced areas of improvement to harden my network via ACL's and static routing, by identifying devices attempting to bypass my local
+		recursive server. Smart TVs, streaming sticks, and voice assistants routinely ship with
         hardcoded public resolvers or encrypted DNS enabled by default, which quietly bypasses every blocklist on
-        the network. The platform watches for that behavior directly rather than assuming compliance.
+        the network. The platform watches for that behavior directly rather than assuming compliance, because filtering DNS at the resolver only works if devices actually use it, and plenty of consumer hardware is
+        built to avoid exactly that..
       </p>
       <p>
         Detection covers plaintext queries sent to anything other than the approved resolver, encrypted DNS over
