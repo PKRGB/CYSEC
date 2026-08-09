@@ -25,7 +25,7 @@ content="
 <link rel="stylesheet" href="code-styles.css">
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>PWA: Network Security Operations Dashboard - RGBPK</title>
+<title>PWA: Network Security Monitoring Platform - RGBPK</title>
 
 <style>
   body {
@@ -88,6 +88,7 @@ content="
     flex-wrap: wrap;
     gap: 8px;
     margin-top: 16px;
+    justify-content: center;
   }
 
   .tech-tag {
@@ -137,32 +138,6 @@ content="
     transform: scale(1.01);
   }
 
-  .img-pair {
-    display: flex;
-    gap: 0;
-    align-items: flex-start;
-    border-radius: 6px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    cursor: pointer;
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
-    overflow: hidden;
-  }
-
-  .img-pair:hover {
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-    transform: scale(1.01);
-  }
-
-  .img-pair img {
-    border-radius: 0;
-    box-shadow: none;
-    display: block;
-    pointer-events: none;
-  }
-
-  .img-pair img:first-child { flex: 1; }
-  .img-pair img:last-child  { width: auto; flex-shrink: 0; }
-
   .img-caption {
     text-align: center;
     font-size: 0.82em;
@@ -176,40 +151,125 @@ content="
   .showcase-text ul { color: #444; font-size: 0.95em; margin: 0; padding-left: 20px; }
   .showcase-text ul li { margin: 6px 0; }
 
-  .geo-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    align-items: start;
+  /* Full-width card for sections without a screenshot */
+  .full-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 30px;
   }
 
-  .geo-grid img {
+  .full-card h3 { color: #2980b9; margin-top: 0; font-size: 1.15em; }
+  .full-card p  { color: #444; font-size: 0.97em; }
+  .full-card ul { color: #444; font-size: 0.95em; }
+
+  /* Comparison table: static build vs application */
+  .compare-wrap {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 26px 30px;
+    overflow-x: auto;
+  }
+
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.93em;
+  }
+
+  .compare-table th {
+    text-align: left;
+    padding: 10px 12px;
+    background-color: #2c3e50;
+    color: white;
+    font-weight: 600;
+    font-size: 0.95em;
+  }
+
+  .compare-table th:first-child { border-radius: 5px 0 0 0; }
+  .compare-table th:last-child  { border-radius: 0 5px 0 0; }
+
+  .compare-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #e4e9ef;
+    color: #444;
+    vertical-align: top;
+  }
+
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table tbody tr:nth-child(even) { background-color: #f9fbfd; }
+  .compare-table td:first-child { font-weight: 600; color: #2c3e50; white-space: nowrap; }
+  .compare-table td.now { color: #1c5980; font-weight: 500; }
+
+  /* Compact feature grid */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+
+  .feature-tile {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .feature-tile img {
     width: 100%;
     height: auto;
-    border-radius: 6px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     cursor: pointer;
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
     display: block;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
   }
 
-  .geo-grid img:hover {
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  .feature-tile img:hover {
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
     transform: scale(1.01);
   }
 
+  .feature-tile h4 {
+    color: #2980b9;
+    font-size: 1em;
+    margin: 14px 0 6px 0;
+  }
+
+  .feature-tile ul {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 0.88em;
+    color: #444;
+  }
+
+  .feature-tile ul li { margin: 5px 0; }
+
   hr { border: none; border-top: 2px solid #bdc3c7; margin: 2em 0; }
 
-     .demo-notice {
-            background-color: #d4edda;
-            border: 2px solid #28a745;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 4px;
-            font-weight: bold;
-            color: #155724;
-        }
-  
+  .demo-notice {
+    background-color: #d4edda;
+    border: 2px solid #28a745;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 4px;
+    font-weight: bold;
+    color: #155724;
+  }
+
+  .related-note {
+    background-color: #eaf3fa;
+    border-left: 4px solid #2980b9;
+    padding: 14px 18px;
+    margin: 10px 0 0 0;
+    border-radius: 0 4px 4px 0;
+    font-size: 0.95em;
+    color: #2c3e50;
+  }
+
   .modal {
     display: none;
     position: fixed;
@@ -269,28 +329,6 @@ content="
     to   { transform: scale(1);    opacity: 1; }
   }
 
-  .back-to-portfolio {
-    position: fixed;
-    top: 10px; left: 20px;
-    background-color: #2980b9;
-    color: white;
-    padding: 8px 14px;
-    border-radius: 6px;
-    font-weight: 600;
-    text-decoration: none;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    z-index: 10000;
-    transition: background-color 0.3s ease;
-    font-size: 1em;
-    user-select: none;
-  }
-
-  .back-to-portfolio:hover { background-color: #1c5980; text-decoration: none; }
-  .back-to-portfolio svg  { width: 18px; height: 18px; fill: white; flex-shrink: 0; }
-
   .back-button {
     position: fixed;
     bottom: 20px; right: 20px;
@@ -312,6 +350,10 @@ content="
   .back-button:hover { background-color: #555; }
   .back-button svg   { width: 24px; height: 24px; fill: white; }
 
+  @media (max-width: 900px) {
+    .feature-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
   @media (max-width: 768px) {
     body { margin: 20px auto; padding: 0 15px; }
     h1   { font-size: 1.6em; padding-top: 50px; }
@@ -325,22 +367,13 @@ content="
     .showcase-row.flip .showcase-image { order: 1; }
     .showcase-row.flip .showcase-text  { order: 2; }
 
-    .geo-grid { grid-template-columns: 1fr; }
-
-    .img-pair { flex-direction: column; }
-    .img-pair img:first-child { width: 100%; }
-    .img-pair img:last-child  { width: 100%; }
+    .feature-grid { grid-template-columns: 1fr; }
+    .compare-wrap { padding: 18px; }
+    .full-card { padding: 20px; }
   }
 </style>
 </head>
 <body>
-
-<!--<a href="index.html" class="back-to-portfolio" aria-label="Back to Portfolio">
-  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
-  </svg>
-  Back to Portfolio
-</a> -->
 
 <button class="back-button" aria-label="Go Back" id="backBtn">
   <svg viewBox="0 0 24 24">
@@ -348,188 +381,411 @@ content="
   </svg>
 </button>
 
-<h1>PWA: Network Security Operations Dashboard</h1>
+<h1>PWA: Network Security Monitoring Platform</h1>
 
 <div class="version-info">
   <span class="version-badge">Version 3.0</span>
   <span class="version-badge">August 2026</span>
   <br>
-  <em>Private deployment — homelab network security monitoring infrastructure.</em>
+  <em>Private deployment, homelab network security monitoring infrastructure.</em>
 </div>
-  <div class="demo-notice">
-         🔒 DEMO MODE: Domains and device names have been sanitized for 
-		portfolio use, however these data patterns and metrics are authentic and representative of 
-		real-world network activity. The production version of this dashboard provides deep 
-		insights into network patterns and is automated for real-time monitoring. 
-    </div>
+
+<div class="demo-notice">
+  🔒 DEMO MODE: Domains, device names, and detection thresholds have been sanitized for
+  portfolio use, however these data patterns and metrics are authentic and representative of
+  real-world network activity. The production deployment runs continuously on hardware I own,
+  behind a VPN perimeter, with no external infrastructure in the path.
+</div>
 
 <div class="description">
   <h2>Overview</h2>
   <p>
-    After deploying Suricata IDS on a dedicated Raspberry Pi with SPAN port mirroring to monitor all network traffic, I built a comprehensive security operations dashboard to surface actionable intelligence from raw IDS data. The system ingests Suricata's eve.json event stream through a multi-tier aggregation pipeline and generates a self-hosted web dashboard providing real-time visibility into network behavior, threat patterns, and device activity across 47+ connected devices.
+    This is the application layer that sits on top of my Suricata IDS pipeline, with the earlier build generating
+    static HTML from bash every three minutes, which worked well as a reporting surface but could never do
+    anything beyond render what the last cron run had already decided. This version is a Flask application
+    served over TLS, with a live event stream, a detection engine that fires notifications on its own, and a
+    mobile Progressive Web App that installs to the home screen on iPhone.
   </p>
   <p>
-    The dashboard unifies data from two independent systems, Suricata IDS and Pi-hole DNS, into a single operational view, enabling threat investigation without context switching. Each IP is clickable, opening a dual-pane modal combining DNS query history alongside network traffic connections, protocols, and ports in a single investigative interface.
+    The bash aggregators were deliberately kept and they still run on cron to produce the hourly, daily,
+    and weekly JSON files that the platform reads, because they are faster at bulk log parsing than Python and
+    because a failed aggregator run stays isolated from the web application instead of taking it down. The
+    split is intentional as heavy log processing stays in bash on a schedule, while real-time event handling lives in
+    Flask daemon threads, and neither one can break the other.
   </p>
-  <div class="tech-tags"><center>
-    <span class="tech-tag">Bash</span>
-    <span class="tech-tag">SQLite3</span>
-    <span class="tech-tag">JSON / jq</span>
-    <span class="tech-tag">HTML / CSS / JavaScript</span>
+  <p>
+    What that buys is the difference between reading a report and running an investigation because every IP is a
+    pivot point, alerts can be muted at three different scopes without touching what Suricata records (mute for this device, mute this pair: src & dst, and mute for all devices), policy
+    violations persist until someone actually clears them, and the whole thing keeps working in a degraded but
+    honest state whenever the connection to the sensor drops. This gives insight into what exactly happened leading up to a network blackout, which is imperative to investigation, particularly in the event of DOS/DDOS. 
+  </p>
+
+  <div class="tech-tags">
+    <span class="tech-tag">Python / Flask</span>
+    <span class="tech-tag">Gunicorn + gevent</span>
+    <span class="tech-tag">Server-Sent Events</span>
+    <span class="tech-tag">Service Worker / PWA</span>
+    <span class="tech-tag">Vanilla JS</span>
+    <span class="tech-tag">Jinja2</span>
     <span class="tech-tag">Nginx</span>
-    <span class="tech-tag">PKI / OpenSSL</span>
-    <span class="tech-tag">Leaflet.js</span>
+    <span class="tech-tag">systemd</span>
+    <span class="tech-tag">Bash / cron</span>
     <span class="tech-tag">Suricata IDS</span>
     <span class="tech-tag">Pi-hole API</span>
-  </div></center>
+    <span class="tech-tag">Leaflet.js</span>
+    <span class="tech-tag">PKI / OpenSSL</span>
+  </div>
+
+  <div class="related-note">
+    The data collection pipeline, geolocation database, and aggregation scripts are documented separately in the
+    <a href="suricata-dashboard.html">Suricata IDS dashboard project</a>. This page covers the PWA that was built on top of it, for improved UX/UI and additional features.
+  </div>
 </div>
 
 <hr>
 
-<!-- SECTION 1: HERO -->
+<!-- COMPARISON TABLE -->
 <div class="showcase-section">
-  <h2>Login</h2>
+  <h2>From Initial Static Build to Application</h2>
+  <div class="compare-wrap">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th style="width: 22%;">Capability</th>
+          <th style="width: 39%;">Static Build (v1)</th>
+          <th style="width: 39%;">Application (v3)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Delivery</td>
+          <td>HTML regenerated by cron every three minutes</td>
+          <td class="now">Flask behind Nginx, rendered on request</td>
+        </tr>
+        <tr>
+          <td>Event latency</td>
+          <td>Up to three minutes stale by design</td>
+          <td class="now">Live event stream pushed over SSE as Suricata writes</td>
+        </tr>
+        <tr>
+          <td>Access control</td>
+          <td>None, static files served directly</td>
+          <td class="now">Session authentication enforced on every route</td>
+        </tr>
+        <tr>
+          <td>Detection</td>
+          <td>Display of what Suricata already flagged</td>
+          <td class="now">Eleven rules across two independent engines</td>
+        </tr>
+        <tr>
+          <td>Notifications</td>
+          <td>None, required opening the page</td>
+          <td class="now">Push notifications to phone, with per-rule cooldowns</td>
+        </tr>
+        <tr>
+          <td>Configuration</td>
+          <td>Editing scripts over SSH</td>
+          <td class="now">In-app settings, hot-reloaded without a restart</td>
+        </tr>
+        <tr>
+          <td>Mobile</td>
+          <td>Desktop layout, scaled down</td>
+          <td class="now">Installable PWA with a purpose-built nine-tab interface</td>
+        </tr>
+        <tr>
+          <td>Investigation</td>
+          <td>Read the page, then go read logs</td>
+          <td class="now">Pivot between panels on any IP without losing your place</td>
+        </tr>
+        <tr>
+          <td>Connection loss</td>
+          <td>Last generated page, silently stale</td>
+          <td class="now">Cached snapshots with the staleness stated on screen</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- AUTHENTICATION -->
+<div class="showcase-section">
+  <h2>Authenticated Application</h2>
   <div class="showcase-row">
     <div class="showcase-image">
-      <img src="assets/suricata-hero.PNG"
-           alt="Login Screen"
-           data-full="assets/suricata-hero.PNG"
-           data-caption="Dashboard overview: geographic traffic map, stat summary, protocol filters, and CSV export">
+      <img src="assets/login.png"
+           alt="Login screen"
+           data-full="assets/login.png"
+           data-caption="Session-based authentication with CSRF protection and login rate limiting">
       <p class="img-caption">Click to enlarge</p>
     </div>
     <div class="showcase-text">
-      <h3>Login Screen</h3>
-      <p>Simple and clean login screen. 
-	 
-    </div>
-  </div>
-</div>
-
-<!-- SECTION 2: DNS INTEGRATION -->
-<div class="showcase-section">
-  <h2>Multi-Source Data Integration</h2>
-  <div class="showcase-row flip">
-    <div class="showcase-image">
-      <img src="assets/dash-dns.PNG"
-           alt="Pi-hole DNS integration panel"
-           data-full="assets/dash-dns.PNG"
-           data-caption="Live Pi-hole DNS data pulled via API into the Suricata dashboard: summary stats, top clients, and top queried domains">
-      <p class="img-caption">Click to enlarge</p>
-    </div>
-    <div class="showcase-text">
-      <h3>Cross-System DNS Telemetry</h3>
-      <p>The dashboard reaches beyond Suricata's own event stream, making live API calls to a separate Pi-hole DNS server to pull DNS summary stats, block rates, top queried domains, and top clients directly into the security operations view.</p>
-      <p>Network traffic and DNS telemetry from two independent systems, unified with no manual correlation required. 122,000+ DNS queries tracked daily with a 34.7% block rate across 258,000+ domains on the blocklist.</p>
+      <h3>Trading Zero Input Surface for Real Capability</h3>
+      <p>
+        The static build had a genuine security advantage to this PWA that is simply due to the lack of interactivity: operating with no user input and nothing
+        but flat files, the injection surface was literally zero. Turning it into an application gave that up on purpose,
+        which meant every input path had to be treated as hostile pre-emptively, rather than hardened later. Patching a security vulnerability is better than nothing, but avoiding 
+		exploitation in the first place is the goal. 
+      </p>
+      <p>
+        Device names, IP addresses, search queries, protocol filters, cursor offsets, and record identifiers are
+        each validated against an explicit pattern or allowlist before they reach a file operation. Post-login
+        redirects resolve against a fixed whitelist rather than a prefix check, because an open redirect is a real
+        phishing vector and a starts-with test is not a defense.
+      </p>
       <ul>
-        <li>Live Pi-hole API v6 calls refreshed every 3 minutes</li>
-        <li>Top clients and top domains surfaced alongside IDS traffic data</li>
-        <li>Enables DNS-level investigation without leaving the dashboard</li>
+        <li>Authentication required on every route and every API endpoint, with no unauthenticated read paths</li>
+        <li>CSRF protection on state-changing requests, hashed credential storage, no secrets in logs</li>
+        <li>Login attempt rate limiting with temporary lockout after repeated failures</li>
+        <li>Secure, HttpOnly, SameSite session cookies with configurable idle timeout, set independently for desktop and mobile</li>
       </ul>
     </div>
   </div>
 </div>
 
-<!-- SECTION 3: GEO -->
+<!-- DNS BYPASS -->
 <div class="showcase-section">
-  <h2>Geographic Traffic Intelligence</h2>
+  <h2>DNS Bypass Detection</h2>
+  <div class="showcase-row flip">
+    <div class="showcase-image">
+      <img src="assets/dns_bypass.png"
+           alt="DNS bypass anomaly detection with flow evidence"
+           data-full="assets/dns_bypass.png"
+           data-caption="Policy violation detection: devices attempting to resolve DNS outside the approved resolver, with flow-level evidence">
+      <p class="img-caption">Click to enlarge</p>
+    </div>
+    <div class="showcase-text">
+      <h3>Catching Devices That Attempt to Route Around Filtering</h3>
+      <p>
+        I utilize a custom DNS stack and this dashboard helped me harden my routing via ACL's and static routing, by identifying devices attempting to bypass my local
+		  recursive server with hardcodes to other servers because filtering DNS at the resolver only works if devices actually use it, and plenty of consumer hardware is
+        built to avoid exactly that. Smart TVs, streaming sticks, and voice assistants routinely ship with
+        hardcoded public resolvers or encrypted DNS enabled by default, which quietly bypasses every blocklist on
+        the network. The platform watches for that behavior directly rather than assuming compliance.
+      </p>
+      <p>
+        Detection covers plaintext queries sent to anything other than the approved resolver, encrypted DNS over
+        TLS on its dedicated port, and DNS over HTTPS aimed at a maintained list of known resolver addresses. Each
+        finding is deduplicated on a rolling window so a chattering IoT device does not bury the panel, and each
+        one persists until it is manually cleared rather than aging out on its own.
+      </p>
+      <ul>
+        <li>Evidence expansion on every finding, pulling matching flow records straight from the event log</li>
+        <li>Flows labeled as no response or bidirectional, which separates a blocked attempt from a successful one</li>
+        <li>Rule-aware evidence scope: a device-wide view for plaintext bypass, a targeted pair view for flagged flows</li>
+        <li>Additional policy rules for oversized uploads, TLS on unexpected ports, internal lateral movement, and periodic beaconing</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- REAL-TIME PIPELINE -->
+<div class="showcase-section">
+  <h2>Real-Time Event Pipeline</h2>
   <div class="showcase-row">
     <div class="showcase-image">
-      <div class="geo-grid">
-        <img src="assets/geo.PNG"
-             alt="Geographic traffic map"
-             data-full="assets/geo.PNG"
-             data-caption="24-hour operational geo map: circle markers sized by connection volume, color-coded by threat classification">
-        <img src="assets/geo-detail.PNG"
-             alt="Geo traffic detail page"
-             data-full="assets/geo-detail.PNG"
-             data-caption="Geo detail page: per-IP protocol breakdown, connection counts, first and last seen timestamps, and threat classification">
-      </div>
-      <p class="img-caption">Click either image to enlarge</p>
+      <img src="assets/alert.png"
+           alt="Alerts panel with engine-fired and persistent tabs"
+           data-full="assets/alert.png"
+           data-caption="Alerts panel: engine-fired notifications, persistent Suricata log, and three-tier muting">
+      <p class="img-caption">Click to enlarge</p>
     </div>
     <div class="showcase-text">
-      <h3>Dual-Map Architecture</h3>
-      <p>A dual-map architecture separates operational (24hr) and historical views. Circle markers are sized proportionally by connection volume and color-coded by threat level: trusted, neutral, or high-risk, providing immediate visual triage of external traffic patterns.</p>
-      <p>Clicking any country opens a full geo detail page with per-IP breakdowns including city-level location, protocol and port data, connection counts, and first and last seen timestamps. All geolocation is performed locally via a DB-IP database with no external API calls and no rate limiting.</p>
+      <h3>Four Threads, One Tail of the Event Log</h3>
+      <p>
+        A single background thread tails Suricata's event stream and feeds everything downstream from one shared
+        buffer, so the log is read once no matter how many consumers exist. The notification engine, the policy
+        violation engine, and the snapshot writer all consume from that buffer by position rather than reopening
+        the file, and the browser receives the same events over a persistent server-sent event stream.
+      </p>
+      <p>
+        Alert muting was the feature that needed the most care. Silencing a noisy signature is necessary, but doing
+        it carelessly means hiding a real detection later, so muting operates at three explicit scopes and never
+        touches what gets recorded. Suricata's log and the persistent alert store always contain everything, with
+        muting acting purely as a display and notification filter.
+      </p>
       <ul>
-        <li>5,237 IPs cached in local geo database</li>
-        <li>Trusted, neutral, and high-risk country classification</li>
-        <li>Filterable by Country, Last Seen time and Threat Level</li>
+        <li>Mute scopes: a specific source and destination pair, a single device, or network-wide</li>
+        <li>Network-wide muting requires confirmation against an explicit warning, with no default selection</li>
+        <li>Live feed supports a per-IP overlay with a rolling sixty-second rate indicator that decays visibly when traffic stops</li>
+        <li>Three separate event stores kept deliberately distinct: session notifications, persistent alerts, and policy violations</li>
       </ul>
     </div>
   </div>
 </div>
 
-<!-- SECTION 4: MODAL -->
+<!-- OFFLINE MODE -->
 <div class="showcase-section">
-  <h2>IP Investigation Modals</h2>
+  <h2>Offline Forensic Mode</h2>
+  <div class="full-card">
+    <!-- Screenshot slot: uncomment both lines below once assets/offline.png exists
+    <img src="assets/offline.png" alt="Offline mode banner with cached snapshot data" data-full="assets/offline.png" data-caption="Offline mode: amber banner stating snapshot age, with every panel title marked as cached" style="width:100%;border-radius:6px;box-shadow:0 4px 12px rgba(0,0,0,0.15);cursor:pointer;margin-bottom:18px;">
+    -->
+    <h3>Staying Useful After the Connection Drops</h3>
+    <p>
+      A monitoring tool that shows nothing during an outage is least useful exactly when it matters most. Browser
+      caching does not solve this, because it only captures what a tab happened to load before the disruption, and
+      the tab is usually closed. The platform instead writes a full set of state snapshots to disk on a fixed
+      interval, entirely independent of whether anyone has the dashboard open.
+    </p>
+    <p>
+      When the browser loses the event stream, the interface shifts to an amber state, states the exact age of the
+      most recent snapshot in the banner, and marks every panel title as cached so there is no chance of mistaking
+      old data for current data. Once the connection returns, live data reloads automatically. The practical
+      payoff is post-incident: after an outage clears, the state from immediately before the disconnect is still
+      sitting there waiting to be read.
+    </p>
+    <ul>
+      <li>Snapshot writer runs as an independent daemon thread on a fixed cycle, unaffected by client activity</li>
+      <li>All writes are atomic, with a storage mount guard that refuses to write rather than writing to the wrong filesystem</li>
+      <li>Recovery is automatic on both desktop and mobile, with no manual refresh required</li>
+      <li>Offline state is communicated explicitly, because silently serving stale data is worse than showing none</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SETTINGS -->
+<div class="showcase-section">
+  <h2>Runtime Configuration</h2>
   <div class="showcase-row flip">
     <div class="showcase-image">
-      <img src="assets/modal.PNG"
-           alt="Dual-pane IP investigation modal"
-           data-full="assets/modal.PNG"
-           data-caption="Dual-pane modal: DNS query history (left) alongside Suricata network traffic (right) for a single IP">
+      <img src="assets/settings.png"
+           alt="Settings panel with rule toggles and session controls"
+           data-full="assets/settings.png"
+           data-caption="Settings: per-rule toggles, watchlist management, exempt port control, and session timeout">
       <p class="img-caption">Click to enlarge</p>
     </div>
     <div class="showcase-text">
-      <h3>Unified Per-IP Investigation</h3>
-      <p>Every IP in the dashboard is clickable. Selecting one opens a dual-pane modal pulling from both data sources simultaneously. Pi-hole DNS query history appears on the left and Suricata network traffic on the right, enabling full context on any device or external connection without switching tools.</p>
+      <h3>Tuning Without SSH</h3>
+      <p>
+        Detection rules need adjustment as a network changes, and requiring a terminal session for every tweak
+        guarantees the tuning simply never happens. Rule state, exempt ports, watched addresses, and session
+        timeouts are all editable in the interface, written atomically, and picked up by the running engines on
+        their next poll cycle without a service restart.
+      </p>
+      <p>
+        The watchlist is the piece I use most. Right-clicking any address anywhere in the dashboard adds it to the
+        watched list, which the notification engine merges with its static rules at evaluation time, so promoting
+        something from interesting to alerting takes one click during an investigation rather than a config edit
+        afterward.
+      </p>
       <ul>
-        <li>DNS pane shows queried domains, record types, allow/block status, and timestamps</li>
-        <li>Network pane shows outgoing connections, protocols, ports, and last-seen times</li>
-        <li>Clickable external IPs link to WHOIS, AbuseIPDB, VirusTotal, and geolocation lookups</li>
-        <li>Time-aware display across Last Hour, Last 24h, and Last 7 Days</li>
+        <li>Per-rule enable and disable toggles, applied within the engine's next polling interval</li>
+        <li>Watchlist additions available from any panel through the shared IP context menu</li>
+        <li>Exempt port management with range validation on every entry</li>
+        <li>Independent idle timeout values for desktop and mobile sessions</li>
       </ul>
     </div>
   </div>
 </div>
 
-<!-- SECTION 5: HISTORICAL -->
+<!-- FEATURE GRID -->
 <div class="showcase-section">
-  <h2>Historical Trends</h2>
-  <div class="showcase-row">
-    <div class="showcase-image">
-      <img src="assets/historical.PNG"
-           alt="Historical trends showing hourly, daily, and weekly traffic"
-           data-full="assets/historical.PNG"
-           data-caption="Three-column historical trends: top sources and destinations across last hour, 24 hours, and 7 days">
-      <p class="img-caption">Click to enlarge</p>
-    </div>
-    <div class="showcase-text">
-      <h3>Multi-Tier Aggregation Pipeline</h3>
-      <p>Three independent aggregation scripts process Suricata's eve.json at different intervals. Hourly runs every 5 minutes, daily every 15 minutes, and weekly every hour. Each produces structured JSON consumed downstream by the dashboard, enabling time-aware traffic analysis without re-parsing raw logs on every load.</p>
+  <h2>Carried Forward and Rebuilt</h2>
+  <p style="color:#555; margin-top:-6px;">
+    These panels existed in the static build and were rebuilt as application features. The screenshots below show
+    what changed once the data stopped being frozen at generation time.
+  </p>
+
+  <div class="feature-grid">
+    <div class="feature-tile">
+      <img src="assets/geo.png" alt="Geographic traffic map"
+           data-full="assets/geo.png"
+           data-caption="Geographic traffic map, rendered in-app with locally sourced geolocation">
+      <h4>Geographic Traffic</h4>
       <ul>
-        <li>Top sources and destinations per timeframe with packet counts</li>
-        <li>Device name mapping applied consistently across all timeframes</li>
-        <li>Identifies behavioral changes over time, separating hourly spikes from sustained patterns</li>
-        <li>Weekly aggregator handles eve.json rotation across multiple log files</li>
+        <li>Opens as an in-app overlay instead of a separate page, so investigation context survives</li>
+        <li>Geolocation resolved locally against an offline database, with no outbound API calls</li>
+      </ul>
+    </div>
+
+    <div class="feature-tile">
+      <img src="assets/geo_detail.png" alt="Country drill-down detail"
+           data-full="assets/geo_detail.png"
+           data-caption="Country drill-down: per-IP protocol breakdown, connection counts, and first and last seen timestamps">
+      <h4>Country Drill-Down</h4>
+      <ul>
+        <li>Per-address protocol, port, and connection detail with first and last seen timestamps</li>
+        <li>Behind the same authentication as every other route, closing a gap left by the static version</li>
+      </ul>
+    </div>
+
+    <div class="feature-tile">
+      <img src="assets/modal.png" alt="IP investigation modal with pivot strip"
+           data-full="assets/modal.png"
+           data-caption="IP investigation modal with the pivot strip for jumping between panels on the same address">
+      <h4>IP Investigation</h4>
+      <ul>
+        <li>Pivot strip jumps the selected address into trends, live feed, geo, anomalies, or search</li>
+        <li>Target panel highlights and scrolls to the row, and clears the filter automatically on exit</li>
+      </ul>
+    </div>
+
+    <div class="feature-tile">
+      <img src="assets/dns.png" alt="Pi-hole DNS summary panel"
+           data-full="assets/dns.png"
+           data-caption="Pi-hole DNS summary pulled live through the API">
+      <h4>DNS Summary</h4>
+      <ul>
+        <li>Live API calls rather than values baked in at generation time</li>
+        <li>Top clients and queried domains sit alongside IDS traffic in one view</li>
+      </ul>
+    </div>
+
+    <div class="feature-tile">
+      <img src="assets/dns_detail.png" alt="Per-client DNS query detail with coverage indicator"
+           data-full="assets/dns_detail.png"
+           data-caption="Per-client DNS query detail with an explicit coverage ratio indicator">
+      <h4>DNS Query Detail</h4>
+      <ul>
+        <li>Per-client query history with record types, allow and block status, and timestamps</li>
+        <li>Coverage ratio shown at all times, so partial data is never mistaken for complete data</li>
+      </ul>
+    </div>
+
+    <div class="feature-tile">
+      <img src="assets/per_protocol.png" alt="Per-protocol event browser"
+           data-full="assets/per_protocol.png"
+           data-caption="Per-protocol event browser reading live from the event log with cursor-based paging">
+      <h4>Per-Protocol Browser</h4>
+      <ul>
+        <li>Reads live from the event log with cursor-based paging rather than a pre-aggregated snapshot</li>
+        <li>Source and destination filtering applied server-side across DNS, TLS, HTTP, flow, and alert events</li>
       </ul>
     </div>
   </div>
 </div>
 
-<!-- SECTION 6: NETWORK DISCOVERY -->
-<div class="showcase-section">
-  <h2>Network Device Discovery</h2>
-  <div class="showcase-row flip">
-    <div class="showcase-image">
-      <img src="assets/device-discover1.PNG"
-           alt="Network discovery panel showing new devices"
-           data-full="assets/device-discover1.PNG"
-           data-caption="Network discovery: new device detection with first seen, last seen, and packet counts">
-      <p class="img-caption">Click to enlarge</p>
-    </div>
+<hr>
 
-    <div class="showcase-text">
-      <h3>Continuous Device Inventory</h3>
-      <p>The dashboard continuously monitors Suricata's event stream for IP addresses not present in the known-devices registry. New devices are flagged immediately with first-seen and last-seen timestamps, packet counts, and an inline name-assignment workflow, maintaining a complete and auditable device inventory without manual network scanning.</p>
-      <ul>
-        <li>46 devices tracked across the network</li>
-        <li>New, returning, and time-filtered views across Last 24h, 7d, and 30d</li>
-        <li>Full device history audit trail persisted to JSON</li>
-        <li>Name assignments propagate across all dashboard sections</li>
-      </ul>
-    </div>
-  </div>
+<!-- ENGINEERING NOTES -->
+<div class="description">
+  <h2>Engineering Notes</h2>
+
+  <h4 style="margin-top:0.6em;">Labeling missing data instead of hiding it</h4>
+  <p>
+    The DNS panel reported no query history for several clients while the resolver's own counter showed over a
+    hundred thousand queries from one of them in the same window. The honest fix came before the real fix: the
+    interface now states the resolver's count alongside what was actually retrieved, and displays a coverage ratio
+    on every load rather than only when incomplete. Showing the indicator only on failure turned out to be
+    ambiguous, because silence read as a broken widget rather than a clean result.
+  </p>
+
+  <h4>Finding the actual root cause instead of the plausible one</h4>
+  <p>
+    That coverage gap traced back to five smart plugs generating roughly 855,000 queries in a day and consuming
+    nearly the entire retrieval window. The plugs were not misbehaving. A public time server was returning its
+    records with a zero cache lifetime, an explicit instruction never to cache, which meant every single request
+    went out fresh. A local cache override fixed it at the resolver and dropped the top talker by an order of
+    magnitude, with no application code changed at all.
+  </p>
+  <p>
+    Two other approaches were tested and discarded on measurement rather than intuition. Per-client retrieval was
+    correct but took forty-plus seconds per device and could not scale. A row-count threshold for deciding which
+    clients needed deeper retrieval would have been wrong on every single client, because the clients returning
+    fifty rows were covering a full day while the clients returning two hundred were covering twelve minutes. Only
+    the timestamp span revealed that, and shipping the row-count version would have marked the busiest devices
+    complete while holding two percent of the intended window.
+  </p>
 </div>
 
 <hr>
@@ -537,11 +793,40 @@ content="
 <div class="description">
   <h2>Infrastructure and Security</h2>
   <ul>
-    <li><strong>PKI-Secured Deployment:</strong> Self-hosted on Nginx with custom CA and CSR-issued certificates, HTTPS enforcement, and Content Security Policy headers, matching the security posture of a production internal tool</li>
-    <li><strong>Defensive Programming:</strong> All aggregator scripts implement graceful failure handling, exit code validation, and automated alerting on pipeline anomalies. Failures surface loudly, never silently</li>
-    <li><strong>Local-Only Geolocation:</strong> DB-IP city database queried via mmdblookup with 5,237 IPs cached and zero redundant lookups once warmed, with no external dependencies</li>
-    <li><strong>USB Log Storage:</strong> All Suricata logs written to USB-mounted storage to prevent SD card wear, with 90-day retention and daily logrotate rotation</li>
-    <li><strong>Static Dashboard:</strong> No user input processing and read-only display only, eliminating injection attack surface entirely</li>
+    <li>
+      <strong>Progressive Web App by choice, not by limitation:</strong> a security tool displaying home network
+      topology, device inventory, and alert history has no business routing through app store infrastructure or a
+      third-party review process. Running as a PWA keeps the entire stack on hardware I own, served over TLS I
+      control, reachable only through my own tunnel, with zero external dependencies in the path.
+    </li>
+    <li>
+      <strong>Layered deployment:</strong> the application never terminates TLS itself. Nginx handles TLS and
+      reverse proxying, the application server binds to localhost only, and systemd manages the service lifecycle
+      with hardening directives applied at the unit level.
+    </li>
+    <li>
+      <strong>Local PKI:</strong> certificates issued from a private certificate authority, TLS 1.2 and 1.3 only,
+      with HSTS and Content Security Policy headers enforced at the proxy.
+    </li>
+    <li>
+      <strong>Explicit filesystem boundary:</strong> the application owns a defined set of paths and treats
+      everything belonging to the IDS, the aggregators, and the existing web root as read-only or entirely
+      off-limits. That boundary is enforced in the installer as well, which will not modify an existing virtual
+      host, an existing crontab, or any file outside its own tree.
+    </li>
+    <li>
+      <strong>Defensive installation:</strong> the installer ships a preflight mode that validates prerequisites,
+      dependencies, ports, storage, and certificate state without writing anything, and exits with a distinct code
+      for ready, blocked, and proceed-with-warnings.
+    </li>
+    <li>
+      <strong>Atomic writes throughout:</strong> every file the application produces is written to a temporary path
+      and moved into place in a single operation, so an interrupted write can never leave a truncated file behind.
+    </li>
+    <li>
+      <strong>Storage discipline:</strong> all logs and persistent state are written to external storage rather
+      than the SD card, with the mount verified before each write cycle.
+    </li>
   </ul>
 </div>
 
@@ -549,7 +834,8 @@ content="
 
 <p style="text-align: center; margin-top: 40px;">
   <strong>Version History:</strong><br>
-  v1.0 (March 2026): Initial portfolio publication
+  v1.0 (March 2026): Static dashboard generated from bash, published as a separate project<br>
+  v3.0 (August 2026): Rebuilt as an authenticated Flask application with a mobile PWA, live event streaming, and independent detection engines
 </p>
 
 <!-- MODAL -->
@@ -614,19 +900,7 @@ content="
     document.body.style.overflow = '';
   }
 
-  document.querySelectorAll('.showcase-image img[data-full]').forEach(img => {
-    img.addEventListener('click', () => {
-      openModal(img.getAttribute('data-full'), img.getAttribute('data-caption'));
-    });
-  });
-
-  document.querySelectorAll('.img-pair[data-full]').forEach(pair => {
-    pair.addEventListener('click', () => {
-      openModal(pair.getAttribute('data-full'), pair.getAttribute('data-caption'));
-    });
-  });
-
-  document.querySelectorAll('.geo-grid img').forEach(img => {
+  document.querySelectorAll('img[data-full]').forEach(img => {
     img.addEventListener('click', () => {
       openModal(img.getAttribute('data-full'), img.getAttribute('data-caption'));
     });
