@@ -402,9 +402,9 @@ content="
   <p>
     This is the application layer that sits on top of my Suricata IDS pipeline, with the earlier build generating
     static HTML from bash every three minutes, which worked well as a reporting surface but could never do
-    anything beyond render what the last cron run had already decided. This version is a Flask application
-    served over TLS, with a live event stream, a detection engine that fires notifications on its own, and a
-    mobile Progressive Web App that installs to the home screen on iPhone.
+    anything beyond render script outputs. This version is a full Flask application
+    served over TLS, with a live event stream, a detection engine that fires notifications on its own to complement Suricata's known-bad signature rules, 
+	and a mobile Progressive Web App that installs to the home screen on iPhone.
   </p>
   <p>
     The bash aggregators were deliberately kept and they still run on cron to produce the hourly, daily,
@@ -580,12 +580,12 @@ content="
 
 <!-- REAL-TIME PIPELINE -->
 <div class="showcase-section">
-  <h2>Real-Time Event Pipeline</h2>
+  <h2>Real-Time Alert & Event Pipeline</h2>
   <div class="showcase-row">
     <div class="showcase-image">
-      <img src="assets/alert.png"
+      <img src="assets/event_stream.png"
            alt="Alerts panel with engine-fired and persistent tabs"
-           data-full="assets/alert.png"
+           data-full="assets/event_stream.png"
            data-caption="Alerts panel: engine-fired notifications, persistent Suricata log, and three-tier muting">
       <p class="img-caption">Click to enlarge</p>
     </div>
@@ -613,6 +613,43 @@ content="
   </div>
 </div>
 
+<!-- Anomalies section -->
+<div class="showcase-section">
+  <h2>Custom Anomalies Rules & Features</h2>
+  <div class="showcase-row">
+    <div class="showcase-image">
+      <img src="assets/anomalies_purge.png"
+           alt="Anomalies tab with Evidence, Restore and Purge buttons"
+           data-full="assets/anomalies_purge.png"
+           data-caption="Anomalies panel: Ability to clear Anomalies, and view evidence, restore them to Active or Purge them fully">
+      <p class="img-caption">Click to enlarge</p>
+    </div>
+    <div class="showcase-text">
+      <h3>Four Threads, One Tail of the Event Log</h3>
+      <p>
+        Policy violations are held to a different standard than alerts. An alert is a notification but a violation is a finding, 
+		and in other platforms these findings can be removed as time passes or more violations are captured but nothing expires on a timer here. 
+		Entries persist until someone looks at them and decides they are handled, which means an empty panel is a statement that the network is clean, rather than a
+        statement that enough time has passed.
+      </p>
+      <p>
+        Every finding carries its own evidence and clicking the EVD button pulls the underlying flow records straight from the
+        event log and labels each as no response or bidirectional, which is the difference between a device that
+        tried to bypass the resolver and a device that succeeded. The scope of that lookup follows the rule that
+        fired, so a plaintext bypass returns everything that device attempted while a flagged flow returns only
+        the pair involved.
+      </p>
+      <ul>
+        <li>Clearing a finding moves it to a separate cleared log rather than deleting it, keeping an auditable record of what was dismissed and when</li>
+        <li>Restore moves an entry back to active, so dismissing something during triage is a reversible decision rather than a permanent one</li>
+        <li>Purge is the only destructive action, applies solely to the cleared log, and is deliberately separated from clearing so the reversible and irreversible paths are never one click apart and requires a User to Clear an Anomaly and then Purge it</li>
+        <li>Anomaly Rules that are applied are set via toggles in the Settings menu: beaconing, DNS/DoH/DoT Bypass, Flows where Suricata triggered an alert, any single outbound data transfer that is over 50MB in one flow, suspicious Lateral Movement, and TLS occurring over odd ports (with the ability to exempt specific ports for legitimate use)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+	
 <!-- OFFLINE MODE -->
 <div class="showcase-section">
   <h2>Offline Forensic Mode</h2>
@@ -717,28 +754,31 @@ content="
       <ul>
         <li>Pivot strip jumps the selected address into trends, live feed, geo, anomalies, or search</li>
         <li>Target panel highlights and scrolls to the row, and clears the filter automatically on exit</li>
+		<li>'Show All Activity' displays all inbound and outbound traffic via Suricata as well as DNS queries, for ease of investigation</li>
       </ul>
     </div>
 
     <div class="feature-tile">
       <img src="assets/pwa_dns.png" alt="Pi-hole DNS summary panel"
-           data-full="assets/pwa_dns.png"
+           data-full="assets/dns_summary.png"
            data-caption="Pi-hole DNS summary pulled live through the API">
       <h4>DNS Summary</h4>
       <ul>
         <li>Live API calls rather than values baked in at generation time</li>
 		<li>API credential read at runtime from a permission-restricted file, never present in source or hardcoded</li>
 		<li>Top clients and queried domains sit alongside IDS traffic in one view</li>
+		<li>General Status and then accordions for each category for ease of navigation on mobile; Top Allowed, Top Blocked, Top Clients, Query Types, and Query Stats</li>
       </ul>
     </div>
 
     <div class="feature-tile">
-      <img src="assets/dns_detail.png" alt="Per-client DNS query detail with coverage indicator"
-           data-full="assets/dns_detail.png"
+      <img src="assets/dns_clients.png" alt="Per-client DNS query detail with coverage indicator"
+           data-full="assets/dns_clients.png"
            data-caption="Per-client DNS query detail with an explicit coverage ratio indicator">
       <h4>DNS Query Detail</h4>
       <ul>
         <li>Per-client query history with record types, allow and block status, and timestamps</li>
+		<li>Queries that are served via cache are always rendered in green, queries that required local recursion are gray, and queries that are blocked are red
         <li>Coverage ratio shown at all times, so partial data is never mistaken for complete data</li>
       </ul>
     </div>
