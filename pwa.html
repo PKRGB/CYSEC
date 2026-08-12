@@ -643,40 +643,9 @@ content="
         <li>Clearing a finding moves it to a separate cleared log rather than deleting it, keeping an auditable record of what was dismissed and when</li>
         <li>Restore moves an entry back to active, so dismissing something during triage is a reversible decision rather than a permanent one</li>
         <li>Purge is the only destructive action, applies solely to the cleared log, and is deliberately separated from clearing so the reversible and irreversible paths are never one click apart and requires a User to Clear an Anomaly and then Purge it</li>
-        <li>Anomaly Rules that are applied are set via toggles in the Settings menu: beaconing, DNS/DoH/DoT Bypass, Flows where Suricata triggered an alert, any single outbound data transfer that is over 50MB in one flow, suspicious Lateral Movement, and TLS occurring over odd ports (with the ability to exempt specific ports for legitimate use)</li>
+        <li>Anomaly Rules that are applied are set via toggles in the Settings menu; discussed below</li>
       </ul>
     </div>
-  </div>
-</div>
-
-	
-<!-- OFFLINE MODE -->
-<div class="showcase-section">
-  <h2>Offline Forensic Mode</h2>
-  <div class="full-card">
-    <!-- Screenshot slot: uncomment both lines below once assets/offline.png exists
-    <img src="assets/offline.png" alt="Offline mode banner with cached snapshot data" data-full="assets/offline.png" data-caption="Offline mode: amber banner stating snapshot age, with every panel title marked as cached" style="width:100%;border-radius:6px;box-shadow:0 4px 12px rgba(0,0,0,0.15);cursor:pointer;margin-bottom:18px;">
-    -->
-    <h3>Staying Useful After the Connection Drops</h3>
-    <p>
-      A monitoring tool that shows nothing during an outage is least useful exactly when it matters most. Browser
-      caching does not solve this, because it only captures what a tab happened to load before the disruption, and
-      the tab is usually closed. The platform instead writes a full set of state snapshots to disk on a fixed
-      interval, entirely independent of whether anyone has the dashboard open.
-    </p>
-    <p>
-      When the browser loses the event stream, the interface shifts to an amber state, states the exact age of the
-      most recent snapshot in the banner, and marks every panel title as cached so there is no chance of mistaking
-      old data for current data. Once the connection returns, live data reloads automatically. The practical
-      payoff is post-incident: after an outage clears, the state from immediately before the disconnect is still
-      sitting there waiting to be read.
-    </p>
-    <ul>
-      <li>Snapshot writer runs as an independent daemon thread on a fixed cycle, unaffected by client activity</li>
-      <li>All writes are atomic, with a storage mount guard that refuses to write rather than writing to the wrong filesystem</li>
-      <li>Recovery is automatic on both desktop and mobile, with no manual refresh required</li>
-      <li>Offline state is communicated explicitly, because silently serving stale data is worse than showing none</li>
-    </ul>
   </div>
 </div>
 
@@ -706,15 +675,45 @@ content="
         afterward.
       </p>
       <ul>
-        <li>Per-rule enable and disable toggles, applied within the engine's next polling interval</li>
         <li>Watchlist additions available from any panel through the shared IP context menu</li>
         <li>Exempt port management with range validation on every entry</li>
         <li>Independent idle timeout values for desktop and mobile sessions</li>
+		<li>Per-rule enable and disable toggles, applied within the engine's next polling interval</li>
+		<li>Toggles for: Beaconing, DNS/DoH/DoT Bypass, Flows where Suricata triggered an alert, any single outbound data transfer that is over 50MB in one flow, suspicious Lateral Movement, and TLS occurring over odd ports (with the ability to exempt specific ports for legitimate use)</li>
       </ul>
     </div>
   </div>
 </div>
 
+	<!-- OFFLINE MODE -->
+<div class="showcase-section">
+  <h2>Offline Forensic Mode</h2>
+  <div class="full-card">
+    <!-- Screenshot slot: uncomment both lines below once assets/offline.png exists
+    <img src="assets/offline.png" alt="Offline mode banner with cached snapshot data" data-full="assets/offline.png" data-caption="Offline mode: amber banner stating snapshot age, with every panel title marked as cached" style="width:100%;border-radius:6px;box-shadow:0 4px 12px rgba(0,0,0,0.15);cursor:pointer;margin-bottom:18px;">
+    -->
+    <h3>Staying Useful After the Connection Drops</h3>
+    <p>
+      A monitoring tool that shows nothing during an outage is least useful exactly when it matters most. Browser
+      caching does not solve this, because it only captures what a tab happened to load before the disruption, and
+      the tab is usually closed. The platform instead writes a full set of state snapshots to disk on a fixed
+      interval, entirely independent of whether anyone has the dashboard open.
+    </p>
+    <p>
+      When the browser loses the event stream, the interface shifts to an amber state, states the exact age of the
+      most recent snapshot in the banner, and marks every panel title as cached so there is no chance of mistaking
+      old data for current data. Once the connection returns, live data reloads automatically. The practical
+      payoff is post-incident: after an outage clears, the state from immediately before the disconnect is still
+      sitting there waiting to be read.
+    </p>
+    <ul>
+      <li>Snapshot writer runs as an independent daemon thread on a fixed cycle, unaffected by client activity</li>
+      <li>All writes are atomic, with a storage mount guard that refuses to write rather than writing to the wrong filesystem</li>
+      <li>Recovery is automatic on both desktop and mobile, with no manual refresh required</li>
+      <li>Offline state is communicated explicitly, because silently serving stale data is worse than showing none</li>
+    </ul>
+  </div>
+</div>	
 <!-- FEATURE GRID -->
 <div class="showcase-section">
   <h2>Carried Forward and Rebuilt</h2>
