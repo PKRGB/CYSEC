@@ -74,14 +74,14 @@ content="
       <strong> NetWatch Mailroom</strong> <br> 
 A standalone PWA that verifies email authenticity entirely on-device, with no backend and no network access of any kind, enforced by a strict CSP (connect-src 'none'). It identifies the trust boundary in a message's relay chain to separate verifiable headers from attacker-supplied ones, evaluates SPF/DKIM/DMARC alignment to catch authentication that passes for a domain the recipient never sees (many tools confirm authenticity of a domain but do not confirm the domain the recipient sees in "From" is the true sender), and detects punycode and lookalike-domain impersonation by explicit Unicode codepoint. Silent link-redirect analysis unwraps Safe Links and URL Defense offline, and attachment scanning performs three-way file-type verification with on-device SHA-256 hashing. Currently being validated against a batch of live, volunteer-provided emails.
    </p>
-    <div style="text-align: center; margin-top:20px;">
-    <img src="assets/mailroom1.jfif" alt="Mailroom Input Options" 
-         style="width: 100%; max-width: 800px; height: auto; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" /> 
-
-    <div style="text-align: center; margin-top:20px;">
-    <img src="assets/mailroom2.jfif" alt="Mailroom Authentication & Evidence" 
-         style="width: 100%; max-width: 800px; height: auto; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" /> 
-  </div>
+   <div class="shot-grid">
+  <button class="shot" type="button">
+    <img src="assets/mailroom1.jfif" alt="Mailroom Input Options" loading="lazy" />
+  </button>
+  <button class="shot" type="button">
+    <img src="assets/mailroom2.jfif" alt="Mailroom Authentication & Evidence" loading="lazy" />
+  </button>
+</div>
   
   </article> 
     </section> 
