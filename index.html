@@ -273,10 +273,16 @@ A standalone PWA that verifies email authenticity entirely on-device, with no ba
     <p class="project-summary">
     After stabilizing and upgrading the HTML nginx-served page approach to this dashboard below, including iterative improvements to all relevant aggregation (and other) scripts that feed the dash, I dedicated over six months to creating a Progressive Web App (PWA) and continue to utilize the custom aggregation scripts to feed it pertinent data pulled from Suricata's logs (upstream signature), combined with my own engines which evaluate policy and custom threshold rules against the live stream to catch outliers not identified via signature rules, as well as pulling in data from other local servers to cover DNS queries. This allows me to launch it from the homescreen of iPhones, with SSE stream bypassing the service worker to avoid breaking live streaming capabilities, and including offline detection that presents data leading up to any disconnect for investigation of cause, and Web Push implementation for real-time alerting. 
     Both the PWA and the HTML dashboards read the same Suricata event stream through independent code paths, so anytime their numbers disagree, I am able to immediately identify potential issues and perform an adhoc audit to resolve them quickly.</p>
-    <div style="text-align: center; margin-top:20px;">
+   
+           <div class="shot-grid">
+  <button class="shot" type="button">
+    <img src="assets/login.png" alt="NWA PWA Auth" loading="lazy" />
+  </button>
+       </div>
+    <!-- <div style="text-align: center; margin-top:20px;">
       <img src="assets/login.png" alt="NWA PWA"
            style="width: 100%; max-width: 800px; height: auto; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" /> 
-    </div>
+    </div> -->
      <div style="text-align: center;">
       <a href="pwa.html" class="cta-button" target="_blank" rel="noopener noreferrer" style="display: inline-block; margin: 20px auto 0;">View PWA Details</a>
     </div>
@@ -292,15 +298,10 @@ A standalone PWA that verifies email authenticity entirely on-device, with no ba
       </div>After deploying Suricata IDS on a dedicated Raspberry Pi with SPAN port mirroring to monitor all LAN network traffic, I built a comprehensive security operations dashboard to surface actionable intelligence from raw IDS data logs. The system ingests Suricata's eve.json event stream through a multi-tier aggregation pipeline (hourly, daily, weekly) and generates a self-hosted web dashboard providing real-time visibility into network behavior, external IP geolocations, threat patterns, and device activity across 47+ connected devices, which includes live DNS telemetry pulled via automated API calls from a separate Pi-hole server.
     </p>
     
-       <div class="shot-grid">
-  <button class="shot" type="button">
-    <img src="assets/suricata-hero.PNG" alt="Network Security Operations Dashboard." loading="lazy" />
-  </button>
-       </div>
-   <!--       <div style="text-align: center; margin-top:20px;">
+      <div style="text-align: center; margin-top:20px;">
 <img src="assets/suricata-hero.PNG" alt="Network Security Operations Dashboard." 
            style="width: 100%; max-width: 800px; height: auto; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" /> 
-    </div> -->
+    </div> 
 
     <div style="text-align: center;">
       <a href="suricata.html" class="cta-button" target="_blank" rel="noopener noreferrer" style="display: inline-block; margin: 20px auto 0;">View Dashboard Details</a>
