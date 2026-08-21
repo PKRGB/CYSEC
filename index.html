@@ -36,6 +36,7 @@ content="
     <a href="#dashboards">Dashboards</a>
 <!--    <a href="#DA">Data Analytics</a> -->
     <a href="#Education">Education</a>
+    <a href="#In-Progress">In-Progress</a>
     <a href="#Pi">Pi Guides</a>
     <a href="#PKI">PKI</a>
     <a href="#projects">Projects</a>
@@ -63,8 +64,23 @@ content="
         data-driven decision-making and secure infrastructure intersect in modern enterprise environments.
       </p>
     </section>
-        
-     <h2><u>Projects</u></h2>
+    
+    <h2> <u>In-Progress</u></h2> 
+<section id="In-Progress">
+  <arricle class="project-item"> 
+    <h2>Email Header (& more!) Parsing Tool</h2>
+    
+    <p class="project-summary"> 
+      <strong> NetWatch Mailroom</strong> <br> 
+A standalone PWA that verifies email authenticity entirely on-device, with no backend and no network access of any kind, enforced by a strict CSP (connect-src 'none'). It identifies the trust boundary in a message's relay chain to separate verifiable headers from attacker-supplied ones, evaluates SPF/DKIM/DMARC alignment to catch authentication that passes for a domain the recipient never sees (many tools confirm authenticity of a domain but do not confirm the domain the recipient sees in "From" is the true sender), and detects punycode and lookalike-domain impersonation by explicit Unicode codepoint. Silent link-redirect analysis unwraps Safe Links and URL Defense offline, and attachment scanning performs three-way file-type verification with on-device SHA-256 hashing. Currently being validated against a batch of live, volunteer-provided emails.
+   </p>
+  
+  
+  
+  </article> 
+  </section> 
+  
+      <h2><u>Projects</u></h2>
 <section id="projects">
   <article class="project-item">
    <h2>Home Network Overhaul & Hardening</h2>
