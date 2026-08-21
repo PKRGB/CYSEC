@@ -292,10 +292,15 @@ A standalone PWA that verifies email authenticity entirely on-device, with no ba
       </div>After deploying Suricata IDS on a dedicated Raspberry Pi with SPAN port mirroring to monitor all LAN network traffic, I built a comprehensive security operations dashboard to surface actionable intelligence from raw IDS data logs. The system ingests Suricata's eve.json event stream through a multi-tier aggregation pipeline (hourly, daily, weekly) and generates a self-hosted web dashboard providing real-time visibility into network behavior, external IP geolocations, threat patterns, and device activity across 47+ connected devices, which includes live DNS telemetry pulled via automated API calls from a separate Pi-hole server.
     </p>
     
-    <div style="text-align: center; margin-top:20px;">
-      <img src="assets/suricata-hero.PNG" alt="Network Security Operations Dashboard." 
+       <div class="shot-grid">
+  <button class="shot" type="button">
+    <img src="assets/suricata-hero.PNG" alt="Network Security Operations Dashboard." loading="lazy" />
+  </button>
+       </div>
+   <!--       <div style="text-align: center; margin-top:20px;">
+<img src="assets/suricata-hero.PNG" alt="Network Security Operations Dashboard." 
            style="width: 100%; max-width: 800px; height: auto; border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" /> 
-    </div>
+    </div> -->
 
     <div style="text-align: center;">
       <a href="suricata.html" class="cta-button" target="_blank" rel="noopener noreferrer" style="display: inline-block; margin: 20px auto 0;">View Dashboard Details</a>
