@@ -668,9 +668,10 @@ body.lb-lock {
   .shot:focus-visible img {
     transform: none;
   }
+}
 
 .shot img.crop-center { object-position: center 40%; }
 .shot img.crop-bottom { object-position: center bottom; }
 .shot img.crop-tall   { aspect-ratio: 4 / 3; 
   }
-}
+
