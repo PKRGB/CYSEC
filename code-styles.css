@@ -483,6 +483,7 @@ code {
 @media screen and (max-width: 600px) {
   .hamburger {
     display: block;
+    align-self: flex-end;
   }
 
   .navbar {
