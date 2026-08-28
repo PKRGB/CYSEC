@@ -126,7 +126,7 @@ A standalone PWA that verifies email authenticity entirely on-device, with no ba
       </ul><p><u><strong>DNS Security Stack:</strong></u></p>
         <ul><li><strong>Pi-hole:</strong> Network-wide ad-blocking and telemetry reduction with query logging</li>
         <li><strong>Unbound:</strong> Fully recursive DNS resolver (no third-party DNS dependencies) with DNSSEC validation</li>
-        <li><strong>Forced DNS Redirection:</strong> Firewall-level NAT rules redirect all outbound DNS queries to internal resolver, preventing DNS leakage</li>
+        <li><strong>Forced DNS Redirection:</strong> Firewall-level ACL's and static routing rules redirect all outbound DNS queries that are aimed at any target other than my internal resolver, preventing DNS leakage</li>
       </ul>
       <p><u><strong>Additional Hardening:</strong></p></u>
       <ul>
